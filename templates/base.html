@@ -6,31 +6,32 @@
 <head>
 
   {% block meta %}
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}" />
   {% endblock %}
 
   {% block corecss %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   {% endblock %}
 
   {% block extra_css %}
   {% endblock %}
 
   {% block corejs %}
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a71ecb4f79.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"></script>
   {% endblock %}
 
   {% block entendedjs %}
@@ -42,27 +43,31 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar_colour">
-    <a href="{% url 'home'%}"><img class="honey-combe-logo-image-navbar" src="{% static 'images/combicon.png' %}" alt="honeycombelogo"></a>
+    <a href="{% url 'home'%}"><img class="honey-combe-logo-image-navbar" src="{% static 'images/combicon.png' %}"
+        alt="honeycombelogo"></a>
     <a class="navbar-brand link_colour navbar_heading" href="{% url 'home' %}">The HoneyCombAM</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
     </button>
     <div class="collapse navbar-collapse navitems" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active link_colour" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link link_colour" href="{% url 'wiki' %}">WiKi</a>
+        <a class="nav-item nav-link active link_colour" href="{% url 'home' %}"><img src=""><img class="navbar-image" src="{% static 'images/hive.png' %}"
+          alt="honeycombelogo"> Home<span
+            class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link link_colour" href="{% url 'wiki' %}"><img class="navbar-image" src="{% static 'images/wiki.png' %}"
+          alt="honeycombelogo"> WiKi</a>
         {% if request.user.is_authenticated %}
         <div class="dropdown">
-          <a class=" nav-link dropdown-toggle user-name" href="#" role="button" id="dropdownMenuLink"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{request.user.username}}
-          </a>
-          <a class="nav-item nav-link" href="{% url 'account_logout' %}">logout</a>
-        </div>
+          <a class=" nav-link dropdown-toggle link_colour uppercase" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{request.user.username}}</a>
+          <div class="dropdown-menu drop-menu background_dropdown" aria-labelledby="dropdownMenuLink">
+                <a class="nav-link dropdown-item link_colour" href="#"><i class="fas fa-id-card"></i> Profile</a>
+                <a class="nav-link dropdown-item link_colour" href="{% url 'account_logout' %}"><i class="fas fa-power-off"></i> logout</a>
+            </div>
       </div>
       {% else %}
-      <a class="nav-item nav-link" href="{% url 'account_login' %}">login/Signup</a>
+      <a class="nav-item nav-link link_colour" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i> login/Signup</a>
       {% endif %}
     </div>
     </div>
@@ -71,7 +76,41 @@
   {% block content %}
   {% endblock %}
 
-
+  <footer>
+    <div class="container-fluid footer">
+      <div class="row footer-width">
+        <div class="col-sm-4 ">
+          <div class="slogan-footer">Apiary Management</div>
+        </div>
+        <div class="col-sm-4 desktop-view">
+          <div class="copyright-footer">Copyright &copy;
+            <script> document.write(new Date().getFullYear()); </script> TheHoneyCombAM </div>
+        </div>
+        <div class="col-sm-4 desktop-view">
+          <div class="footer-social-icons">
+            <span><a href="https://www.facebook.com/" target="_blank" class="fa fa-facebook"></a></span>
+            <span><a href="https://twitter.com/?lang=en-gb" target="_blank" class="fa fa-twitter"></a></span>
+            <span><a href="https://www.instagram.com/" target="_blank" class="fa fa-instagram"></a></span>
+            <span><a href="https://www.youtube.com/" target="_blank" class="fa fa-youtube"></a></span>
+            <span><a href="https://www.snapchat.com/l/en-gb/" target="_blank" class="fa fa-snapchat"></a></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 mobile-view">
+        <div class="footer-social-icons">
+          <span><a href="https://www.facebook.com/" target="_blank" class="fa fa-facebook"></a></span>
+          <span><a href="https://twitter.com/?lang=en-gb" target="_blank" class="fa fa-twitter"></a></span>
+          <span><a href="https://www.instagram.com/" target="_blank" class="fa fa-instagram"></a></span>
+          <span><a href="https://www.youtube.com/" target="_blank" class="fa fa-youtube"></a></span>
+          <span><a href="https://www.snapchat.com/l/en-gb/" target="_blank" class="fa fa-snapchat"></a></span>
+        </div>
+      </div>
+      <div class="col-sm-4 mobile-view">
+        <div class="copyright-footer">copyright &copy;
+          <script> document.write(new Date().getFullYear()); </script> TheHoneyCombAM </div>
+      </div>
+    </div>
+  </footer>
 
 
 </body>
