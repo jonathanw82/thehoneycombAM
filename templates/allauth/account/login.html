@@ -1,12 +1,40 @@
-{% extends "account/base.html" %}
-
-{% load i18n %}
-{% load account socialaccount %}
-
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% extends "account/base.html" %}{% load i18n %}{% load account socialaccount %}{% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
+{% load static %}
+<div class="emptyDiv"></div>
+<div class="container">
+	<div class="row">
+    <div class="col"></div>
+		<div class="col-md-6 login-box" id="login-boxsize">
+			<h1>{% trans "Sign In" %}</h1>
+			<p>
+				{% blocktrans %}If you have not created an account yet, then please
+				<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
+			</p>
+			<form class="login" method="POST" action="{% url 'account_login' %}">
+				{% csrf_token %}
+				{{ form|crispy }}
+				{% if redirect_field_value %}
+				    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+				<button class="btn btn-info buttons_login" type="submit">{% trans "Sign In" %}</button>
+				<p class="mt-2">
+					<a class="button secondaryAction"
+						href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+				</p>
+			</form>
+    </div>
+    <div class="col"></div>
+	</div>
+</div>
+{% endblock %}
 
+{% block postloadjs %}
+    {{ block.super }}
+    {% static 'js/auth.js'%}
+{% endblock %}
+<!-- 
 <h1>{% trans "Sign In" %}</h1>
 
 {% get_providers as socialaccount_providers %}
@@ -41,6 +69,6 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   {% endif %}
   <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
   <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
+</form> -->
 
-{% endblock %}
+

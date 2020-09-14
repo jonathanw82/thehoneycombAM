@@ -2,6 +2,17 @@
     text-transform: capitalize;
 }
 
+/* ------------ Login & Signup ----------*/
+.buttons_login{
+    
+}
+.login-box{
+    border: 2px solid black;
+    margin-top: 20px;
+}
+
+
+
 /* ------------ Navigation --------------*/
 .navbar_colour{
     background-color: orange;
@@ -42,8 +53,14 @@
 .navbar-image{
     width: 20px;
     height: 20px;
+    margin-bottom: 5px;
 }
 
+.navbar-image-hive{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 5px;;
+}
 /* ------------ Footer --------------*/
 
 .footer{
@@ -111,10 +128,6 @@
 }
 
 @media only screen and (max-width: 524px){
-.beekeeper-image{
-    width: 300px;
-    height: auto;
-}
 
 .desktop-view{
     display: none;
