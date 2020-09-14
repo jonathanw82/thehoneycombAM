@@ -1,0 +1,28 @@
+
+
+/* ------------ Navigation --------------*/
+.navbar_colour{
+    background-color: orange;
+}
+
+.link_colour{
+    color: black;
+}
+
+.navitems{
+    justify-content: flex-end;
+}
+
+.honey-combe-logo-image-navbar{
+    height: 50px;
+    width: 50px;
+    padding-right: 2px;
+}
+
+.navbar_heading:hover{
+    color: black;
+}
+
+.navbar-toggler-icon{
+    color: black!important;
+}
