@@ -5,3 +5,4 @@ icons
 *.pyc
 __pycache__/
 holdingpen.txt
+keys.txt
