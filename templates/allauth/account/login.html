@@ -31,8 +31,9 @@
 {% endblock %}
 
 {% block postloadjs %}
-    {{ block.super }}
-    {% static 'js/auth.js'%}
+	{{ block.super }}
+	<script src="{% static 'js/auth.js' %}"></script>
+	
 {% endblock %}
 <!-- 
 <h1>{% trans "Sign In" %}</h1>
