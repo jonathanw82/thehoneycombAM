@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load static %} 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'apiary/css/apiary.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                        <h1>Add Apiary</h1>
+                <form class="AddApiaryForm" method="POST" action="{% url 'setup' %}"enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form| crispy }}
+            
+                    <button class="btn btn-info buttons-click" type="submit" href="{% url 'setup' %}">Add Apiary</button>
+                    <a class="btn btn-info buttons-click"  href="{% url 'setup' %}">Back</a> 
+                </form>
+            </div> 
+		</div>
+    </div>
+
+{% endblock %}
