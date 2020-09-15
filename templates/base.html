@@ -43,21 +43,21 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar_colour">
-    <a href="{% url 'home'%}"><img class="honey-combe-logo-image-navbar" src="{% static 'images/combicon.png' %}"
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'userLoggedIn'%}"><img class="honey-combe-logo-image-navbar" src="{% static 'images/combicon.png' %}"
         alt="honeycombelogo"></a>
-    <a class="navbar-brand link_colour navbar_heading" href="{% url 'home' %}">The HoneyCombAM</a>
+    <a class="navbar-brand link_colour navbar_heading" href="{% url 'userLoggedIn' %}">The HoneyCombAM</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
     </button>
     <div class="collapse navbar-collapse navitems" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active link_colour" href="{% url 'home' %}"><img src=""><img
+        <a class="nav-item nav-link active link_colour" href="{% url 'userLoggedIn' %}"><img src=""><img
             class="navbar-image-hive" src="{% static 'images/hive.png' %}" alt="honeycombelogo"> Home<span
             class="sr-only">(current)</span></a>
         <a class="nav-item nav-link link_colour" href="{% url 'wiki' %}"><img class="navbar-image"
             src="{% static 'images/wiki.png' %}" alt="honeycombelogo"> WiKi</a>
-        {% if request.user.is_authenticated %}
         <div class="dropdown">
           <a class=" nav-link dropdown-toggle link_colour uppercase" href="#" role="button" id="dropdownMenuLink"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -69,8 +69,21 @@
           </div>
         </div>
         {% else %}
-        <a class="nav-item nav-link link_colour" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i>
-          login/Signup</a>
+        <a href="{% url 'home'%}"><img class="honey-combe-logo-image-navbar" src="{% static 'images/combicon.png' %}"
+          alt="honeycombelogo"></a>
+      <a class="navbar-brand link_colour navbar_heading" href="{% url 'home' %}">The HoneyCombAM</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+      </button>
+      <div class="collapse navbar-collapse navitems" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active link_colour" href="{% url 'home' %}"><img src=""><img
+              class="navbar-image-hive" src="{% static 'images/hive.png' %}" alt="honeycombelogo"> Home<span
+              class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link link_colour" href="{% url 'wiki' %}"><img class="navbar-image"
+              src="{% static 'images/wiki.png' %}" alt="honeycombelogo"> WiKi</a>
+        <a class="nav-item nav-link link_colour" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt"></i>login/Signup</a>
         {% endif %}
       </div>
     </div>
