@@ -62,7 +62,7 @@
         <div class="dropdown">
           <a class=" nav-link dropdown-toggle link_colour uppercase" href="#" role="button" id="dropdownMenuLink"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{request.user.username}}</a>
+            {{request.user.username}}{{request.user.id}}</a>
           <div class="dropdown-menu drop-menu background_dropdown" aria-labelledby="dropdownMenuLink">
             <a class="nav-link dropdown-item link_colour" href="#"><i class="fas fa-id-card"></i> Profile</a>
             <a class="nav-link dropdown-item link_colour" href="{% url 'account_logout' %}"><i

@@ -14,10 +14,10 @@ def apiary(request):
     """ A view to display the Users list of Apiarys page """
     sites = Apiary_details.objects.all()
 
-    apiary_sites = {
+    context = {
         'sites': sites,
     }
-    return render(request, 'apiary/apiary.html', apiary_sites)
+    return render(request, 'apiary/apiary.html', context)
 
 
 def addApiary(request):
@@ -26,7 +26,7 @@ def addApiary(request):
         form = AddApiaryForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('setup')
+            return redirect('apiary')
     else:
         form = AddApiaryForm()
         context = {
