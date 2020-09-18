@@ -25,7 +25,9 @@ def addApiary(request):
     if request.method == 'POST':
         form = AddApiaryForm(request.POST)
         if form.is_valid():
-            form.save()
+            my_model = form.save(commit=False)
+            my_model.user_id = request.user.pk
+            my_model.save()
             return redirect('apiary')
     else:
         form = AddApiaryForm()

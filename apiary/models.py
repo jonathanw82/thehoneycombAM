@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Apiary_details(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=50, null=False,
                                  blank=False)
     street_address1 = models.CharField(max_length=80, null=False,

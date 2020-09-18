@@ -12,13 +12,15 @@
             <h1>Apiary page</h1>
             <div>
             {% for site in sites %}
-
+               
             <h5>{{ site.full_name }}</h5>
-
+            <h4>{{ site.user_id }}</h4>
+                
             {% endfor %}
             </div>
         </div>
     </div>
+    <div class="emptydiv"></div>
 </div>
 
 {% endblock %}
