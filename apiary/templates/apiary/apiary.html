@@ -14,7 +14,9 @@
             {% for site in sites %}
                
             <h5>{{ site.full_name }}</h5>
-            <h4>{{ site.user_id }}</h4>
+            <h4>{{ site.user }}</h4>
+            <a href="{% url 'editApiary' site.pk %}">Edit</a>
+            <a href="{% url 'deleteApiary' site.pk %}">Delete Apiary</a>
                 
             {% endfor %}
             </div>
