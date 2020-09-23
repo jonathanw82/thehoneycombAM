@@ -24,6 +24,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
     path('apiary/', include('apiary.urls')),
+    path('hives/', include('hives.urls')),
 ]
 
 

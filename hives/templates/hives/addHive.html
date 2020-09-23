@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load static %} 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'hives/css/hives.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                        <h1>Add Hive</h1>
+                <form class="AddHiveForm" method="POST" action="{% url 'addHive' ap %}"enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form| crispy }}
+            
+                    <button class="btn btn-info buttons-click" type="submit" href="{% url 'hive' ap %}">Add</button>
+                    <a class="btn btn-info buttons-click"  href="{% url 'hive' ap %}">Back</a> 
+                </form>
+            </div> 
+		</div>
+    </div>
+
+{% endblock %}

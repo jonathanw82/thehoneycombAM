@@ -12,10 +12,9 @@ def setup(request):
 
 def apiary(request):
     """ A view to display the Users list of Apiarys page """
-    sites = Apiary_details.objects.all()
-
+    apiaries = Apiary_details.objects.all()
     context = {
-        'sites': sites,
+        'apiaries': apiaries,
     }
     return render(request, 'apiary/apiary.html', context)
 

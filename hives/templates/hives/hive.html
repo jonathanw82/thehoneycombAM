@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block extra_css%}
+<link rel="stylesheet" href="{% static 'hives/css/hives.css' %}" />
+{% endblock%}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Hives</h1>
+            <a href="{% url 'addHive' apiaryID %}">Add Hives</a>
+            <div>   
+                    {% for hive in hives %}
+                        <h5>Hive Name: {{ hive.hive_name }}</h5>
+                        <a href="{% url 'deleteHive' hive.pk hive.apiary_id %}">Delete</a>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="emptydiv"></div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+{% endblock %}
