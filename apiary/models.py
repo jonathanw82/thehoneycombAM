@@ -19,7 +19,7 @@ class Apiary_details(models.Model):
                                 blank=False)
 
     def __str__(self):
-        return self.user
+        return self.full_name
 
     class Meta:
         verbose_name_plural = 'Apiary Details'

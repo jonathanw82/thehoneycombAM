@@ -14,6 +14,8 @@
             <div>   
                     {% for hive in hives %}
                         <h5>Hive Name: {{ hive.hive_name }}</h5>
+                        <h4>Hive id: {{ hive.id }}</h4>
+                        <h4>Hive apiary id: {{ apiaryID }}</h4>
                         <a href="{% url 'deleteHive' hive.pk hive.apiary_id %}">Delete</a>
                     {% endfor %}
             </div>

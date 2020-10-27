@@ -17,6 +17,7 @@
                         <h5>Site Name: {{ apiary.full_name }}</h5></a>>
                         Site User: {{ apiary.user }}<br>
                         Loggedin User: {{ request.user }}<br>
+                        <h4>Apiary id: {{ apiary.id }}</h4>
                         <a href="{% url 'editApiary' apiary.pk %}">Edit</a>
                         <a href="{% url 'deleteApiary' apiary.pk %}">Delete Apiary</a>
                         {% endif %}

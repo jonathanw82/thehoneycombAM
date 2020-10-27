@@ -5,8 +5,7 @@ from django.contrib.auth.models import User
 
 class hive_details(models.Model):
 
-    apiary_id = models.CharField(max_length=50, null=False,
-                                 blank=False)
+    apiary_id = models.ForeignKey(Apiary_details, on_delete=models.CASCADE, default=-1)
     user = models.CharField(User, max_length=50, null=False,
                             blank=False)
     hive_name = models.CharField(max_length=50, null=False,

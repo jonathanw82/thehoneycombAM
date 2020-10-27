@@ -20,13 +20,15 @@ def hive(request, apiary_id):
 def addHive(request, apiaryID, pk=None):
     """ A view to display the add hives page """
     ap = apiaryID
+    # get an instance of the apiary pk
+    instofID = get_object_or_404(Apiary_details, id=apiaryID)
     hive_details = get_object_or_404(hive, pk=pk) if pk else None
     if request.method == 'POST':
         form = AddHiveForm(request.POST)
         if form.is_valid():
             hive_details = form.save(commit=False)
             hive_details.user = request.user.id
-            hive_details.apiary_id = ap
+            hive_details.apiary_id = instofID
             hive_details.save()
             return redirect('hive', ap)
     else:
