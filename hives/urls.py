@@ -3,7 +3,8 @@ from . import views
 
 
 urlpatterns = [
-    path('hive/<apiary_id>', views.hive, name='hive'),
-    path('addHive/<apiaryID>', views.addHive, name='addHive'),
-    path('deleteHive/<pk><apiary_id>', views.deleteHive, name='deleteHive')
+    path('hive/<apiary_id>/', views.hive, name='hive'),
+    path('addHive/<apiary_id>/', views.addHive, name='addHive'),
+    path('deleteHive/<apiaryID>/<pk>/', views.deleteHive, name='deleteHive'),
+    path('editHive/<apiaryID>/<pk>/', views.editHive, name='editHive')
 ]

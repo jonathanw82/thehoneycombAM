@@ -6,7 +6,7 @@ class AddHiveForm(forms.ModelForm):
 
     class Meta:
         model = hive_details
-        fields = ['hive_name']
+        fields = ['hive_name', 'hive_type']
 
     def __init__(self, *args, **kwargs):
 

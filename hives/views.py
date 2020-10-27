@@ -17,11 +17,11 @@ def hive(request, apiary_id):
     return render(request, 'hives/hive.html', context)
 
 
-def addHive(request, apiaryID, pk=None):
+def addHive(request, apiary_id, pk=None):
     """ A view to display the add hives page """
-    ap = apiaryID
+    ap = apiary_id
     # get an instance of the apiary pk
-    instofID = get_object_or_404(Apiary_details, id=apiaryID)
+    instofID = get_object_or_404(Apiary_details, id=apiary_id)
     hive_details = get_object_or_404(hive, pk=pk) if pk else None
     if request.method == 'POST':
         form = AddHiveForm(request.POST)
@@ -40,8 +40,28 @@ def addHive(request, apiaryID, pk=None):
         return render(request, 'hives/addHive.html', context)
 
 
-def deleteHive(request, pk, apiary_id):
+def editHive(request, apiaryID, pk=None):
+    """ A view to display the Edit hives page """
+    ap = apiaryID
+    edithive = get_object_or_404(hive_details, pk=pk) if pk else None
+    if request.method == 'POST':
+        form = AddHiveForm(request.POST, instance=edithive)
+        if form.is_valid():
+            edithive.save()
+            return redirect('hive', ap)
+    else:
+        form = AddHiveForm(instance=edithive)
+        context = {
+            'ap': ap,
+            'form': form,
+        }
+        return render(request, 'hives/editHive.html', context)
+
+
+def deleteHive(request, apiaryID, pk):
     """ A view to delete Hives Sites """
+    apiary_id = apiaryID
     hivedel = get_object_or_404(hive_details, pk=pk)
     hivedel.delete()
+    print('WEEEEEE AAARREEEE HEEERREE')
     return redirect('hive', apiary_id)
