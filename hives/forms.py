@@ -1,5 +1,5 @@
 from django import forms
-from .models import hive_details, Apiary_details
+from .models import hive_details, Apiary_details, hiveDocuments
 
 
 class AddHiveForm(forms.ModelForm):
@@ -33,3 +33,19 @@ class editHiveForm(forms.ModelForm):
             # user to the __init__
             self.fields['apiary_id'].queryset = Apiary_details.objects.filter(
                 user=user)
+
+
+class addHiveDocumentsForm(forms.ModelForm):
+
+    class Meta:
+        model = hiveDocuments
+        fields = ['queen', 'queenColour', 'qc',
+                  'qcnum', 'eggs',
+                  'supers', 'supersnum',
+                  'weather', 'notes']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'add-hive-form'

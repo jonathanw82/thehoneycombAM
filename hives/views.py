@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import AddHiveForm, editHiveForm
-from .models import Apiary_details, hive_details
-
-# Create your views here.
+from .forms import AddHiveForm, editHiveForm, addHiveDocumentsForm
+from .models import Apiary_details, hive_details, hiveDocuments
 
 
 def hive(request, apiary_id):
@@ -66,3 +64,31 @@ def deleteHive(request, apiaryID, pk):
     hivedel = get_object_or_404(hive_details, pk=pk)
     hivedel.delete()
     return redirect('hive', apiary_id)
+
+
+def hiveDocs(request, pk):
+    docs = hiveDocuments.objects.filter(hivenumber=pk)
+    context = {
+        'docs': docs
+    }
+    return render(request, 'hives/hiveDocs.html', context)
+
+
+def addhiveDoc(request, pk=None):
+    """ A view to display the add Hive Documents """
+    if request.method == 'POST':
+        form = addHiveDocumentsForm(request.POST)
+        if form.is_valid():
+            hiveDocuments = form.save(commit=False)
+            hiveDocuments.hivenumber = pk
+            hiveDocuments.beekeepername = request.user
+            hiveDocuments.save()
+            return redirect('hiveDocs', pk)
+    else:
+        form = addHiveDocumentsForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'hives/addHiveDoc.html', context)
+
+

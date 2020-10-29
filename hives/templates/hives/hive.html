@@ -13,12 +13,14 @@
             <a href="{% url 'addHive' apiaryID %}">Add Hives</a>
             <div>   
                     {% for hive in hives %}
+                        <a href="{% url 'hiveDocs' hive.id %}">
                         <h5>Hive Name: {{ hive.hive_name }}</h5>
                         <h4>Hive id: {{ hive.id }}</h4>
                         <h4>Apiary id: {{ apiaryID }}</h4>
-                        <h4>Hive Type: {{ hive.hive_type }}</h4>
+                        <h4>Hive Type: {{ hive.hive_type }}</h4></a>
                         <a href="{% url 'deleteHive' apiaryID hive.id %}">Delete</a>
                         <a href="{% url 'editHive' apiaryID hive.id %}">Edit</a>
+                        <a href="{% url 'addhiveDoc' hive.id %}">Add Inspection</a>
                     {% endfor %}
             </div>
         </div>

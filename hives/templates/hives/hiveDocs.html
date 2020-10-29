@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block extra_css%}
+<link rel="stylesheet" href="{% static 'hives/css/hives.css' %}" />
+{% endblock%}
+
+{% block content %}
+<h1>Hive Documents</h1>
+    {% for doc in docs %}
+        <div>Hive Number: {{ doc.hivenumber}} Queen: {{ doc.queen }} Queen Colour: {{ doc.queenColour }}
+            QC: {{ doc.qc }} QC Number: {{ doc.qcnum }} Eggs; {{ doc.eggs }} Supers:{{ doc.supers }}
+            Number Of Supers: {{ doc.supernum }} Weather: {{ doc.weather }} Notes: {{ doc.notes }}
+            Beekeeper: {{ doc.beekeepername }}</div>
+            <div><a href="">Edit</a><a href="">Delete</a></div>
+        <hr color=gray>
+    {% endfor %}
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+{% endblock %}
