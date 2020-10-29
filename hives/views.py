@@ -68,19 +68,22 @@ def deleteHive(request, apiaryID, pk):
 
 def hiveDocs(request, pk):
     docs = hiveDocuments.objects.filter(hivenumber=pk)
+    hivename = get_object_or_404(hive_details, pk=pk)
     context = {
-        'docs': docs
+        'docs': docs,
+        'hivename': hivename
     }
     return render(request, 'hives/hiveDocs.html', context)
 
 
 def addhiveDoc(request, pk=None):
     """ A view to display the add Hive Documents """
+    instofID = get_object_or_404(hive_details, pk=pk)
     if request.method == 'POST':
         form = addHiveDocumentsForm(request.POST)
         if form.is_valid():
             hiveDocuments = form.save(commit=False)
-            hiveDocuments.hivenumber = pk
+            hiveDocuments.hivenumber = instofID
             hiveDocuments.beekeepername = request.user
             hiveDocuments.save()
             return redirect('hiveDocs', pk)
@@ -92,3 +95,9 @@ def addhiveDoc(request, pk=None):
         return render(request, 'hives/addHiveDoc.html', context)
 
 
+def deleteHivedoc(request, hive_id, pk):
+    """ A view to delete Hives Sites """
+    hiveid = hive_id
+    hivedocdel = get_object_or_404(hiveDocuments, pk=pk)
+    hivedocdel.delete()
+    return redirect('hiveDocs', hiveid)

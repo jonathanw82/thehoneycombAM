@@ -27,7 +27,7 @@ class hive_details(models.Model):
                                  default=UNKNOWN)
 
     def __str__(self):
-        return self.hive
+        return self.hive_name
 
     class Meta:
         verbose_name_plural = 'Hive Details'
@@ -52,7 +52,8 @@ class hiveDocuments(models.Model):
                 (UNKNOWN, 'Unknown')
                 ]
 
-    hivenumber = models.CharField(max_length=30, blank=False, null=False)
+    hivenumber = models.ForeignKey(hive_details, on_delete=models.CASCADE,
+                                   default=-1)
     time_and_date = models.DateTimeField(blank=True, null=True,
                                          default=timezone.now)
     queen = models.BooleanField(default=False)
