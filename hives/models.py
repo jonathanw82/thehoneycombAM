@@ -22,7 +22,7 @@ class hive_details(models.Model):
                             blank=False)
     hive_name = models.CharField(max_length=50, null=False,
                                  blank=False)
-    hive_type = models.CharField(choices=HIVETYPE, max_length=50, 
+    hive_type = models.CharField(choices=HIVETYPE, max_length=50,
                                  default=UNKNOWN)
 
     def __str__(self):

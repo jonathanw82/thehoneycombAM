@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404, reverse
-from .forms import AddHiveForm
-from .models import Apiary_details
-from .models import hive_details
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import AddHiveForm, editHiveForm
+from .models import Apiary_details, hive_details
 
 # Create your views here.
 
@@ -45,12 +44,15 @@ def editHive(request, apiaryID, pk=None):
     ap = apiaryID
     edithive = get_object_or_404(hive_details, pk=pk) if pk else None
     if request.method == 'POST':
-        form = AddHiveForm(request.POST, instance=edithive)
+        form = editHiveForm(request.user, request.POST, instance=edithive)
+        print(form)
         if form.is_valid():
             edithive.save()
             return redirect('hive', ap)
     else:
-        form = AddHiveForm(instance=edithive)
+        # Send in request.user to so the queryset can be set to only the
+        # logged in user.
+        form = editHiveForm(request.user, instance=edithive)
         context = {
             'ap': ap,
             'form': form,
@@ -63,5 +65,4 @@ def deleteHive(request, apiaryID, pk):
     apiary_id = apiaryID
     hivedel = get_object_or_404(hive_details, pk=pk)
     hivedel.delete()
-    print('WEEEEEE AAARREEEE HEEERREE')
     return redirect('hive', apiary_id)
