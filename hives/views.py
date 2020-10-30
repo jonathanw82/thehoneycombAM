@@ -43,13 +43,12 @@ def editHive(request, apiaryID, pk=None):
     edithive = get_object_or_404(hive_details, pk=pk) if pk else None
     if request.method == 'POST':
         form = editHiveForm(request.user, request.POST, instance=edithive)
-        print(form)
         if form.is_valid():
             edithive.save()
             return redirect('hive', ap)
     else:
-        # Send in request.user to so the queryset can be set to only the
-        # logged in user.
+        # Send in request.user to so the queryset can be set so only the
+        # logged in user can see apiarys that belong to them.
         form = editHiveForm(request.user, instance=edithive)
         context = {
             'ap': ap,
@@ -93,6 +92,27 @@ def addhiveDoc(request, pk=None):
             'form': form,
         }
         return render(request, 'hives/addHiveDoc.html', context)
+
+
+def editHiveDoc(request, hive_id, pk):
+    """ A view to display the Edit Hive Documents """
+    hiveid = hive_id
+    docid = pk
+    instdoc = get_object_or_404(hiveDocuments, pk=pk)
+    if request.method == 'POST':
+        form = addHiveDocumentsForm(request.POST, instance=instdoc)
+        if form.is_valid():
+            instdoc.save()
+            return redirect('hiveDocs', hiveid)
+    else:
+        form = addHiveDocumentsForm(instance=instdoc)
+        print(form)
+        context = {
+            'form': form,
+            'docid': docid,
+            'instdoc': instdoc
+        }
+        return render(request, 'hives/editHiveDoc.html', context)
 
 
 def deleteHivedoc(request, hive_id, pk):

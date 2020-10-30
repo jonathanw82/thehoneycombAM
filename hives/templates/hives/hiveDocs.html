@@ -9,11 +9,18 @@
 <h1>Hive Documents</h1>
 <h3>Hive Name: {{ hivename.hive_name }}</h3>
     {% for doc in docs %}
-        <div>Hive Number: {{ doc.hivenumber}} Queen: {{ doc.queen }} Queen Colour: {{ doc.queenColour }}
-            QC: {{ doc.qc }} QC Number: {{ doc.qcnum }} Eggs; {{ doc.eggs }} Supers:{{ doc.supers }}
-            Number Of Supers: {{ doc.supernum }} Weather: {{ doc.weather }} Notes: {{ doc.notes }}
-            Beekeeper: {{ doc.beekeepername }}</div>
-            <div><a href="">Edit</a><a href="{% url 'deleteHivedoc' hivename.id doc.pk %}">Delete</a></div>
+        <div>
+            Date: {{ doc.time_and_date }}
+            Log Number: {{ doc.id }} 
+            Hive Number: {{ doc.hivenumber}}
+            Queen: {% if doc.queen %} Yes Queen Colour: {{ doc.queenColour }}{% else %} No {% endif %}
+            QC: {% if doc.qc %} Yes QC Number: {{ doc.qcnum }} {% else %} No {% endif %}
+            Eggs: {% if doc.eggs %} Yes {% else %} No {% endif %} 
+            Supers:{% if doc.supers %} Yes Number Of Supers: {{ doc.supernum }} {% else %} No {% endif %}
+            Weather: {% if doc.weather == None %}Wether Not Recorded {% else %} {{ doc.weather }} {% endif %}
+            Notes: {{ doc.notes }}
+            Beekeeper: <span class="capitaise">{{ doc.beekeepername }}</span></div>
+            <div><a href="{% url 'editHiveDoc' hivename.id doc.pk %}">Edit</a><a href="{% url 'deleteHivedoc' hivename.id doc.pk %}">Delete</a></div>
         <hr color=gray>
     {% endfor %}
 {% endblock %}

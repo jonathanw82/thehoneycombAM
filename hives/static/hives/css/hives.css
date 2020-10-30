@@ -1,3 +1,11 @@
 .emptydiv{
-    height: 50px;
+    height: 100px;
+}
+
+.capitaise{
+    text-transform: capitalize;
+}
+
+.hidename{
+    display: none;
 }

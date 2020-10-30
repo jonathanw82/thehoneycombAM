@@ -2,21 +2,29 @@
 
 {% load static %} 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'apiary/css/apiary.css' %}">
+    <link rel="stylesheet" href="{% static 'hives/css/hives.css' %}">
 {% endblock %}
+
+{% load crispy_forms_tags %}
 
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
                         <h1>Add Insection Details</h1>
-                        <h3>Plaase note Time & Date are added automatically</h3>
+                        <h3>Please note Date's are added automatically</h3>
                 <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ form | crispy }}
-            
+                        {{ form.queen |as_crispy_field }}
+                        {{ form.queenColour |as_crispy_field }}
+                        {{ form.qc |as_crispy_field }}
+                        {{ form.qcnum |as_crispy_field }}
+                        {{ form.eggs |as_crispy_field }}
+                        {{ form.supers |as_crispy_field }}
+                        {{ form.supersnum |as_crispy_field }}
+                        {{ form.weather |as_crispy_field }}
+                        {{ form.notes |as_crispy_field }}
                     <button class="btn btn-info buttons-click" type="submit">Done</button>
-                    
                 </form>
             </div> 
 		</div>

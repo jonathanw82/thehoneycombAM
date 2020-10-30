@@ -42,14 +42,14 @@ class hiveDocuments(models.Model):
     RED = 'Red'
     GREEN = 'Green'
     BLUE = 'Blue'
-    UNKNOWN = 'Unknown'
+    NOTYETRECORD = 'Not Marked'
 
     QUEENCOL = [(WHITE, 'White'),
                 (YELLOW, 'Yellow'),
                 (RED, 'Red'),
                 (GREEN, 'Green'),
                 (BLUE, 'Blue'),
-                (UNKNOWN, 'Unknown')
+                (NOTYETRECORD, 'Not Marked')
                 ]
 
     hivenumber = models.ForeignKey(hive_details, on_delete=models.CASCADE,
@@ -58,7 +58,7 @@ class hiveDocuments(models.Model):
                                          default=timezone.now)
     queen = models.BooleanField(default=False)
     queenColour = models.CharField(choices=QUEENCOL, max_length=50,
-                                   default=UNKNOWN)
+                                   default=NOTYETRECORD)
     qc = models.BooleanField(default=False)
     qcnum = models.IntegerField(blank=True, null=True)
     eggs = models.BooleanField(default=False)
