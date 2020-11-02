@@ -13,7 +13,24 @@
                         <h3>Doc ID: {{ docid }}</h3>
                 <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ form | crispy }}
+                        {{ form.queen |as_crispy_field }}
+                        {{ form.queenColour |as_crispy_field }}
+                        {{ form.qc |as_crispy_field }}
+                        {{ form.qcnum |as_crispy_field }}
+                        {{ form.eggs |as_crispy_field }}
+                        {{ form.supers |as_crispy_field }}
+                        {{ form.supersnum |as_crispy_field }}
+                        {{ form.weather |as_crispy_field }}
+                        {{ form.notes |as_crispy_field }}
+                        {{ form.beekeepername |as_crispy_field }}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ form.image1 |as_crispy_field }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form.image2 |as_crispy_field }}
+                            </div>
+                        </div>
                     <button class="btn btn-info buttons-click" type="submit">Done</button>
                 </form>
             </div> 

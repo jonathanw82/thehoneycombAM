@@ -7,9 +7,9 @@
 
 {% block content %}
 <div class="container">
-<h1>Hive Documents</h1>
-<h3>Hive Name: {{ hivename.hive_name }}</h3>
-    {% for doc in docs %}
+<h1>Hive Records</h1>
+<h3>Hive: {{ hivename.hive_name }}</h3>
+    {% for doc in docs reversed %}
         <div>
             Date: {{ doc.time_and_date }}
             Log Number: {{ doc.id }} 
@@ -24,12 +24,12 @@
             <div class="row">
                 {% if doc.image1 %} 
                 <div class="col-sm-6"> 
-                    <img src="{{ doc.image1.url }}" alt="Hive Document image 1">
+                    <a href="{{ doc.image1.url }}"><img class="imageondoc" src="{{ doc.image1.url }}" alt="Hive Document image 1"></a>
                 </div>
                 {% endif %}
                 {% if doc.image2 %} 
                 <div class="col-sm-6"> 
-                    <img src="{{ doc.image2.url }}" alt="Hive Document image 2">
+                    <a href="{{ doc.image2.url }}"><img class="imageondoc" src="{{ doc.image2.url }}" alt="Hive Document image 2"></a>
                 </div>
                 {% endif %}
             </div>

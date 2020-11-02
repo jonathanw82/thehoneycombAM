@@ -1,4 +1,5 @@
 from django import forms
+from .widgets import CustomClearableFileInput
 from .models import hive_details, Apiary_details, hiveDocuments
 
 
@@ -44,6 +45,11 @@ class addHiveDocumentsForm(forms.ModelForm):
                   'supers', 'supersnum',
                   'weather', 'notes', 'beekeepername',
                   'image1', 'image2']
+
+    image1 = forms.ImageField(label='Image 1', required=False,
+                              widget=CustomClearableFileInput)
+    image2 = forms.ImageField(label='Image 2', required=False,
+                              widget=CustomClearableFileInput)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
