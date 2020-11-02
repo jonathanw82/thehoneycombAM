@@ -42,7 +42,8 @@ class addHiveDocumentsForm(forms.ModelForm):
         fields = ['queen', 'queenColour', 'qc',
                   'qcnum', 'eggs',
                   'supers', 'supersnum',
-                  'weather', 'notes', 'beekeepername']
+                  'weather', 'notes', 'beekeepername',
+                  'image1', 'image2']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

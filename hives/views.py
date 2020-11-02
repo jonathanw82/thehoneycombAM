@@ -79,7 +79,7 @@ def addhiveDoc(request, pk=None):
     """ A view to display the add Hive Documents """
     instofID = get_object_or_404(hive_details, pk=pk)
     if request.method == 'POST':
-        form = addHiveDocumentsForm(request.POST)
+        form = addHiveDocumentsForm(request.POST, request.FILES)
         if form.is_valid():
             hiveDocuments = form.save(commit=False)
             hiveDocuments.hivenumber = instofID
@@ -100,7 +100,8 @@ def editHiveDoc(request, hive_id, pk):
     docid = pk
     instdoc = get_object_or_404(hiveDocuments, pk=pk)
     if request.method == 'POST':
-        form = addHiveDocumentsForm(request.POST, instance=instdoc)
+        form = addHiveDocumentsForm(request.POST, request.FILES,
+                                    instance=instdoc)
         if form.is_valid():
             instdoc.save()
             return redirect('hiveDocs', hiveid)

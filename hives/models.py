@@ -67,6 +67,10 @@ class hiveDocuments(models.Model):
     weather = models.CharField(max_length=20, blank=True, null=True)
     notes = models.CharField(max_length=500, blank=True, null=True)
     beekeepername = models.CharField(max_length=30, blank=True, null=True)
+    image1 = models.ImageField(upload_to='media/images/',
+                               blank=True, null=True)
+    image2 = models.ImageField(upload_to='media/images/',
+                               blank=True, null=True)
 
     def __str__(self):
         return self.hiveDocuments
