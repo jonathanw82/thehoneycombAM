@@ -42,6 +42,7 @@
 </head>
 
 <body>
+  <div class="bg-image"></div>
   <nav class="navbar navbar-expand-lg navbar_colour">
     <!-- if the user is authenticated then change the displayed options and routing for the home buttons -->
     {% if request.user.is_authenticated %}
@@ -90,6 +91,26 @@
     </div>
   </nav>
 
+  {% if messages %}
+  <div class="notifications">
+      {% for message in messages %}
+              {% with message.level as level %}
+                  {% if level == 40 %}
+                      {% include 'messages/error_message.html' %}
+                  {% elif level == 30 %}
+                      {% include 'messages/warning_message.html' %}
+                  {% elif level == 25 %}
+                      {% include 'messages/success_message.html' %}
+                  {% else %}
+                      {% include 'messages/info_message.html' %}
+                  {% endif %}
+              {% endwith %}
+      {% endfor %}
+  </div>      
+  {% endif %} 
+
+
+
   {% block content %}
   {% endblock %}
 
@@ -130,6 +151,9 @@
   </footer>
 
 {% block postloadjs %}
+  <script type='text/javascript'>
+    $('.toast').toast('show');
+  </script>
 {% endblock %}
 </body>
 

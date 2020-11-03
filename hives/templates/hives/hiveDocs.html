@@ -7,37 +7,44 @@
 
 {% block content %}
 <div class="container">
-<h1>Hive Records</h1>
-<h3>Hive: {{ hivename.hive_name }}</h3>
+    <h1>Hive Records</h1>
+    <h3>Hive: {{ hivename.hive_name }}</h3>
     {% for doc in docs reversed %}
-        <div>
-            Date: {{ doc.time_and_date }}
-            Log Number: {{ doc.id }} 
-            Hive Number: {{ doc.hivenumber}}
-            Queen: {% if doc.queen %} Yes Queen Colour: {{ doc.queenColour }}{% else %} No {% endif %}
-            QC: {% if doc.qc %} Yes QC Number: {{ doc.qcnum }} {% else %} No {% endif %}
-            Eggs: {% if doc.eggs %} Yes {% else %} No {% endif %} 
-            Supers:{% if doc.supers %} Yes Number Of Supers: {{ doc.supernum }} {% else %} No {% endif %}
-            Weather: {% if doc.weather == None %}Wether Not Recorded {% else %} {{ doc.weather }} {% endif %}
-            Notes: {{ doc.notes }}
-            Beekeeper: <span class="capitaise">{{ doc.beekeepername }}</span></div>
-            <div class="row">
-                {% if doc.image1 %} 
-                <div class="col-sm-6"> 
-                    <a href="{{ doc.image1.url }}"><img class="imageondoc" src="{{ doc.image1.url }}" alt="Hive Document image 1"></a>
-                </div>
-                {% endif %}
-                {% if doc.image2 %} 
-                <div class="col-sm-6"> 
-                    <a href="{{ doc.image2.url }}"><img class="imageondoc" src="{{ doc.image2.url }}" alt="Hive Document image 2"></a>
-                </div>
-                {% endif %}
-            </div>
-            <div><a href="{% url 'editHiveDoc' hivename.id doc.pk %}">Edit</a><a href="{% url 'deleteHivedoc' hivename.id doc.pk %}">Delete</a>
+    <div>
+        Date: {{ doc.time_and_date }}
+        Log Number: {{ doc.id }}
+        Hive Number: {{ doc.hivenumber}}
+        Queen: {% if doc.queen %} Yes Queen Colour: {{ doc.queenColour }}{% else %} No {% endif %}
+        QC: {% if doc.qc %} Yes QC Number: {{ doc.qcnum }} {% else %} No {% endif %}
+        Eggs: {% if doc.eggs %} Yes {% else %} No {% endif %}
+        Supers:{% if doc.supers %} Yes Number Of Supers: {{ doc.supernum }} {% else %} No {% endif %}
+        Weather: {% if doc.weather == None %}Wether Not Recorded {% else %} {{ doc.weather }} {% endif %}
+        Notes: {{ doc.notes }}
+        Beekeeper: <span class="capitaise">{{ doc.beekeepername }}</span>
+    </div>
+    <div class="row">
+        {% if doc.image1 %}
+        <div class="col-sm-6">
+            <a href="{{ doc.image1.url }}" target="_blank">
+                <img class="imageondoc" src="{{ doc.image1.url }}" alt="Oops lost Image! {{ doc.image1.name }}">
+            </a>
         </div>
+        {% endif %}
+        {% if doc.image2 %}
+        <div class="col-sm-6">
+            <a href="{{ doc.image2.url }}" target="_blank">
+                <img class="imageondoc" src="{{ doc.image2.url }}" alt="Oops lost Image!  {{ doc.image2.name }}">
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    <div>
+        <a href="{% url 'editHiveDoc' hivename.id doc.pk %}">Edit</a>
+        <a href="{% url 'deleteHivedoc' hivename.id doc.pk %}">Delete</a>
+    </div>
         <hr color=gray>
     {% endfor %}
-</div>    
+</div>
 {% endblock %}
 
 {% block postloadjs %}

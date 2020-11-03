@@ -2,16 +2,40 @@
     text-transform: capitalize;
 }
 
+.bg-image{
+    background-image: url('/static/images/background.png');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat:no-repeat;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    min-height: 100vh;
+}
+
 /* ------------ Login & Signup ----------*/
 .buttons_login{
     
 }
+
 .login-box{
     border: 2px solid black;
     margin-top: 20px;
 }
 
+/* ------------- notifications ------------*/
 
+.notifications{
+    z-index: 99999999;
+    position: fixed;
+    top: 75px;
+    right: 15px;
+}
+
+.alert_title{
+    color: white;
+}
 
 /* ------------ Navigation --------------*/
 .navbar_colour{

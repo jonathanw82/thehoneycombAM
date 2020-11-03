@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AddHiveForm, editHiveForm, addHiveDocumentsForm
 from .models import Apiary_details, hive_details, hiveDocuments
+from django.contrib import messages
 
 
 def hive(request, apiary_id):
@@ -27,7 +28,11 @@ def addHive(request, apiary_id, pk=None):
             hive_details.user = request.user.id
             hive_details.apiary_id = instofID
             hive_details.save()
+            messages.success(request, f'Added {hive_details.hive_name}\
+                             To your Apiary')
             return redirect('hive', ap)
+        else:
+            messages.error(request, 'Your hive was not valid')
     else:
         form = AddHiveForm()
         context = {
@@ -40,16 +45,29 @@ def addHive(request, apiary_id, pk=None):
 def editHive(request, apiaryID, pk=None):
     """ A view to display the Edit hives page """
     ap = apiaryID
+    currentApiary = get_object_or_404(Apiary_details, pk=apiaryID)
     edithive = get_object_or_404(hive_details, pk=pk) if pk else None
     if request.method == 'POST':
         form = editHiveForm(request.user, request.POST, instance=edithive)
         if form.is_valid():
             edithive.save()
+            new = str(edithive.apiary_id)
+            current = str(currentApiary.full_name)
+            if new != current:
+                messages.success(request, f'Hive: {edithive.hive_name.capitalize()} was\
+                     Updated And Moved To Apiary: {edithive.apiary_id}!')
+            else:
+                messages.success(request, f'Hive: {edithive.hive_name.capitalize()} was\
+                             Updated!')
             return redirect('hive', ap)
+        else:
+            messages.error(request, 'Error Hive Was Not Updated!')
     else:
         # Send in request.user to so the queryset can be set so only the
         # logged in user can see apiarys that belong to them.
         form = editHiveForm(request.user, instance=edithive)
+        messages.info(request, f'You are editing\
+                      Hive: {edithive.hive_name.capitalize()}!')
         context = {
             'ap': ap,
             'form': form,
@@ -60,12 +78,16 @@ def editHive(request, apiaryID, pk=None):
 def deleteHive(request, apiaryID, pk):
     """ A view to delete Hives Sites """
     apiary_id = apiaryID
+    nameapiary = get_object_or_404(Apiary_details, pk=apiaryID)
     hivedel = get_object_or_404(hive_details, pk=pk)
+    messages.warning(request, f'You have Deleted {hivedel.hive_name} From \
+                     Apiary {nameapiary.full_name}')
     hivedel.delete()
     return redirect('hive', apiary_id)
 
 
 def hiveDocs(request, pk):
+    """ A view to display the Hive Documents relevent to the hive PK """
     docs = hiveDocuments.objects.filter(hivenumber=pk)
     hivename = get_object_or_404(hive_details, pk=pk)
     context = {
@@ -85,7 +107,12 @@ def addhiveDoc(request, pk=None):
             hiveDocuments.hivenumber = instofID
             hiveDocuments.beekeepername = request.user
             hiveDocuments.save()
+            messages.success(request, f'Hive Record Was\
+                           Added {instofID.hive_name}')
             return redirect('hiveDocs', pk)
+        else:
+            messages.error(request, f'Error New Hive Record: {instofID.hive_name} Was\
+                           Not Added!')
     else:
         form = addHiveDocumentsForm()
         context = {
@@ -104,10 +131,15 @@ def editHiveDoc(request, hive_id, pk):
                                     instance=instdoc)
         if form.is_valid():
             instdoc.save()
+            messages.success(request, f'Log Number: {instdoc.pk} Was\
+                             Updated!')
             return redirect('hiveDocs', hiveid)
+        else:
+            messages.error(request, f'Error Log Number: {instdoc.pk} Was\
+                           Not Updated!')
     else:
         form = addHiveDocumentsForm(instance=instdoc)
-        print(form)
+        messages.info(request, f'You Are Editing {instdoc.pk}!')
         context = {
             'form': form,
             'docid': docid,
@@ -119,6 +151,9 @@ def editHiveDoc(request, hive_id, pk):
 def deleteHivedoc(request, hive_id, pk):
     """ A view to delete Hives Sites """
     hiveid = hive_id
+    hivedetail = get_object_or_404(hive_details, pk=hive_id)
     hivedocdel = get_object_or_404(hiveDocuments, pk=pk)
+    messages.warning(request, f'You Have Deleted Hive Record: {hivedocdel.pk} From\
+                     Hive: {hivedetail.hive_name}')
     hivedocdel.delete()
     return redirect('hiveDocs', hiveid)
