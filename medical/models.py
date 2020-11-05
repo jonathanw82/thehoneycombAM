@@ -27,14 +27,13 @@ class hiveMedical(models.Model):
                                          blank=False)
     medicine_name = models.CharField(max_length=80, null=False,
                                      blank=False)
-    medicine_purchase_date = models.CharField(max_length=20, null=True,
-                                              blank=True)
+    medicine_purchase_date = models.DateField(null=True, blank=True)
     medicine_batch_number = models.CharField(max_length=80, null=False,
                                              blank=False)
     medicine_qty = models.CharField(max_length=80, null=False,
                                     blank=False)
-    medicine_exp_date = models.CharField(max_length=20, null=False,
-                                         blank=False)
+    medicine_exp_date = models.DateField(null=True, blank=True)
+    medicine_updated = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.hiveMedical
@@ -55,16 +54,17 @@ class hiveMedicalRecords(models.Model):
                                      blank=False)
     medicine_admin_time_and_date = models.DateTimeField(blank=True, null=True,
                                                         default=timezone.now)
+    medicine_updated = models.DateTimeField(blank=True, null=True)
     medicine_duration = models.CharField(max_length=20, null=False,
                                          blank=False)
     medicine_withdrawal = models.CharField(max_length=50, null=True,
                                            blank=True)
     medicine_qty_used = models.CharField(max_length=20, null=False,
                                          blank=False)
-    medicine_disposal = models.CharField(max_length=150, null=True,
-                                         blank=True)
-    medicine_disposal_date = models.CharField(max_length=20, null=True,
-                                              blank=True)
+    deployment_method = models.CharField(max_length=50, null=True, blank=True)
+    medicine_disposal = models.CharField(max_length=150, null=False,
+                                         blank=False)
+    medicine_disposal_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.hiveMedicalRecords

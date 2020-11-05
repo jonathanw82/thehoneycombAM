@@ -4,7 +4,31 @@
 
 {% block content %}
   <h1 class="display-4 text-success">Bee Medical Page</h1>
-       
+  <a class="btn btn-secondary" href="{% url 'addMedicine'%}">Add Medicine</a>
+  <div>
+       {% for med in medications %}
+       <div>
+          {{ med.medicine_name }}
+          {{ med.supplier_full_name }}
+          {% if datetoday > med.medicine_exp_date %}
+          Medicine Has EXPIRED!!!!
+          {% else %}
+          {% endif %}
+          <div>
+            {% if med.medicine_updated %}
+            This Medicine Was Updated On The: {{ med.medicine_updated }}
+            {% endif %}
+
+          </div>
+          <div>
+            <a href="{% url 'editMedicine' med.pk %}">Edit Medicine</a>
+            <a href="{% url 'deleteMedicine' med.pk %}">Delete</a>
+          </div>
+          
+      </div>
+       {% endfor %}
+ 
+ </div>      
 {% endblock %}
 
 {% block postloadjs %}

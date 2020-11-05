@@ -2,18 +2,28 @@ from django import forms
 from .models import hiveMedical, hiveMedicalRecords
 
 
+class DateInput(forms.DateInput):
+    """
+    This function creates a widget to make
+    a Date Input field.
+    """
+    input_type = 'date'
+
+
 class addHiveMedicineForm(forms.ModelForm):
 
     class Meta:
+        widgets = {'medicine_exp_date': DateInput(),
+                   'medicine_purchase_date': DateInput()}
         model = hiveMedical
         fields = [
+            'medicine_name',
             'supplier_full_name',
             'supplier_street_address1',
             'supplier_street_address2',
             'supplier_town_or_city',
             'supplier_county',
             'supplier_postcode',
-            'medicine_name',
             'medicine_purchase_date',
             'medicine_batch_number',
             'medicine_qty',
@@ -30,12 +40,14 @@ class addHiveMedicineForm(forms.ModelForm):
 class addHiveMedicalRecordForm(forms.ModelForm):
 
     class Meta:
+        widgets = {'medicine_disposal_date': DateInput()}
         model = hiveMedicalRecords
         fields = [
-            'medicine_admin_time_and_date',
+            'medicine_name',
             'medicine_duration',
             'medicine_withdrawal',
             'medicine_qty_used',
+            'deployment_method',
             'medicine_disposal',
             'medicine_disposal_date']
 

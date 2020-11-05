@@ -21,6 +21,7 @@
                         <a href="{% url 'deleteHive' apiaryID hive.id %}">Delete</a>
                         <a href="{% url 'editHive' apiaryID hive.id %}">Edit</a>
                         <a href="{% url 'addhiveDoc' hive.id %}">Add Inspection</a><br>
+                        <a href="{% url 'hiveMedicalHistory' hive.id %}">Medical History</a><br>
                         Hive Movement History: 
                         {% if hive.hive_new_apiary %}
                         <h4>Hive moved to Apiary {{ hive.hive_new_apiary }} <br>
