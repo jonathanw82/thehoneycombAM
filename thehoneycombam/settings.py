@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'home',
     'apiary',
     'hives',
+    'medical'
 ]
 
 MIDDLEWARE = [

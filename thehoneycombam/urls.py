@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('apiary/', include('apiary.urls')),
     path('hives/', include('hives.urls')),
+    path('medical/', include('medical.urls')),
 ]
 
 

@@ -9,6 +9,8 @@
 <div class="container">
     <h1>Hive Records</h1>
     <h3>Hive: {{ hivename.hive_name }}</h3>
+    Download Hive documents to PDF
+    <a class="btn btn-secondary" href="">Download PDF</a>
     {% for doc in docs reversed %}
     <div>
         Date: {{ doc.time_and_date }}

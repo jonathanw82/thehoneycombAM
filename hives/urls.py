@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+# from .views import GeneratePDF
 
 
 urlpatterns = [
@@ -11,5 +12,5 @@ urlpatterns = [
     path('addhiveDoc/<pk>/', views.addhiveDoc, name='addhiveDoc'),
     path('editHiveDoc/<hive_id>/<pk>/', views.editHiveDoc, name='editHiveDoc'),
     path('deleteHivedoc/<hive_id>/<pk>/', views.deleteHivedoc,
-         name='deleteHivedoc')
+         name='deleteHivedoc'),
 ]

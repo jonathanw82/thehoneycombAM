@@ -2,7 +2,7 @@
     text-transform: capitalize;
 }
 
-.bg-image{
+/* .bg-image{
     background-image: url('/static/images/background.png');
     background-position: center;
     background-size: cover;
@@ -12,12 +12,12 @@
     z-index: -1;
     width: 100%;
     min-height: 100vh;
-}
+} */
 
 /* ------------ Login & Signup ----------*/
-.buttons_login{
+/* .buttons_login{
     
-}
+} */
 
 .login-box{
     border: 2px solid black;

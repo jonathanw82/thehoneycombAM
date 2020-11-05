@@ -25,6 +25,11 @@ class hive_details(models.Model):
                                  blank=False)
     hive_type = models.CharField(choices=HIVETYPE, max_length=50,
                                  default=UNKNOWN)
+    hive_new_apiary = models.CharField(max_length=50, null=True,
+                                       blank=True)
+    hive_old_apiary = models.CharField(max_length=50, null=True,
+                                       blank=True)
+    hive_move_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.hive_name
