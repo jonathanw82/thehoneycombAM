@@ -4,7 +4,7 @@
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'hives/css/hives.css' %}">
 {% endblock %}
-
+{% load crispy_forms_tags %}
 {% block content %}
     <div class="container">
         <div class="row">
@@ -12,9 +12,15 @@
                         <h1>Add Hive Medical Record</h1>
                 <form class="addHiveMedicalRecordForm" method="POST" action="{% url 'addMedicalRecord' hiveinst.pk %}"enctype="multipart/form-data">
                         {% csrf_token %}
+                        {% if isMedicinePresent %}
                         {{ form| crispy }}
-            
-                    <button class="btn btn-info buttons-click" type="submit" href="{% url 'hiveMedicalHistory' hiveinst.pk %}">Add</button>
+                        <button class="btn btn-info buttons-click" type="submit" href="{% url 'hiveMedicalHistory' hiveinst.pk %}">Add</button>
+                        {% else %}
+                        You have not added any Medicines as yet
+                        <div>
+                            <a class="btn btn-info buttons-click" href="{% url 'addMedicine' %}">Add Medicine</a>
+                        </div>
+                        {% endif %}
                 </form>
             </div> 
 		</div>

@@ -78,9 +78,11 @@ def hiveMedicalHistory(request, pk):
 
 def addMedicalRecord(request, pk=None):
     """ A view to display the add medicine page """
+    user = request.user
+    isMedicinePresent = hiveMedical.objects.filter(user=user)
     hiveinst = get_object_or_404(hive_details, pk=pk)
     if request.method == 'POST':
-        form = addHiveMedicalRecordForm(request.POST)
+        form = addHiveMedicalRecordForm(user, request.POST)
         if form.is_valid():
             hiveMedicalRecords = form.save(commit=False)
             hiveMedicalRecords.hivenumber = hiveinst
@@ -90,20 +92,22 @@ def addMedicalRecord(request, pk=None):
         else:
             messages.error(request, 'Your medical record was not valid')
     else:
-        form = addHiveMedicalRecordForm()
+        form = addHiveMedicalRecordForm(user)
         context = {
             'form': form,
             'hiveinst': hiveinst,
+            'isMedicinePresent': isMedicinePresent
         }
         return render(request, 'medical/addMedicalRecord.html', context)
 
 
 def editMedicalRecord(request, hiveinst_id, pk=None):
     """ A view to display the add medicine page """
+    user = request.user
     hiveinst = get_object_or_404(hive_details, pk=hiveinst_id)
     editMedicineRecord = get_object_or_404(hiveMedicalRecords, pk=pk)
     if request.method == 'POST':
-        form = addHiveMedicalRecordForm(request.POST,
+        form = addHiveMedicalRecordForm(user, request.POST,
                                         instance=editMedicineRecord)
         if form.is_valid():
             editMedicineRecord = form.save(commit=False)
@@ -113,7 +117,7 @@ def editMedicalRecord(request, hiveinst_id, pk=None):
         else:
             messages.error(request, 'Your medical record was not valid')
     else:
-        form = addHiveMedicalRecordForm(instance=editMedicineRecord)
+        form = addHiveMedicalRecordForm(user, instance=editMedicineRecord)
         context = {
             'form': form,
             'hiveinst': hiveinst,

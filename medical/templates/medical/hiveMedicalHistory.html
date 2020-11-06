@@ -1,36 +1,42 @@
 {% extends "base.html" %}
 
-{% load static %} 
+{% load static %}
 
 {% block content %}
-  <h1 class="display-4 text-success">Hive Medical History</h1>
-  <a class="btn btn-secondary" href="{% url 'addMedicalRecord' hiveinst.pk %}">Add Medical Record</a>
-  <div>
-       {% for med in medications reversed %}
-       <div>
-           Record Number: {{ med.pk }}<br>
-          {{ med.medicine_admin_time_and_date }}
-          {{ med.hive_name }}
-          {{ med.medicine_name }}
-          {{ med.deployment_method}}
-          {% if med.medicine_updated %}
-          <div>
-          Record Was Updated On: {{ med.medicine_updated }}
-          {% else %}
-          </div>
-          {% endif %}
-      </div>
-      <div>
-          <a href="{% url 'editMedicalRecord' hiveinst.pk med.id %}">Edit</a>
-      </div>
-      <div>
-          <a href="{% url 'deleteMedicalRecord' hiveinst.pk med.id %}">Delete</a>
-      </div>
-       {% endfor %}
- 
- </div>      
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="display-4 text-success">Hive Medical History</h1>
+            <h2>Hive Name: {{ hiveinst.hive_name }}</h2>
+            <a class="btn btn-secondary" href="{% url 'addMedicalRecord' hiveinst.pk %}">Add Medical Record</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            {% for med in medications reversed %}
+            <div>
+                Record Number: {{ med.pk }}<br>
+                {{ med.medicine_admin_time_and_date }}
+                {{ med.hive_name }}
+                {{ med.medicine_name }}
+                {{ med.deployment_method}}
+            </div>    
+            
+                {% if med.medicine_updated %}
+            <div>
+                Record Was Updated On: {{ med.medicine_updated }}
+            </div>
+                {% endif %}    
+            <div>
+                <a href="{% url 'editMedicalRecord' hiveinst.pk med.id %}">Edit</a>
+                <a href="{% url 'deleteMedicalRecord' hiveinst.pk med.id %}">Delete</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block postloadjs %}
-    {{ block.super }}
+{{ block.super }}
 {% endblock %}

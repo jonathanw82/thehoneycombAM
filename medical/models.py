@@ -46,12 +46,12 @@ class hiveMedicalRecords(models.Model):
     """
     A Model for Hive Medical Medicine
     """
+
     hivenumber = models.ForeignKey(hive_details, on_delete=models.CASCADE,
                                    default=-1)
     hive_name = models.CharField(max_length=50, null=False,
                                  blank=False)
-    medicine_name = models.CharField(max_length=80, null=False,
-                                     blank=False)
+    medicine_name = models.CharField(max_length=80, blank=True, null=True)
     medicine_admin_time_and_date = models.DateTimeField(blank=True, null=True,
                                                         default=timezone.now)
     medicine_updated = models.DateTimeField(blank=True, null=True)

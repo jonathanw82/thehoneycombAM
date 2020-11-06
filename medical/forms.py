@@ -41,6 +41,7 @@ class addHiveMedicalRecordForm(forms.ModelForm):
 
     class Meta:
         widgets = {'medicine_disposal_date': DateInput()}
+
         model = hiveMedicalRecords
         fields = [
             'medicine_name',
@@ -51,8 +52,22 @@ class addHiveMedicalRecordForm(forms.ModelForm):
             'medicine_disposal',
             'medicine_disposal_date']
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        choices = [(med.medicine_name +
+                    ' Batch Num: ' +
+                    med.medicine_batch_number +
+                    ' Exp: ' +
+                    str(med.medicine_exp_date),
+                    med.medicine_name +
+                    ' Batch Num: ' +
+                    med.medicine_batch_number +
+                    ' Exp: ' +
+                    str(med.medicine_exp_date))
+                   for med in hiveMedical.objects.filter(user=user)]
 
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'add-hive-form'
+            self.fields['medicine_name'] = forms.ChoiceField(
+                                widget=forms.Select(), choices=choices)
