@@ -13,6 +13,8 @@ Django-crispy-form
 Confirm Delete
 https://www.youtube.com/watch?v=OIfKHssR1oc
 
+https://pixabay.com/videos/bee-honey-insect-beehive-nature-39121/
+
 favicon.io Icons made by https://www.flaticon.com/authors/freepik title=Freepik from https://www.flaticon.com/
 Navbar Logo Icons made by https://creativemarket.com/eucalyp title= Eucalyp from https://www.flaticon.com/
 Wiki Icons made by https://www.flaticon.com/authors/freepik title=Freepik from https://www.flaticon.com/

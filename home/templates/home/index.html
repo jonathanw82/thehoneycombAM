@@ -1,19 +1,29 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'home/css/index.css' %}">
+{% endblock %}
 
 {% block content %}
-      
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-12">
-            <h1>Welcome to The HoneyComb Apairy Mangement</h1>
-            <h3>Please Signin or sign up to continue!</h3>
-            <a class="btn btn-secondary" href="{% url 'account_login' %}">Login/Signup</a>
-          </div>
-        </div>
+<div class="overlay"></div>
+<video autoplay muted loop id="myVideo">
+  <source src="{% static 'home/images/bee2.mp4' %}" type="video/mp4">
+</video>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 test">
+      <p>Welcome to The HoneyComb Apairy Management</p>
+      <div class="subheading">Please Signin or sign up to continue!</div>
+      <div class="buttons">
+        <a class="btn btn-secondary " href="{% url 'account_login' %}">Login/Signup</a>
       </div>
- 
+    </div>
+  </div>
+</div>
+
 {% endblock %}
 
 {% block postloadjs %}
