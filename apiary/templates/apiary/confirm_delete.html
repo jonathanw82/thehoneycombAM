@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block extra_css%}
+<link rel="stylesheet" href="{% static 'apiary/css/apiary.css' %}" />
+{% endblock%}
+
+{% block content %}
+<div class="container">
+    <div id="test"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Confirm Delete</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <p>Warning you are about to delete : {{ apiarydel.full_name }} </p>
+                <p>All data included with this Apiary will be <strong>LOST</strong> including all Hives,
+                    All inspection records and all medical records</p>
+                <p>If you want to keep the hive & medical data please back it up with the save as
+                    PDF button or move the hive to another apiary</p>
+                <a class="btn btn-danger" id="firstWarning" onclick=secondWarning()>Confirm</a>
+                <span id="secondary-confirm"></span>
+                <a href="{% url 'apiary' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+    <div class="emptydiv"></div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'apiary/js/apiary.js' %}"></script>
+{% endblock %}

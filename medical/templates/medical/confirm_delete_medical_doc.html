@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block extra_css%}
+<link rel="stylesheet" href="{% static 'apiary/css/apiary.css' %}" />
+{% endblock%}
+
+{% block content %}
+<div class="container">
+    <div id="test"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Confirm Delete Medical Record</h1>
+
+            <form method="POST">
+                {% csrf_token %}
+                <p>Warning you are about to delete Medical Record: {{ recordDel.pk }} From Hive: {{ recordDel.hive_name }}</p>
+                <input class="btn btn-danger confirmBut" type="submit" value="Delete"></input>
+                <a href="{% url 'hive' hiveid %}" class="btn btn-secondary">Cancel</a>
+            </form>
+            <hr>
+            <h3>Please Note:</h3>
+            <p>Beekeepers are required to keep proof of purchase and a record of purchase, administration and disposal
+                of all veterinary medicines for a minimum of 5 years
+                under the Veterinary Medicines Regulations 2011SI 2159.
+                Further information can be obtained from Veterinary Medicines Directorate, Woodham Lane, New Haw,
+                Addlestone, Surrey. KT15.3LS. Telephone: 01932 336911.
+                <a href="http://www.vmd.defra.gov.uk" target="_blank">www.vmd.defra.gov.uk</a></p>
+        </div>
+    </div>
+    <div class="emptydiv"></div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+{% endblock %}

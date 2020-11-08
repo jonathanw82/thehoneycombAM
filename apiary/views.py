@@ -12,7 +12,8 @@ def setup(request):
 
 def apiary(request):
     """ A view to display the Users list of Apiarys page """
-    apiaries = Apiary_details.objects.all()
+    user = request.user
+    apiaries = Apiary_details.objects.filter(user=user)
     context = {
         'apiaries': apiaries,
     }
@@ -57,5 +58,10 @@ def editApiary(request, pk=None):
 def deleteApiary(request, pk):
     """ A view to delete Apiary Sites """
     apiarydel = get_object_or_404(Apiary_details, pk=pk)
-    apiarydel.delete()
-    return redirect('apiary')
+    if request.method == 'POST':
+        apiarydel.delete()
+        return redirect('apiary')
+    context = {
+        "apiarydel": apiarydel
+    }
+    return render(request, 'apiary/confirm_delete.html', context)

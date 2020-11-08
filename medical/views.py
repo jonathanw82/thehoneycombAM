@@ -60,10 +60,18 @@ def editMedicine(request, pk=None):
 
 def deleteMedicine(request, pk):
     """ A view to delete Medicine """
+    datetoday = date.today()
     medicineDel = get_object_or_404(hiveMedical, pk=pk)
-    messages.warning(request, f'You Have Deleted {medicineDel.medicine_name}')
-    medicineDel.delete()
-    return redirect('beeMedical')
+    if request.method == 'POST':
+        messages.warning(request, f'You Have Deleted\
+                         {medicineDel.medicine_name}')
+        medicineDel.delete()
+        return redirect('beeMedical')
+    context = {
+        'medicineDel': medicineDel,
+        'datetoday': datetoday,
+    }
+    return render(request, 'medical/confirm_delete_medicine.html', context)
 
 
 def hiveMedicalHistory(request, pk):
@@ -127,8 +135,15 @@ def editMedicalRecord(request, hiveinst_id, pk=None):
 
 def deleteMedicalRecord(request, hiveinst_id, pk):
     """ A view to delete Medicine """
+    hiveid = hiveinst_id
     recordDel = get_object_or_404(hiveMedicalRecords, pk=pk)
-    messages.warning(request, f'You Have Deleted The Medical Record\
+    if request.method == "POST":
+        messages.warning(request, f'You Have Deleted The Medical Record\
                      Number:{ recordDel.pk }')
-    recordDel.delete()
-    return redirect('hiveMedicalHistory', hiveinst_id)
+        recordDel.delete()
+        return redirect('hiveMedicalHistory', hiveinst_id)
+    context = {
+        'recordDel': recordDel,
+        'hiveid': hiveid
+    }
+    return render(request, 'medical/confirm_delete_medical_doc.html', context)

@@ -1,8 +1,17 @@
 # thehoneycombe
-Apiary Management for bee keeping 
+Apiary Management for beekeeping 
 
 Under Constuction
 
+## Library & Dependencies
+Django
+Django-allauth
+Pillow
+Django-crispy-form
+
+## Tutorials
+Confirm Delete
+https://www.youtube.com/watch?v=OIfKHssR1oc
 
 favicon.io Icons made by https://www.flaticon.com/authors/freepik title=Freepik from https://www.flaticon.com/
 Navbar Logo Icons made by https://creativemarket.com/eucalyp title= Eucalyp from https://www.flaticon.com/

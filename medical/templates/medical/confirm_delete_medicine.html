@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block extra_css%}
+<link rel="stylesheet" href="{% static 'apiary/css/apiary.css' %}" />
+{% endblock%}
+
+{% block content %}
+<div class="container">
+    <div id="test"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Confirm Delete Medicine</h1>
+
+            <form method="POST">
+                {% csrf_token %}
+                <p>Warning you are about to delete Medicine: {{ medicineDel.medicine_name }}<br>
+                    Exp: {{ medicineDel.medicine_exp_date }}
+                <span>
+                    {% if datetoday > medicineDel.medicine_exp_date %}
+                    <strong>Medicine Has EXPIRED!!!!</strong>
+                    {% else %}
+                    <strong>Medicine is still in Date </strong>
+                    {% endif %}
+                </span>
+                </p>
+                <input class="btn btn-danger confirmBut" type="submit" value="Delete"></input>
+                <a href="{% url 'beeMedical' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+            <hr>
+            <h3>Please Note:</h3>
+            <p>Beekeepers are required to keep proof of purchase and a record of purchase, administration and disposal
+                of all veterinary medicines for a minimum of 5 years
+                under the Veterinary Medicines Regulations 2011SI 2159.
+                Further information can be obtained from Veterinary Medicines Directorate, Woodham Lane, New Haw,
+                Addlestone, Surrey. KT15.3LS. Telephone: 01932 336911.
+                <a href="http://www.vmd.defra.gov.uk" target="_blank">www.vmd.defra.gov.uk</a></p>
+        </div>
+    </div>
+    <div class="emptydiv"></div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+{% endblock %}

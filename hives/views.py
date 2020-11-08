@@ -1,15 +1,8 @@
-
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .forms import AddHiveForm, editHiveForm, addHiveDocumentsForm
 from .models import Apiary_details, hive_details, hiveDocuments
 from django.contrib import messages
 from datetime import date, datetime
-# from django.views.generic import View
-# from django.template.loader import get_template
-# from .utils import render_to_pdf
-# from django.template.loader import render_to_string
-# from weasyprint import HTML
-# import tempfile
 
 
 def hive(request, apiary_id):
@@ -97,10 +90,16 @@ def deleteHive(request, apiaryID, pk):
     apiary_id = apiaryID
     nameapiary = get_object_or_404(Apiary_details, pk=apiaryID)
     hivedel = get_object_or_404(hive_details, pk=pk)
-    messages.warning(request, f'You have Deleted {hivedel.hive_name} From \
+    if request.method == 'POST':
+        messages.warning(request, f'You have Deleted {hivedel.hive_name} From \
                      Apiary {nameapiary.full_name}')
-    hivedel.delete()
-    return redirect('hive', apiary_id)
+        hivedel.delete()
+        return redirect('hive', apiary_id)
+    context = {
+        "hivedel": hivedel,
+        "apiary_id": apiary_id
+    }
+    return render(request, 'hives/confirm_hive_delete.html', context)
 
 
 def hiveDocs(request, pk):
@@ -170,51 +169,13 @@ def deleteHivedoc(request, hive_id, pk):
     hiveid = hive_id
     hivedetail = get_object_or_404(hive_details, pk=hive_id)
     hivedocdel = get_object_or_404(hiveDocuments, pk=pk)
-    messages.warning(request, f'You Have Deleted Hive Record: {hivedocdel.pk} From\
+    if request.method == 'POST':
+        messages.warning(request, f'You Have Deleted Hive Record: {hivedocdel.pk} From\
                      Hive: {hivedetail.hive_name}')
-    hivedocdel.delete()
-    return redirect('hiveDocs', hiveid)
-
-
-"""
----------------  Views to Downloading hive records in PDF -----------------
-"""
-# def exportHiveRecord(request):
-#     response = HttpResponse(content_type='application/pdf')
-#     response['Content-Disposition'] = 'inline; attachment;\
-#          filename=Hive Records' + str(datetime.datatime.now())+'.pdf'
-#     response['Content-Transfer-Encoding'] = 'binary'
-
-#     html_string = render_to_string('hives/hiveDocs.html')
-#     html = HTML(string=html_string)
-#     result = html.write_pdf()
-
-#     with tempfile.NamedTemporaryFile(delete=True) as output:
-#         output.write(result)
-#         output.flush()
-#         output = open(output.name, 'rb')
-#         response.write(output.read())
-#     return response
-
-
-# class GeneratePDF(View):
-#     def get(self, request, *args, **Kwargs):
-#         template = get_template('hiveDocs.html')
-#         html = template.render()
-#         pdf = render_to_pdf('invoice.html', context)
-#         if pdf:
-#             response = HttpResponse(pdf, content_type='application/pdf')
-#             filename = "Invoice_%s.pdf" %("12341231")
-#             content = "inline; filename='%s'" %(filename)
-#             download = request.GET.get("download")
-#             if download:
-#                 content = "attachment; filename='%s'" %(filename)
-#             response['Content-Disposition'] = content
-#             return response
-#         return HttpResponse("Not found")
-
-
-# def exportHiveRecord(request, *args, **Kwargs):
-#     template = get_template('hiveDocs.html')
-#     html = template.render()
-#     return HttpResponse(html)
+        hivedocdel.delete()
+        return redirect('hiveDocs', hiveid)
+    context = {
+        "hivedocdel": hivedocdel,
+        "hiveid": hiveid
+    }
+    return render(request, 'hives/confirm_hive_record_delete.html', context)

@@ -7,6 +7,7 @@
 
 {% block content %}
 <div class="container">
+    <div id="test"></div>
     <div class="row">
         <div class="col-sm-12">
             <h1>Apiary page</h1>
@@ -19,7 +20,7 @@
                         Loggedin User: {{ request.user }}<br>
                         <h4>Apiary id: {{ apiary.id }}</h4>
                         <a href="{% url 'editApiary' apiary.pk %}">Edit</a>
-                        <a href="{% url 'deleteApiary' apiary.pk %}">Delete Apiary</a>
+                        <a href="{% url 'deleteApiary' apiary.pk %}">Delete Apiary</a><br>
                         {% endif %}
                     {% endfor %}
             </div>
@@ -32,5 +33,6 @@
 
 {% block postloadjs %}
 {{ block.super }}
+<script type="text/javascript" src="{% static 'apiary/js/apiary.js' %}"></script>
 {% endblock %}
 

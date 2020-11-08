@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block extra_css%}
+<link rel="stylesheet" href="{% static 'apiary/css/apiary.css' %}" />
+{% endblock%}
+
+{% block content %}
+<div class="container">
+    <div id="test"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Confirm Delete Hive Inspection Record </h1>
+            <form method="POST">
+                {% csrf_token %}
+                <p>Warning you are about to delete Record: {{ hivedocdel.pk }} From Hive: {{ hivedocdel.hive_name }}</p>
+                <input class="btn btn-danger confirmBut" type="submit" value="Delete"></input>
+                <a href="{% url 'hive' hiveid %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+    <div class="emptydiv"></div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+{% endblock %}
