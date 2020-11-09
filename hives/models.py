@@ -1,20 +1,47 @@
 from django.db import models
 from apiary.models import Apiary_details
 from django.contrib.auth.models import User
-from django.utils import timezone
 
 
 class hive_details(models.Model):
     UNKNOWN = 'Unknown'
     NATIONAL = 'National'
+    NATLARGE = '14x12 National'
     COMMERCIAL = 'Commercial'
     NUCPOLY = '6 Frame Poly NUC'
     NUCWOOD = '6 Frame Wooden NUC'
+    WBC = 'WBC'
+    CDB = 'CDB'
+    LANGSTROTH = 'Langstroth'
+    SMITH = 'Smith'
+    TOPB = 'Top Bar'
+    SK = 'Skep'
+    DAN = 'Dadant'
+    FLOW = 'Flow'
+    WAR = 'Warré'
+    ROSE = 'Rose'
+    DLD = 'Dartington Long Deep'
+    BEEHAUS = 'Beehaus'
+    LB = 'Long Box Hive'
 
-    HIVETYPE = [(NATIONAL, 'National'),
-                (COMMERCIAL, 'Commercial'),
+    HIVETYPE = [(NATIONAL, 'BS National'),
+                (NATLARGE, '14x12 National'),
+                (COMMERCIAL, 'BS Commercial'),
                 (NUCPOLY, '6 Frame Poly NUC'),
-                (NUCWOOD, '6 Frame Wooden NUC')
+                (NUCWOOD, '6 Frame Wooden NUC'),
+                (WBC, 'WBC'),
+                (CDB, 'CDB'),
+                (LANGSTROTH, 'Langstroth'),
+                (SMITH, 'Smith'),
+                (TOPB, 'Top Bar'),
+                (SK, 'Skep'),
+                (DAN, 'Dadant'),
+                (FLOW, 'Flow'),
+                (WAR, 'Warré'),
+                (ROSE, 'Rose'),
+                (DLD, 'Dartington Long Deep'),
+                (BEEHAUS, 'Beehaus'),
+                (LB, 'Long Box')
                 ]
 
     apiary_id = models.ForeignKey(Apiary_details, on_delete=models.CASCADE,
