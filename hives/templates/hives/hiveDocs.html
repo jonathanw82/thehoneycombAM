@@ -10,17 +10,19 @@
     <h1>Hive Records</h1>
     <h3>Hive: {{ hivename.hive_name }}</h3>
     Download Hive documents to PDF
-    <a class="btn btn-secondary" href="">Download PDF</a>
+    <a class="btn btn-secondary" href="{% url 'hive_record_pdf_view' hivename.pk %}">Download PDF</a>
     {% for doc in docs reversed %}
     <div>
-        Date: {{ doc.time_and_date }}
+        Date: {{ doc.date }}
         Log Number: {{ doc.id }}
         Hive Number: {{ doc.hivenumber}}
         Queen: {% if doc.queen %} Yes Queen Colour: {{ doc.queenColour }}{% else %} No {% endif %}
         QC: {% if doc.qc %} Yes QC Number: {{ doc.qcnum }} {% else %} No {% endif %}
         Eggs: {% if doc.eggs %} Yes {% else %} No {% endif %}
-        Supers:{% if doc.supers %} Yes Number Of Supers: {{ doc.supernum }} {% else %} No {% endif %}
-        Weather: {% if doc.weather == None %}Wether Not Recorded {% else %} {{ doc.weather }} {% endif %}
+        Brood: {{ doc.brood }}
+        Number Of Supers: {{ doc.supersnum }}
+        Weather: {% if doc.weather == None %} None {% else %} {{ doc.weather }} {% endif %}
+        Temperment: {{doc.temperment}}
         Notes: {{ doc.notes }}
         Beekeeper: <span class="capitaise">{{ doc.beekeepername }}</span>
     </div>

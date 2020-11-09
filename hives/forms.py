@@ -41,9 +41,10 @@ class addHiveDocumentsForm(forms.ModelForm):
     class Meta:
         model = hiveDocuments
         fields = ['queen', 'queenColour', 'qc',
-                  'qcnum', 'eggs',
-                  'supers', 'supersnum',
-                  'weather', 'notes', 'beekeepername',
+                  'qcnum', 'eggs', 'brood',
+                  'supersnum', 'weather',
+                  'temperment',
+                  'notes', 'beekeepername',
                   'image1', 'image2']
 
     image1 = forms.ImageField(label='Image 1', required=False,

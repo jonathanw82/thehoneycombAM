@@ -26,9 +26,12 @@ urlpatterns = [
     path('apiary/', include('apiary.urls')),
     path('hives/', include('hives.urls')),
     path('medical/', include('medical.urls')),
+    path('pdf/', include('pdf.urls')),
 ]
 
 
 if settings.DEBUG:  # new
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)

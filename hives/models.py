@@ -57,20 +57,53 @@ class hiveDocuments(models.Model):
                 (NOTYETRECORD, 'Not Marked')
                 ]
 
+    OC = 'Over Cast'
+    S = 'Sunny'
+    SNH = 'Sunny & HOT'
+    F = 'Fair'
+    R = 'Raining'
+    THUN = 'Thundery'
+    SNOW = 'Snow'
+    FOG = 'Fog'
+
+    WEATHER = [(OC, 'Over Cast'),
+               (S, 'Sunny'),
+               (SNH, 'Sunny & HOT'),
+               (F, 'Fair'),
+               (R, 'Rain'),
+               (THUN, 'Thundery'),
+               (SNOW, 'Snow'),
+               (FOG, 'Fog')]
+
+    DE = 'Select'
+    A = '5 Calm'
+    B = '4'
+    C = '3'
+    D = '2'
+    E = '1 Evil'
+
+    TEMPER = [(A, '5 Calm'),
+              (B, '4'),
+              (C, '3'),
+              (D, '2'),
+              (E, '1 Evil')]
+
     hivenumber = models.ForeignKey(hive_details, on_delete=models.CASCADE,
                                    default=-1)
-    time_and_date = models.DateTimeField(blank=True, null=True,
-                                         default=timezone.now)
+    date = models.DateField(null=True, blank=True)
     queen = models.BooleanField(default=False)
     queenColour = models.CharField(choices=QUEENCOL, max_length=50,
                                    default=NOTYETRECORD)
     qc = models.BooleanField(default=False)
     qcnum = models.IntegerField(blank=True, null=True)
     eggs = models.BooleanField(default=False)
-    supers = models.BooleanField(default=False)
-    supersnum = models.IntegerField(blank=True, null=True)
-    weather = models.CharField(max_length=20, blank=True, null=True)
+    brood = models.BooleanField(default=False)
+    supersnum = models.IntegerField(blank=True, null=True, default=0)
+    weather = models.CharField(choices=WEATHER, max_length=20,
+                               default=F)
     notes = models.CharField(max_length=500, blank=True, null=True)
+    temperment = models.CharField(choices=TEMPER, max_length=20,
+                                  default=A)
     beekeepername = models.CharField(max_length=30, blank=True, null=True)
     image1 = models.ImageField(upload_to='media/images/',
                                blank=True, null=True)

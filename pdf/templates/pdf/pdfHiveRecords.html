@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hive Record PDF</title>
+    <style>
+        .progname {
+            font-size: 2.5rem;
+            float: right;
+        }
+
+        .imagelogo {
+            float: left;
+        }
+
+        .headerdiv {
+            background-color: orange;
+            padding: 5px 5px 5px 5px;
+        }
+
+        .subheading {
+            font-size: 2rem;
+        }
+
+        .content {
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 2px 2px 2px 2px;
+        }
+        th{
+            font-size: 0.8rem;
+            padding-top: 4px;
+        }
+        td{
+            padding-top: 5px;
+        }
+        .notesCol{
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="headerdiv">
+        <img class="imagelogo" src="static/images/combicon.png" height="80px">
+        <span class="progname">The HoneyCombAM</span>
+    </div>
+
+    <div class="subheading">
+        <p>Hive Record Backup: {{ todaysDate }}<br>
+            For Hive: {{ hivename.hive_name }}<br>
+            Original Apriary: {{hivename.hive_old_apiary}}<br>
+            {% if hivename.hive_new_apiary %} Hive moved to Apiary: {{hivename.hive_new_apiary}} on the: {{hivename.hive_move_date}}{% endif %}
+        </p>
+    </div>
+    <hr>
+
+    <table class="content" style="width:100%">
+        <tr>
+            <th>Date</th>
+            <th>Log Number</th>
+            <th>Queen</th>
+            <th>Queen Colour</th>
+            <th>Qc</th>
+            <th>Qc Number</th>
+            <th>Eggs</th>
+            <th>Brood</th>
+            <th>Supers Number</th>
+            <th>Weather</th>
+            <th>Mood</th>
+            <th>Beekeeper</th>
+        </tr>
+        {% for rec in hiveRecords reversed %}
+        <tr>
+            <td>{{ rec.date }}</td>
+            <td>{{ rec.id }}</td>
+            <td>{% if rec.queen %} Yes {% else %} No {% endif %}</td>
+            <td>{{ rec.queenColour }}</td>
+            <td>{% if rec.qc %} Yes {% else %} No {% endif %}</td>
+            <td>{% if rec.qcnum %} {{ rec.qcnum }} {% else %} 0 {% endif %}</td>
+            <td>{% if rec.eggs %} Yes {% else %} No {% endif %}</td>
+            <td>{% if rec.brood %} Yes {% else %} No {% endif %}</td>
+            <td>{{ rec.supersnum }}</td>
+            <td>{% if rec.weather %} {{ rec.weather }} {% else %} None {% endif %}</td>
+            <td>{{ rec.temperment }}</td>
+            <td>{{ rec.beekeepername }}</td>
+        </tr>
+        <tr>
+            <td class="notesCol" colspan="12">Notes: {{ rec.notes }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <hr>
+   
+</body>
+
+</html>

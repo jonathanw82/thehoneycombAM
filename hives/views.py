@@ -122,6 +122,7 @@ def addhiveDoc(request, pk=None):
             hiveDocuments = form.save(commit=False)
             hiveDocuments.hivenumber = instofID
             hiveDocuments.beekeepername = request.user
+            hiveDocuments.date = date.today()
             hiveDocuments.save()
             messages.success(request, f'Hive Record Was\
                            Added {instofID.hive_name}')

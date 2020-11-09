@@ -13,13 +13,13 @@ class hiveAdmin(admin.ModelAdmin):
 class hivedocumentsAdmin(admin.ModelAdmin):
 
     list_display = (
-        'time_and_date',
+        'date',
         'queen',
         'queenColour',
         'qc',
         'qcnum',
         'eggs',
-        'supers',
+        'brood',
         'supersnum',
         'weather',
         'notes',
