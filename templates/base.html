@@ -64,8 +64,9 @@
           <a class=" nav-link dropdown-toggle link_colour uppercase" href="#" role="button" id="dropdownMenuLink"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{request.user.username}}</a>
-          <div class="dropdown-menu drop-menu background_dropdown" aria-labelledby="dropdownMenuLink">
-            <a class="nav-link dropdown-item link_colour" href="#"><i class="fas fa-id-card"></i> Profile</a>
+          <div class="dropdown-menu dropdown-menu-right drop-menu background_dropdown" aria-labelledby="dropdownMenuLink">
+            <a class="nav-link dropdown-item link_colour" href="{% url 'apiary'%}"><i class="fas fa-sitemap"></i> Apiarys</a>
+            <a class="nav-link dropdown-item link_colour" href="{% url 'beeMedical'%}"><i class="fas fa-notes-medical"></i> Bee Medical</a>
             <a class="nav-link dropdown-item link_colour" href="{% url 'account_logout' %}"><i
                 class="fas fa-power-off"></i> logout</a>
           </div>

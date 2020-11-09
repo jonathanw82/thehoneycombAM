@@ -5,9 +5,10 @@
 {% block content %}
 <div class="container">
   <h1 class="display-4 text-success">Bee Medical Page</h1>
-  <a class="btn btn-secondary" href="{% url 'addMedicine'%}">Add Medicine</a>
   <div>
-    {% for med in medications %}
+    {% if medications %}
+    <a class="btn btn-secondary" href="{% url 'addMedicine'%}"><i class="fas fa-prescription-bottle-alt"></i> Add Medicine</a>
+    {% for med in medications reversed %}
     <div>
       {{ med.medicine_name }}
       {{ med.supplier_full_name }}
@@ -28,6 +29,9 @@
 
     </div>
     {% endfor %}
+    {% else %}
+    <h3>You dont have an medications, to add some please click here: <a class="btn btn-secondary" href="{% url 'addMedicine'%}">Add Medicine</a></h3>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

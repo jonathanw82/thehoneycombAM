@@ -58,9 +58,9 @@
 
     <div class="subheading">
         <p>Hive Record Backup: {{ todaysDate }}<br>
-            For Hive: {{ hivename.hive_name }}<br>
-            Original Apriary: {{hivename.hive_old_apiary}}<br>
-            {% if hivename.hive_new_apiary %} Hive moved to Apiary: {{hivename.hive_new_apiary}} on the: {{hivename.hive_move_date}}{% endif %}
+            For Hive: {{ hivename.hive_name|title }}<br>
+            Original Apriary: {{ hivename.hive_old_apiary|title }}<br>
+            {% if hivename.hive_new_apiary %} Hive moved to Apiary: {{ hivename.hive_new_apiary|title }} on the: {{ hivename.hive_move_date }}{% endif %}
         </p>
     </div>
     <hr>
@@ -93,7 +93,7 @@
             <td>{{ rec.supersnum }}</td>
             <td>{% if rec.weather %} {{ rec.weather }} {% else %} None {% endif %}</td>
             <td>{{ rec.temperment }}</td>
-            <td>{{ rec.beekeepername }}</td>
+            <td>{{ rec.beekeepername|title }}</td>
         </tr>
         <tr>
             <td class="notesCol" colspan="12">Notes: {{ rec.notes }}</td>

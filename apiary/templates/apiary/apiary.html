@@ -11,19 +11,22 @@
     <div class="row">
         <div class="col-sm-12">
             <h1>Apiary page</h1>
-            <div>   
-                    {% for apiary in apiaries %}
-                        {% if apiary.user == request.user %} 
-                        <a href="{% url 'hive' apiary.pk %}">
-                        <h5>Site Name: {{ apiary.full_name }}</h5></a>>
-                        Site User: {{ apiary.user }}<br>
-                        Loggedin User: {{ request.user }}<br>
-                        <h4>Apiary id: {{ apiary.id }}</h4>
-                        <a href="{% url 'editApiary' apiary.pk %}">Edit</a>
-                        <a href="{% url 'deleteApiary' apiary.pk %}">Delete Apiary</a><br>
-                        {% endif %}
-                    {% endfor %}
+            {% if apiaries %}
+            <div>
+                {% for apiary in apiaries %}
+                <a href="{% url 'hive' apiary.pk %}">
+                    <h5>Site Name: {{ apiary.full_name|title }}</h5>
+                </a>
+                Site User: {{ apiary.user|title }}<br>
+                Loggedin User: {{ request.user|title }}<br>
+                <h4>Apiary id: {{ apiary.id }}</h4>
+                <a href="{% url 'editApiary' apiary.pk %}">Edit</a>
+                <a href="{% url 'deleteApiary' apiary.pk %}">Delete Apiary</a><br>
+                {% endfor %}
             </div>
+            {% else %}
+            <h3>You have not added any Apiarys, please click here to add an apiary <a class="btn btn-secondary" href="{% url 'addApiary' %}">Add Apiary</a></h3>
+            {% endif %}
         </div>
     </div>
     <div class="emptydiv"></div>
@@ -35,4 +38,3 @@
 {{ block.super }}
 <script type="text/javascript" src="{% static 'apiary/js/apiary.js' %}"></script>
 {% endblock %}
-

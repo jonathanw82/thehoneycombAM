@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h1>Hives</h1>
-            <a href="{% url 'addHive' apiaryID %}">Add Hives</a>
+            <a class="btn btn-secondary" href="{% url 'addHive' apiaryID %}"> Add Hives</a>
             <div>   
                     {% for hive in hives %}
                         <a href="{% url 'hiveDocs' hive.id %}">
@@ -18,10 +18,10 @@
                         <h4>Hive id: {{ hive.id }}</h4>
                         <h4>Apiary id: {{ apiaryID }}</h4>
                         <h4>Hive Type: {{ hive.hive_type }}</h4></a>
-                        <a href="{% url 'deleteHive' apiaryID hive.id %}">Delete</a>
-                        <a href="{% url 'editHive' apiaryID hive.id %}">Edit</a>
-                        <a href="{% url 'addhiveDoc' hive.id %}">Add Inspection</a><br>
-                        <a href="{% url 'hiveMedicalHistory' hive.id %}">Medical History</a><br>
+                        <a class="btn btn-secondary" href="{% url 'deleteHive' apiaryID hive.id %}"><i class="fas fa-trash-alt"></i> Delete</a>
+                        <a class="btn btn-secondary" href="{% url 'editHive' apiaryID hive.id %}"><i class="fas fa-edit"></i> Edit</a>
+                        <a class="btn btn-secondary" href="{% url 'addhiveDoc' hive.id %}">Add Inspection</a><br>
+                        <a class="btn btn-secondary" href="{% url 'hiveMedicalHistory' hive.id %}"><i class="fas fa-file-medical"></i> Medical History</a><br>
                         Hive Movement History: 
                         {% if hive.hive_new_apiary %}
                         <h4>Hive moved to Apiary {{ hive.hive_new_apiary }} <br>

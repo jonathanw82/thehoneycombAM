@@ -8,9 +8,9 @@
 {% block content %}
 <div class="container">
     <h1>Hive Records</h1>
-    <h3>Hive: {{ hivename.hive_name }}</h3>
+    <h3>Hive: {{ hivename.hive_name|title }}</h3>
     Download Hive documents to PDF
-    <a class="btn btn-secondary" href="{% url 'hive_record_pdf_view' hivename.pk %}">Download PDF</a>
+    <a class="btn btn-secondary" href="{% url 'hive_record_pdf_view' hivename.pk %}"><i class="fas fa-file-pdf"></i> Download PDF</a>
     {% for doc in docs reversed %}
     <div>
         Date: {{ doc.date }}

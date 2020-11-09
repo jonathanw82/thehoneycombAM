@@ -7,8 +7,8 @@
     <div class="row">
         <div class="col-sm-12">
             <h1 class="display-4 text-success">Hive Medical History</h1>
-            <h2>Hive Name: {{ hiveinst.hive_name }}</h2>
-            <a class="btn btn-secondary" href="{% url 'addMedicalRecord' hiveinst.pk %}">Add Medical Record</a>
+            <h2>Hive Name: {{ hiveinst.hive_name|title }}</h2>
+            <a class="btn btn-secondary" href="{% url 'addMedicalRecord' hiveinst.pk %}"><i class="fas fa-prescription-bottle-alt"></i> Add Medical Record</a>
         </div>
     </div>
     <div class="row">
