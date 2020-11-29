@@ -1,6 +1,20 @@
 # thehoneycombe
 Apiary Management for beekeeping 
 
+## The users goals of this aplication are:
+# Create Apirary with contact details.
+# Add Bee hives
+# Add inspection documents to each hive
+# Add medical documents to each hive
+# Add purchased medicine to a specific section that warns if the medicine is out of date
+# A facility to download the history of a specific hive and its medical documants
+# A facility to download the medical history.
+
+
+The Business potentials of this website are:
+
+This Website is the best way to help them achieve these things because:
+
 Under Constuction
 
 ## Library & Dependencies
