@@ -3,6 +3,8 @@ from .forms import AddHiveForm, editHiveForm, addHiveDocumentsForm
 from .models import Apiary_details, hive_details, hiveDocuments
 from django.contrib import messages
 from datetime import date, datetime
+import boto3
+from django.conf import settings
 
 
 def hive(request, apiary_id):
@@ -170,7 +172,9 @@ def deleteHivedoc(request, hive_id, pk):
     hiveid = hive_id
     hivedetail = get_object_or_404(hive_details, pk=hive_id)
     hivedocdel = get_object_or_404(hiveDocuments, pk=pk)
+    s3 = boto3.resource('s3')
     if request.method == 'POST':
+        s3.Object(settings.AWS_STORAGE_BUCKET_NAME, hivedocdel.image1).delete()
         messages.warning(request, f'You Have Deleted Hive Record: {hivedocdel.pk} From\
                      Hive: {hivedetail.hive_name}')
         hivedocdel.delete()
