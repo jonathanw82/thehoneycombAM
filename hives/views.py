@@ -172,9 +172,10 @@ def deleteHivedoc(request, hive_id, pk):
     hiveid = hive_id
     hivedetail = get_object_or_404(hive_details, pk=hive_id)
     hivedocdel = get_object_or_404(hiveDocuments, pk=pk)
+    bucketname = settings.AWS_STORAGE_BUCKET_NAME
     s3 = boto3.resource('s3')
     if request.method == 'POST':
-        s3.Object(settings.AWS_STORAGE_BUCKET_NAME, hivedocdel.image1).delete()
+        s3.Object(bucketname, hivedocdel.image1.name).delete()
         messages.warning(request, f'You Have Deleted Hive Record: {hivedocdel.pk} From\
                      Hive: {hivedetail.hive_name}')
         hivedocdel.delete()
