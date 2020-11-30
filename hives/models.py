@@ -132,9 +132,9 @@ class hiveDocuments(models.Model):
     temperment = models.CharField(choices=TEMPER, max_length=20,
                                   default=A)
     beekeepername = models.CharField(max_length=30, blank=True, null=True)
-    image1 = models.ImageField(upload_to='media/images/',
+    image1 = models.ImageField(
                                blank=True, null=True)
-    image2 = models.ImageField(upload_to='media/images/',
+    image2 = models.ImageField(
                                blank=True, null=True)
 
     def __str__(self):
