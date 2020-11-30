@@ -1,0 +1,64 @@
+#myVideo {
+    position: fixed;
+    /* right: 0;
+    bottom: 0; */
+    padding:0px;
+    margin:0px;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -50;
+    object-fit: fill;
+}
+
+p{
+    margin-top: 80px;
+    color: white;
+    font-family: cursive;
+    font-size: 2.5rem;
+}
+
+.subheading{
+    color: white;
+    font-family: cursive;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.overlay{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -10;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/*---------------------------------------- Media Query --------------------- */
+@media only screen  and (max-width: 768px){
+
+    p{
+        margin-top: 30px;
+        text-align: center;
+    }
+    .subheading{
+       text-align: center;
+    }
+    .buttons{
+        text-align: center;
+    }
+}
+
+@media only screen  and (max-width: 425px){
+
+.subheading{
+        font-size: 1.4rem;
+    }
+}
+
+@media only screen  and (max-width: 375px){
+
+    p{
+            font-size: 1.8rem;
+        }
+    }

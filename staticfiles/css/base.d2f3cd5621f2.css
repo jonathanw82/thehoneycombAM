@@ -1,0 +1,222 @@
+.uppercase{
+    text-transform: capitalize;
+}
+
+/* .bg-image{
+    background-image: url('/static/images/background.png');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat:no-repeat;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    min-height: 100vh;
+} */
+
+/* ------------ Login & Signup ----------*/
+/* .buttons_login{
+    
+} */
+
+.login-box{
+    border: 2px solid black;
+    margin-top: 20px;
+}
+
+/* ------------- notifications ------------*/
+
+.notifications{
+    z-index: 99999999;
+    position: fixed;
+    top: 75px;
+    right: 15px;
+}
+
+.alert_title{
+    color: white;
+}
+
+/* ------------ Navigation --------------*/
+.navbar_colour{
+    background-color: orange;
+}
+
+.link_colour{
+    color: black;
+    font-size: 1.25rem;
+}
+
+.link_colour:hover{
+    color: black;
+}
+
+.navitems{
+    justify-content: flex-end;
+}
+
+.honey-combe-logo-image-navbar{
+    height: 50px;
+    width: 50px;
+    padding-right: 2px;
+}
+
+.navbar_heading:hover{
+    color: black;
+}
+
+.navbar-toggler-icon{
+    color: black!important;
+}
+
+.background_dropdown{
+    background-color: orange!important;
+    border: none!important;
+}
+
+.navbar-image{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+.navbar-image-hive{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 5px;;
+}
+/* ------------ Footer --------------*/
+
+.footer{
+    position: fixed;
+    bottom: 0px;
+    background-color: #F2A20C;
+    padding: 5px;    
+}
+
+.footer-social-icons {
+    text-align: right;
+    padding-top: 5px;
+}
+
+.footer-social-icons a{
+    color: black;
+    font-size: 1.4rem;
+    letter-spacing: 10px;
+    cursor: pointer; 
+}
+
+.footer-social-icons a:hover {
+    color:#BF2604;;
+    text-decoration: none;
+}
+
+.copyright-footer{
+    text-align: center;
+    font-weight: 700;
+    padding-top: 2px;
+}
+
+.slogan-footer{
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* ----------------- Media Queries ---------------*/
+
+@media only screen and (max-width: 1024px){
+
+}
+
+@media only screen and (max-width: 985px){
+
+.navbar-toggler-icon{
+    padding-top: 5px;
+}
+.about-the-apiary-text{
+  
+    padding-right: 20px;
+    font-size: 1.1rem;
+}
+}
+
+@media only screen and (max-width: 768px){
+
+
+}
+
+@media only screen and (min-width: 524px){
+.mobile-view{
+    display: none;
+}
+}
+
+@media only screen and (max-width: 524px){
+
+.desktop-view{
+    display: none;
+}
+}
+
+@media only screen and (max-width: 425px){
+.logotext{
+    font-size: 1.5rem;
+    font-family: 'Pacifico', sans-serif;
+    color: #000;
+}
+
+.apiary_text_heading{
+    font-size: 1.5rem;
+}
+
+.footer-social-icons {
+    text-align: center;
+}
+
+.slogan-footer{
+    display: None; 
+}
+
+.desktop-view{
+    display: none;
+}
+
+}
+
+@media only screen and (max-width: 375px){
+.honey-pot-logo-image-navbar{
+    display: None; 
+}
+.beekeeper-image{
+    width: 280px;
+    height: auto;
+}
+.empty-div-bottom{
+    height: 90px;
+}
+}
+
+@media only screen and (max-width: 323px){
+
+.honey-combe-logo-image-navbar{
+    width: 30px;
+    height: 30px;
+}
+
+.navbar_heading{
+    font-size: 1.2rem!important;
+}
+
+.beekeeper-image{
+    width: 250px;
+    height: auto;
+}
+
+.empty-div-bottom{
+    height: 80px;
+}
+
+.toast{
+    max-width: 250px!important;
+}
+}
