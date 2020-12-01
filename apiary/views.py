@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AddApiaryForm
 from .models import Apiary_details
+import datetime
 
 # Create your views here.
 
@@ -12,10 +13,13 @@ def setup(request):
 
 def apiary(request):
     """ A view to display the Users list of Apiarys page """
+    dt = datetime.datetime.today()
+    month = dt.month
     user = request.user
     apiaries = Apiary_details.objects.filter(user=user)
     context = {
         'apiaries': apiaries,
+        'month': month,
     }
     return render(request, 'apiary/apiary.html', context)
 

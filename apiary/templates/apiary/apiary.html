@@ -10,7 +10,13 @@
     <div id="test"></div>
     <div class="row">
         <div class="col-sm-12">
-            <h1>Apiary page</h1>
+            <h1>Welcome to your Apiary's</h1>
+            <div class="row">
+                <div class="col-sm-12">
+                <div id='apiarytips'></div>
+                </div>
+            </div>
+          
             {% if apiaries %}
             <div>
                 {% for apiary in apiaries %}
@@ -25,7 +31,8 @@
                 {% endfor %}
             </div>
             {% else %}
-            <h3>You have not added any Apiarys, please click here to add an apiary <a class="btn btn-secondary" href="{% url 'addApiary' %}">Add Apiary</a></h3>
+            <h3>You have not added any Apiarys, please click here to add an apiary <a class="btn btn-secondary"
+                    href="{% url 'addApiary' %}">Add Apiary</a></h3>
             {% endif %}
         </div>
     </div>
@@ -37,4 +44,5 @@
 {% block postloadjs %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'apiary/js/apiary.js' %}"></script>
+<script type="text/javascript" src="{% static 'apiary/js/apiaryTips.js' %}"></script>
 {% endblock %}
