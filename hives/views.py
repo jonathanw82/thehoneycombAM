@@ -3,8 +3,8 @@ from .forms import AddHiveForm, editHiveForm, addHiveDocumentsForm
 from .models import Apiary_details, hive_details, hiveDocuments
 from django.contrib import messages
 from datetime import date
-import boto3
 from django.conf import settings
+import boto3
 
 
 def hive(request, apiary_id):
