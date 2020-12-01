@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AddHiveForm, editHiveForm, addHiveDocumentsForm
 from .models import Apiary_details, hive_details, hiveDocuments
 from django.contrib import messages
-from datetime import date, datetime
+from datetime import date
 import boto3
 from django.conf import settings
 
@@ -82,7 +82,7 @@ def editHive(request, apiaryID, pk=None):
         context = {
             'ap': ap,
             'form': form,
-            'currentApiary': currentApiary
+            'currentApiary': currentApiary,
         }
         return render(request, 'hives/editHive.html', context)
 
@@ -99,7 +99,7 @@ def deleteHive(request, apiaryID, pk):
         return redirect('hive', apiary_id)
     context = {
         "hivedel": hivedel,
-        "apiary_id": apiary_id
+        "apiary_id": apiary_id,
     }
     return render(request, 'hives/confirm_hive_delete.html', context)
 
@@ -110,7 +110,7 @@ def hiveDocs(request, pk):
     hivename = get_object_or_404(hive_details, pk=pk)
     context = {
         'docs': docs,
-        'hivename': hivename
+        'hivename': hivename,
     }
     return render(request, 'hives/hiveDocs.html', context)
 
@@ -162,7 +162,7 @@ def editHiveDoc(request, hive_id, pk):
         context = {
             'form': form,
             'docid': docid,
-            'instdoc': instdoc
+            'instdoc': instdoc,
         }
         return render(request, 'hives/editHiveDoc.html', context)
 
@@ -175,6 +175,7 @@ def deleteHivedoc(request, hive_id, pk):
     bucketname = settings.AWS_STORAGE_BUCKET_NAME
     s3 = boto3.resource('s3')
     if request.method == 'POST':
+        # if there is an image1 or 2 delete them from the s3 storage bucket
         if hivedocdel.image1.name:
             s3.Object(bucketname, hivedocdel.image1.name).delete()
         if hivedocdel.image2.name:
@@ -185,6 +186,6 @@ def deleteHivedoc(request, hive_id, pk):
         return redirect('hiveDocs', hiveid)
     context = {
         "hivedocdel": hivedocdel,
-        "hiveid": hiveid
+        "hiveid": hiveid,
     }
     return render(request, 'hives/confirm_hive_record_delete.html', context)
