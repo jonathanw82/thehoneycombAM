@@ -9,11 +9,13 @@ import boto3
 
 def hive(request, apiary_id):
     """ A view to display the Users list of hives page """
+    apiary = get_object_or_404(Apiary_details, id=apiary_id)
     apiaryID = apiary_id
     hives = hive_details.objects.filter(apiary_id=apiaryID)
     context = {
         'apiaryID': apiaryID,
         'hives': hives,
+        'apiary': apiary,
     }
     return render(request, 'hives/hive.html', context)
 

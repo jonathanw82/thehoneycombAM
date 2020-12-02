@@ -9,27 +9,45 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h1>Hives</h1>
+            <h1>Welcome to {{apiary.full_name|title}}</h1>
+            <h2>{{apiary.town_or_city}}</h2>
+            <div class="row">
+                <div class="col-sm-12">
+                    <span style="visibility:hidden;"><input type="text" id="user_input" value="{{apiary.town_or_city}}"></input></span>
+                    <div>Area: <span id="area"></span></div>
+                    <div>DESCRIPTION: <span id="description"></span></div>
+                    <div>TEMP: <span id="temp"></span></div>
+                    <div>TEMP MIN: <span id="temp_min"></span></div>
+                    <div>TEMP MAX: <span id="temp_max"></span></div> 
+                    <div>Wind Speed: <span id="windspeed"></span></div>    
+                    <div>Wind Direction: <span id="wind_direction"></span></div>  
+                </div>
+            </div>
+            <h2>Hives</h2>
             <a class="btn btn-secondary" href="{% url 'addHive' apiaryID %}"> Add Hives</a>
-            <div>   
-                    {% for hive in hives %}
-                        <a href="{% url 'hiveDocs' hive.id %}">
-                        <h5>Hive Name: {{ hive.hive_name }}</h5>
-                        <h4>Hive id: {{ hive.id }}</h4>
-                        <h4>Apiary id: {{ apiaryID }}</h4>
-                        <h4>Hive Type: {{ hive.hive_type }}</h4></a>
-                        <a class="btn btn-secondary" href="{% url 'deleteHive' apiaryID hive.id %}"><i class="fas fa-trash-alt"></i> Delete</a>
-                        <a class="btn btn-secondary" href="{% url 'editHive' apiaryID hive.id %}"><i class="fas fa-edit"></i> Edit</a>
-                        <a class="btn btn-secondary" href="{% url 'addhiveDoc' hive.id %}">Add Inspection</a><br>
-                        <a class="btn btn-secondary" href="{% url 'hiveMedicalHistory' hive.id %}"><i class="fas fa-file-medical"></i> Medical History</a><br>
-                        Hive Movement History: 
-                        {% if hive.hive_new_apiary %}
-                        <h4>Hive moved to Apiary {{ hive.hive_new_apiary }} <br>
-                            on the {{ hive.hive_move_date }} from Apiary {{ hive.hive_old_apiary }}</h4>
-                        {% else %}
-                        Hive has not been moved from original site {{ hive.hive_old_apiary }}
-                        {% endif %}
-                    {% endfor %}
+            <div>
+                {% for hive in hives %}
+                <a href="{% url 'hiveDocs' hive.id %}">
+                    <h5>Hive Name: {{ hive.hive_name }}</h5>
+                    <h4>Hive id: {{ hive.id }}</h4>
+                    <h4>Apiary id: {{ apiaryID }}</h4>
+                    <h4>Hive Type: {{ hive.hive_type }}</h4>
+                </a>
+                <a class="btn btn-secondary" href="{% url 'deleteHive' apiaryID hive.id %}"><i
+                        class="fas fa-trash-alt"></i> Delete</a>
+                <a class="btn btn-secondary" href="{% url 'editHive' apiaryID hive.id %}"><i class="fas fa-edit"></i>
+                    Edit</a>
+                <a class="btn btn-secondary" href="{% url 'addhiveDoc' hive.id %}">Add Inspection</a><br>
+                <a class="btn btn-secondary" href="{% url 'hiveMedicalHistory' hive.id %}"><i
+                        class="fas fa-file-medical"></i> Medical History</a><br>
+                Hive Movement History:
+                {% if hive.hive_new_apiary %}
+                <h4>Hive moved to Apiary {{ hive.hive_new_apiary }} <br>
+                    on the {{ hive.hive_move_date }} from Apiary {{ hive.hive_old_apiary }}</h4>
+                {% else %}
+                Hive has not been moved from original site {{ hive.hive_old_apiary }}
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -40,4 +58,5 @@
 
 {% block postloadjs %}
 {{ block.super }}
+<script type="text/javascript" src="{% static 'hives/js/weather.js' %}"></script>
 {% endblock %}
