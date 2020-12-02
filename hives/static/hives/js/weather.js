@@ -4,14 +4,10 @@ var geo_key = "71449q7rsn1296418593s99p378462oo".keyHelper();
 
 function displaywetherdata(wetherdata) {
 
-    console.log(wetherdata);
-
     let area = document.getElementById("area");
     area.innerHTML = wetherdata.name;
     let description = document.getElementById("description");
     description.innerHTML = wetherdata.weather[0].description;
-    // var description = document.getElementById("icon");
-    // description.innerHTML = wetherdata.weather[0].icon;
     let temp = document.getElementById("temp");
     temp.innerHTML = wetherdata.main.temp + "&#8451;";
     let temp_min = document.getElementById("temp_min");
@@ -52,7 +48,7 @@ window.onload = function(){
     else {
         inputUser = "LONDON";
     }
-
+    // get the weather from open weather map api
     var api_request = new XMLHttpRequest();
     api_request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -69,7 +65,7 @@ window.onload = function(){
     api_request.open("GET", the_url, true); 
     api_request.send();
 
-    
+    // Get the land and lat of the user input from the geocage api
     var api_requestGeo = new XMLHttpRequest();
     api_requestGeo.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -79,14 +75,10 @@ window.onload = function(){
             console.log(geo);
         }
     };                              
-    endpointGeo = "https://api.opencagedata.com/geocode/v1/json?";
-    queryGeo = "q=" + inputUser + ",";                 
-    keyGeo = 'UK&key=' + geo_key;                  
-    the_urlGeo = endpointGeo + queryGeo + keyGeo;                                  
+    endpointGeo = "https://api.opencagedata.com/geocode/v1/json?q=" + inputUser + ',UK&key=' + geo_key;
 
-    api_requestGeo.open("GET", the_urlGeo, true); 
+    api_requestGeo.open("GET", endpointGeo, true); 
     api_requestGeo.send();
-
 };
 
 function displaygeodata(){
