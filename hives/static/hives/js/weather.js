@@ -1,3 +1,7 @@
+// encrypted keys
+var weather_key = "81op2521sr2q808222668qn88ss490ps".keyHelper();
+var geo_key = "71449q7rsn1296418593s99p378462oo".keyHelper();
+
 function displaywetherdata(wetherdata) {
 
     console.log(wetherdata);
@@ -21,8 +25,6 @@ function displaywetherdata(wetherdata) {
     degToCompass(compuss);
     let wind_direction = document.getElementById("wind_direction");
     wind_direction.innerHTML = directionCompuss;
-
-
 };
 
 // This function takes the wind direction in deg and converts it to compus.
@@ -55,20 +57,41 @@ window.onload = function(){
     api_request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             the_response = api_request.responseText;
-            console.log(the_response);
             wetherdata = JSON.parse(the_response);
             displaywetherdata(wetherdata);
         }
-        else {
-            console.log("this stuff is not working");
-        }
     };
+    endpoint = "https://api.openweathermap.org/data/2.5/weather?";
+    query = "q=" + inputUser + ",GB&units=metric";                 
+    key = '&appid=' + weather_key;                  
+    the_url = endpoint + query + key                                  
 
-    endpoint = "https://api.openweathermap.org/data/2.5/weather?";    // who (www.example.com) - what server
-    query = "q=" + inputUser + ",GB&units=metric";                 // what data do you want ?
-    key = "&appid=7816d9f235c88adc096427a68ca872f2";                  // key to identify yourself to the server
-    the_url = endpoint + query + key                                  // elemants for all api call(maybe not the key if open api)
-
-    api_request.open("GET", the_url, true);         // Admit "GET" (method) and "true"
+    api_request.open("GET", the_url, true); 
     api_request.send();
+
+    
+    var api_requestGeo = new XMLHttpRequest();
+    api_requestGeo.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            geo_response = api_requestGeo.responseText;
+            geo = JSON.parse(geo_response);
+            displaygeodata(geo);
+            console.log(geo);
+        }
+    };                              
+    endpointGeo = "https://api.opencagedata.com/geocode/v1/json?";
+    queryGeo = "q=" + inputUser + ",";                 
+    keyGeo = 'UK&key=' + geo_key;                  
+    the_urlGeo = endpointGeo + queryGeo + keyGeo;                                  
+
+    api_requestGeo.open("GET", the_urlGeo, true); 
+    api_requestGeo.send();
+
 };
+
+function displaygeodata(){
+    let long = document.getElementById("long");
+    long.innerHTML = geo.results[0].geometry.lng;
+    let lat = document.getElementById("lat");
+    lat.innerHTML = geo.results[0].geometry.lat;
+}

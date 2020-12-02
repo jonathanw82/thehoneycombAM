@@ -13,9 +13,9 @@ def hive(request, apiary_id):
     apiaryID = apiary_id
     hives = hive_details.objects.filter(apiary_id=apiaryID)
     context = {
+        'apiary': apiary,
         'apiaryID': apiaryID,
         'hives': hives,
-        'apiary': apiary,
     }
     return render(request, 'hives/hive.html', context)
 
