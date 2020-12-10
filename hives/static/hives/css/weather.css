@@ -1,0 +1,114 @@
+.weatherboxcold{
+    border: 1px solid red;
+    border-radius: 20px;
+    background-image: linear-gradient(blue, lightblue) ;
+    width: 100%;
+}
+.separatorcold{
+    border: 1px solid orange;
+}
+
+.weatherboxhot{
+    border: 1px solid blue;
+    border-radius: 20px;
+    background-image: linear-gradient(red, yellow) ;
+    width: 100%;
+}
+.separatorhot{
+    border: 1px solid blue;
+}
+
+.rline{
+    margin-right: 2px;
+}
+
+.currentweatherleft{
+    text-align: center;
+    width: 50%;
+}
+
+.textcol{
+    color: white;
+}
+
+.textcol1{
+    color: black;
+}
+
+.currentweatherright{
+    text-align: center;
+    width: 50%;
+}
+
+.dayforcastinfo{
+    text-align: center;
+    padding: 0px;
+    display: inline-block;
+}
+
+.rainropimage{
+    width: 10px;
+    height: auto;
+}
+
+.alert_heading{
+    text-align: center;
+    color: white;
+    opacity: 1;
+}
+
+.weathertextalert{
+    color: black;
+    text-align: center;
+    background-color: red;
+}
+
+.weatherarea{
+    padding-top: 3px;
+}
+
+@media only screen and (max-width: 768px) {
+   
+    .weatherarea{
+        padding-top: 3px;
+    }
+
+}
+
+@media only screen and (max-width: 425px) {
+
+    .weathertext{
+        font-size: 0.9rem;
+    }
+    .weatherarea{
+        padding-top: 8px;
+    }
+
+}
+
+@media only screen and (max-width: 375px) {
+
+    .weathertext{
+        font-size: 0.9rem;
+    }
+    .weatherbox{
+        padding-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+
+    .weathertext{
+        font-size: 0.8rem;
+    }
+    .weatherarea{
+        padding-top: 11px;
+    }
+    .forecastprecip{
+        font-size: 0.8rem;
+    }
+    .rainropimage{
+        width: 8px;
+    }
+   
+}

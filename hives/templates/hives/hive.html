@@ -3,6 +3,7 @@
 {% load static %}
 {% block extra_css%}
 <link rel="stylesheet" href="{% static 'hives/css/hives.css' %}" />
+<link rel="stylesheet" href="{% static 'hives/css/weather.css' %}" />
 {% endblock%}
 
 {% block entendedjs %}
@@ -12,24 +13,73 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <h1>Welcome to {{apiary.full_name|title}}</h1>
             <h2>{{apiary.town_or_city}}</h2>
-            <div class="row">
-                <div class="col-sm-12">
-                    <span style="display:none"><input type="text" id="user_input"
-                            value="{{apiary.town_or_city}}"></input></span>
-                    <div>Area: <span id="area"></span></div>
-                    <div>DESCRIPTION: <span id="description" style="text-transform:capitalize"></span></div>
-                    <div>TEMP: <span id="temp"></span></div>
-                    <div>TEMP MIN: <span id="temp_min"></span></div>
-                    <div>TEMP MAX: <span id="temp_max"></span></div>
-                    <div>Wind Speed: <span id="windspeed"></span></div>
-                    <div>Wind Direction: <span id="wind_direction"></span></div>
-                    <div>long: <span id="long"></span></div>
-                    <div>lat: <span id="lat"></span></div>
+        </div>
+        <div class="col-sm-6">
+            <div id="weatherbox" class="col-sm-12 weatherboxcold">
+                <div class="row">
+                    <div class=" col-sm-6 currentweatherleft textcol">
+                        <div class="weathertext weatherarea">{{ area }}</div>
+                        <div id="current_temp" class="weathertext">{{ current_temp }}&#x2103</div>
+                        <div id="current_tempdisp" style="display:None">{{ current_temp }}</div>
+                        <div class="weathertext">{{ dec|title }}</div>
+                    </div>
+                    <div class="col-sm-6 currentweatherright textcol">
+                        <img src="{{ iconnow }}" alt="wether icon"><br>
+                        <div class="weathertext">Feels Like: {{ feels_like }} &#x2103</div>
+                    </div>
+                </div>
+                {% if alertcurrent %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="alert_heading" class="alert_heading">WEATHER ALERT !</div>
+                        <div class="weathertextalert">{{ alertcurrent }}</div>
+                    </div>
+                </div>
+                {% endif %}
+                <div id="separator" class="separatorcold"></div>
+                <div style="text-align: center;" class="weathertext textcol">5 Day Forecast</div>
+                <div class="row">
+                    <div class="col dayforcastinfo textcol1">
+                        <div class="dayforcastinfo rline">
+                            <img src="{{ icon1 }}" alt="weather icon">
+                            <div class="forecastprecip"><img class="rainropimage"
+                                    src="/static/hives/images/raindrop.png" alt="weather icon"> {{ day1pop }}%</div>
+                            <div class="weathertext">{{ day1max }}/{{ day1min }}</div>
+                        </div>
+                        <div class="dayforcastinfo rline">
+                            <img src="{{ icon2 }}" alt="weather icon">
+                            <div class="forecastprecip"><img class="rainropimage"
+                                    src="/static/hives/images/raindrop.png" alt="weather icon"> {{ day2pop }}%</div>
+                            <div class="weathertext">{{ day2max }}/{{ day2min }}</div>
+                        </div>
+                        <div class="dayforcastinfo rline">
+                            <img src="{{ icon3 }}" alt="weather icon">
+                            <div class="forecastprecip"><img class="rainropimage"
+                                    src="/static/hives/images/raindrop.png" alt="weather icon"> {{ day3pop }}%</div>
+                            <div class="weathertext">{{ day3max }}/{{ day3min }}</div>
+                        </div>
+                        <div class="dayforcastinfo rline">
+                            <img src="{{ icon4 }}" alt="weather icon">
+                            <div class="forecastprecip"><img class="rainropimage"
+                                    src="/static/hives/images/raindrop.png" alt="weather icon"> {{ day4pop }}%</div>
+                            <div class="weathertext">{{ day4max }}/{{ day4min }}</div>
+                        </div>
+                        <div class="dayforcastinfo rline">
+                            <img src="{{ icon5 }}" alt="weather icon">
+                            <div class="forecastprecip"><img class="rainropimage"
+                                    src="/static/hives/images/raindrop.png" alt="weather icon"> {{ day5pop }}%</div>
+                            <div class="weathertext">{{ day5max }}/{{ day5min }}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
             <h2>Hives</h2>
             <a class="btn btn-secondary" href="{% url 'addHive' apiaryID %}"> Add Hives</a>
             <div>
