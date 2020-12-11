@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -9,6 +10,7 @@ def index(request):
         return render(request, 'home/index.html')
 
 
+@login_required
 def userLoggedIn(request):
     """ A view to display the index page """
     return render(request, 'home/loggedInUser.html')

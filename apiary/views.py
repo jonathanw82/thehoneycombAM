@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .forms import AddApiaryForm
 from .models import Apiary_details
 import datetime
@@ -6,11 +7,13 @@ import datetime
 # Create your views here.
 
 
+@login_required
 def setup(request):
     """ A view to display the Wiki page """
     return render(request, 'apiary/setup.html')
 
 
+@login_required
 def apiary(request):
     """ A view to display the Users list of Apiarys page """
     dt = datetime.datetime.today()
@@ -24,6 +27,7 @@ def apiary(request):
     return render(request, 'apiary/apiary.html', context)
 
 
+@login_required
 def addApiary(request, pk=None):
     """ A view to display the add Apiary page """
     if request.method == 'POST':
@@ -41,6 +45,7 @@ def addApiary(request, pk=None):
     return render(request, 'apiary/addApiary.html', context)
 
 
+@login_required
 def editApiary(request, pk=None):
     """ A view to editing Apiary Sites """
     editapiary = get_object_or_404(Apiary_details, pk=pk) if pk else None
@@ -59,6 +64,7 @@ def editApiary(request, pk=None):
     return render(request, 'apiary/editApiary.html', context)
 
 
+@login_required
 def deleteApiary(request, pk):
     """ A view to delete Apiary Sites """
     apiarydel = get_object_or_404(Apiary_details, pk=pk)

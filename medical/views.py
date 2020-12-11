@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import addHiveMedicineForm, addHiveMedicalRecordForm
 from .models import hiveMedical, hiveMedicalRecords
+from django.contrib.auth.decorators import login_required
 from hives.models import hive_details
 from django.contrib import messages
 from datetime import date
 from django.utils import timezone
 
 
+@login_required
 def beeMedical(request):
     """ A view to display the Bee medical page """
     datetoday = date.today()
@@ -19,6 +21,7 @@ def beeMedical(request):
     return render(request, 'medical/beeMedical.html', context)
 
 
+@login_required
 def addMedicine(request, pk=None):
     """ A view to display the add medicine page """
     if request.method == 'POST':
@@ -38,6 +41,7 @@ def addMedicine(request, pk=None):
         return render(request, 'medical/addMedicine.html', context)
 
 
+@login_required
 def editMedicine(request, pk=None):
     """ A view to display the add medicine page """
     editMedicine = get_object_or_404(hiveMedical, pk=pk)
@@ -58,6 +62,7 @@ def editMedicine(request, pk=None):
         return render(request, 'medical/editMedicine.html', context)
 
 
+@login_required
 def deleteMedicine(request, pk):
     """ A view to delete Medicine """
     datetoday = date.today()
@@ -74,6 +79,7 @@ def deleteMedicine(request, pk):
     return render(request, 'medical/confirm_delete_medicine.html', context)
 
 
+@login_required
 def hiveMedicalHistory(request, pk):
     hiveinst = get_object_or_404(hive_details, pk=pk)
     medications = hiveMedicalRecords.objects.filter(hivenumber=hiveinst.pk)
@@ -84,6 +90,7 @@ def hiveMedicalHistory(request, pk):
     return render(request, 'medical/hiveMedicalHistory.html', context)
 
 
+@login_required
 def addMedicalRecord(request, pk=None):
     """ A view to display the add medicine page """
     user = request.user
@@ -109,6 +116,7 @@ def addMedicalRecord(request, pk=None):
         return render(request, 'medical/addMedicalRecord.html', context)
 
 
+@login_required
 def editMedicalRecord(request, hiveinst_id, pk=None):
     """ A view to display the add medicine page """
     user = request.user
@@ -133,6 +141,7 @@ def editMedicalRecord(request, hiveinst_id, pk=None):
         return render(request, 'medical/editMedicalRecord.html', context)
 
 
+@login_required
 def deleteMedicalRecord(request, hiveinst_id, pk):
     """ A view to delete Medicine """
     hiveid = hiveinst_id

@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.template.loader import get_template
-from xhtml2pdf import pisa
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
+from xhtml2pdf import pisa
 from hives.models import hiveDocuments, hive_details
 from datetime import date
 from django.conf import settings
@@ -10,6 +11,7 @@ from django.contrib.staticfiles import finders
 import os
 
 
+@login_required
 def hive_record_pdf_view(request, *args, **kwargs):
     pk = kwargs.get("pk")
     todaysDate = date.today()
@@ -41,6 +43,7 @@ def hive_record_pdf_view(request, *args, **kwargs):
     return response
 
 
+@login_required
 def link_callback(uri, rel):
     """
     Convert HTML URIs to absolute system paths so xhtml2pdf can access those
