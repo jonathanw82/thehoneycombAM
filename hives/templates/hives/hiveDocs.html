@@ -8,6 +8,10 @@
 {% block content %}
 <div class="container">
     <h1>Hive Records</h1>
+    <a class="btn btn-secondary" href="{% url 'hive' apiaryPK %}"> Back</a>
+    <a class="btn btn-secondary" href="{% url 'addhiveDoc' apiaryPK hivename.pk %}">Add Inspection</a>
+    <a class="btn btn-secondary" href="{% url 'hiveMedicalHistory' apiaryPK hivename.pk %}"><i
+        class="fas fa-file-medical"></i> Medical History</a><br>
     <h3>Hive: {{ hivename.hive_name|title }}</h3>
     Download Hive documents to PDF
     <a class="btn btn-secondary" href="{% url 'hive_record_pdf_view' hivename.pk %}"><i class="fas fa-file-pdf"></i> Download PDF</a>
@@ -43,7 +47,7 @@
         {% endif %}
     </div>
     <div>
-        <a href="{% url 'editHiveDoc' hivename.id doc.pk %}">Edit</a>
+        <a href="{% url 'editHiveDoc' apiaryPK hivename.id doc.pk %}">Edit</a>
         <a href="{% url 'deleteHivedoc' hivename.id doc.pk %}">Delete</a>
     </div>
         <hr color=gray>

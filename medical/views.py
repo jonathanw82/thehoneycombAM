@@ -80,18 +80,19 @@ def deleteMedicine(request, pk):
 
 
 @login_required
-def hiveMedicalHistory(request, pk):
+def hiveMedicalHistory(request, apiaryPK, pk):
     hiveinst = get_object_or_404(hive_details, pk=pk)
     medications = hiveMedicalRecords.objects.filter(hivenumber=hiveinst.pk)
     context = {
         'medications': medications,
-        'hiveinst': hiveinst
+        'hiveinst': hiveinst,
+        'apiaryPK': apiaryPK,
     }
     return render(request, 'medical/hiveMedicalHistory.html', context)
 
 
 @login_required
-def addMedicalRecord(request, pk=None):
+def addMedicalRecord(request, apiaryID, pk=None):
     """ A view to display the add medicine page """
     user = request.user
     isMedicinePresent = hiveMedical.objects.filter(user=user)
@@ -103,7 +104,7 @@ def addMedicalRecord(request, pk=None):
             hiveMedicalRecords.hivenumber = hiveinst
             hiveMedicalRecords.hive_name = hiveinst.hive_name
             hiveMedicalRecords.save()
-            return redirect('hiveMedicalHistory', pk)
+            return redirect('hiveMedicalHistory', apiaryID, pk)
         else:
             messages.error(request, 'Your medical record was not valid')
     else:
@@ -111,13 +112,14 @@ def addMedicalRecord(request, pk=None):
         context = {
             'form': form,
             'hiveinst': hiveinst,
-            'isMedicinePresent': isMedicinePresent
+            'isMedicinePresent': isMedicinePresent,
+            'apiaryID': apiaryID,
         }
         return render(request, 'medical/addMedicalRecord.html', context)
 
 
 @login_required
-def editMedicalRecord(request, hiveinst_id, pk=None):
+def editMedicalRecord(request, apiaryID, hiveinst_id, pk=None):
     """ A view to display the add medicine page """
     user = request.user
     hiveinst = get_object_or_404(hive_details, pk=hiveinst_id)
@@ -129,7 +131,7 @@ def editMedicalRecord(request, hiveinst_id, pk=None):
             editMedicineRecord = form.save(commit=False)
             editMedicineRecord.medicine_updated = timezone.now()
             editMedicineRecord.save()
-            return redirect('hiveMedicalHistory', hiveinst_id)
+            return redirect('hiveMedicalHistory', apiaryID, hiveinst_id)
         else:
             messages.error(request, 'Your medical record was not valid')
     else:
@@ -137,12 +139,13 @@ def editMedicalRecord(request, hiveinst_id, pk=None):
         context = {
             'form': form,
             'hiveinst': hiveinst,
+            'apiaryID': apiaryID,
         }
         return render(request, 'medical/editMedicalRecord.html', context)
 
 
 @login_required
-def deleteMedicalRecord(request, hiveinst_id, pk):
+def deleteMedicalRecord(request, apiaryPK, hiveinst_id, pk):
     """ A view to delete Medicine """
     hiveid = hiveinst_id
     recordDel = get_object_or_404(hiveMedicalRecords, pk=pk)
@@ -150,9 +153,10 @@ def deleteMedicalRecord(request, hiveinst_id, pk):
         messages.warning(request, f'You Have Deleted The Medical Record\
                      Number:{ recordDel.pk }')
         recordDel.delete()
-        return redirect('hiveMedicalHistory', hiveinst_id)
+        return redirect('hiveMedicalHistory', apiaryPK, hiveinst_id)
     context = {
         'recordDel': recordDel,
-        'hiveid': hiveid
+        'hiveid': hiveid,
+        'apiaryPK': apiaryPK,
     }
     return render(request, 'medical/confirm_delete_medical_doc.html', context)

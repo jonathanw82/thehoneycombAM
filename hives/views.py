@@ -264,19 +264,20 @@ def deleteHive(request, apiaryID, pk):
 
 
 @login_required
-def hiveDocs(request, pk):
+def hiveDocs(request, apiaryPK, pk):
     """ A view to display the Hive Documents relevent to the hive PK """
     docs = hiveDocuments.objects.filter(hivenumber=pk)
     hivename = get_object_or_404(hive_details, pk=pk)
     context = {
         "docs": docs,
         "hivename": hivename,
+        "apiaryPK": apiaryPK,
     }
     return render(request, "hives/hiveDocs.html", context)
 
 
 @login_required
-def addhiveDoc(request, pk=None):
+def addhiveDoc(request, apiaryPK, pk=None):
     """ A view to display the add Hive Documents """
     instofID = get_object_or_404(hive_details, pk=pk)
     if request.method == "POST":
@@ -292,7 +293,7 @@ def addhiveDoc(request, pk=None):
                 f"Hive Record Was\
                            Added {instofID.hive_name}",
             )
-            return redirect("hiveDocs", pk)
+            return redirect("hiveDocs", apiaryPK, pk)
         else:
             messages.error(
                 request,
@@ -308,7 +309,7 @@ def addhiveDoc(request, pk=None):
 
 
 @login_required
-def editHiveDoc(request, hive_id, pk):
+def editHiveDoc(request, apiaryPK, hive_id, pk):
     """ A view to display the Edit Hive Documents """
     hiveid = hive_id
     docid = pk
@@ -322,7 +323,7 @@ def editHiveDoc(request, hive_id, pk):
                 f"Log Number: {instdoc.pk} Was\
                              Updated!",
             )
-            return redirect("hiveDocs", hiveid)
+            return redirect("hiveDocs", apiaryPK, hiveid)
         else:
             messages.error(
                 request,

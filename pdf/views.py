@@ -2,12 +2,11 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.template.loader import get_template
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView
+from django.conf import settings
+from django.contrib.staticfiles import finders
 from xhtml2pdf import pisa
 from hives.models import hiveDocuments, hive_details
 from datetime import date
-from django.conf import settings
-from django.contrib.staticfiles import finders
 import os
 
 
@@ -26,7 +25,9 @@ def hive_record_pdf_view(request, *args, **kwargs):
     # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type="application/pdf")
     # if download:
-    # response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    # response[
+    #     "Content-Disposition"
+    # ] = f'attachment; filename="hiveRecords-{hivename}-{todaysDate}.pdf"'
     # if diaplay:
     response[
         "Content-Disposition"

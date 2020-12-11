@@ -8,6 +8,7 @@
   <div>
     {% if medications %}
     <a class="btn btn-secondary" href="{% url 'addMedicine'%}"><i class="fas fa-prescription-bottle-alt"></i> Add Medicine</a>
+    <a class="btn btn-secondary" href="{% url 'apiary' %}">Back</a>
     {% for med in medications reversed %}
     <div>
       {{ med.medicine_name }}

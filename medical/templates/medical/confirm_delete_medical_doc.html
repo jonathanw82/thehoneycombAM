@@ -16,7 +16,7 @@
                 {% csrf_token %}
                 <p>Warning you are about to delete Medical Record: {{ recordDel.pk }} From Hive: {{ recordDel.hive_name }}</p>
                 <input class="btn btn-danger confirmBut" type="submit" value="Delete"></input>
-                <a href="{% url 'hive' hiveid %}" class="btn btn-secondary">Cancel</a>
+                <a href="{% url 'hiveMedicalHistory' apiaryPK hiveid %}" class="btn btn-secondary">Cancel</a>
             </form>
             <hr>
             <h3>Please Note:</h3>

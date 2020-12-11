@@ -8,11 +8,13 @@
         <div class="col-sm-12">
             <h1 class="display-4 text-success">Hive Medical History</h1>
             <h2>Hive Name: {{ hiveinst.hive_name|title }}</h2>
-            <a class="btn btn-secondary" href="{% url 'addMedicalRecord' hiveinst.pk %}"><i class="fas fa-prescription-bottle-alt"></i> Add Medical Record</a>
+            <a class="btn btn-secondary" href="{% url 'addMedicalRecord' apiaryPK hiveinst.pk %}"><i class="fas fa-prescription-bottle-alt"></i> Add Medical Record</a>
+            <a class="btn btn-secondary" href="{% url 'hiveDocs' apiaryPK hiveinst.pk %}"></i> Back</a>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
+            {% if medications %}
             {% for med in medications reversed %}
             <div>
                 Record Number: {{ med.pk }}<br>
@@ -28,10 +30,13 @@
             </div>
                 {% endif %}    
             <div>
-                <a href="{% url 'editMedicalRecord' hiveinst.pk med.id %}">Edit</a>
-                <a href="{% url 'deleteMedicalRecord' hiveinst.pk med.id %}">Delete</a>
+                <a href="{% url 'editMedicalRecord' apiaryPK hiveinst.pk med.id %}">Edit</a>
+                <a href="{% url 'deleteMedicalRecord' apiaryPK hiveinst.pk med.id %}">Delete</a>
             </div>
             {% endfor %}
+            {% else %}
+            <div>You dont have any medical history for this Hive click add medical record to get started!</div>
+            {% endif %}
         </div>
     </div>
 </div>
