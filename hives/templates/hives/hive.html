@@ -19,6 +19,7 @@
         </div>
         <div class="col-sm-6">
             <div id="weatherbox" class="col-sm-12 weatherboxcold">
+                {% if area %}
                 <div class="row">
                     <div class=" col-sm-6 currentweatherleft textcol">
                         <div class="weathertext weatherarea">{{ area }}</div>
@@ -75,6 +76,9 @@
                         </div>
                     </div>
                 </div>
+                {% else %}
+                <div style="text-align: center;" class="weathertext textcol"> ** Weather Unavailable **</div>
+                {% endif %}
             </div>
         </div>
     </div>
