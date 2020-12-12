@@ -91,6 +91,7 @@
         <div class="col-sm-12">
             <h2>Hives</h2>
             <div>
+                {% if hives %}
                 {% for hive in hives %}
                 <a href="{% url 'hiveDocs' apiaryID hive.id %}">
                     <h5>Hive Name: {{ hive.hive_name }}</h5>
@@ -111,6 +112,9 @@
                 Hive has not been moved from original site {{ hive.hive_old_apiary }}
                 {% endif %}
                 {% endfor %}
+                {% else %}
+                <h3> You have not added any hives please click Add Hives to get started</h3>
+                {% endif %}
             </div>
         </div>
     </div>

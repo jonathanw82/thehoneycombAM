@@ -30,6 +30,9 @@ def addMedicine(request, pk=None):
             hiveMedical = form.save(commit=False)
             hiveMedical.user = request.user
             hiveMedical.save()
+            messages.success(
+                request, "You have successfully added a medicine",
+            )
             return redirect('beeMedical')
         else:
             messages.error(request, 'Your medicine form was not valid')
@@ -51,6 +54,12 @@ def editMedicine(request, pk=None):
             editMedicine = form.save(commit=False)
             editMedicine.medicine_updated = timezone.now()
             editMedicine.save()
+            messages.success(
+                request, f"You have successfully updated\
+                     {editMedicine.medicine_name} purchased from\
+                          {editMedicine.supplier_full_name} on the\
+                               {editMedicine.medicine_purchase_date}",
+            )
             return redirect('beeMedical')
         else:
             messages.error(request, 'Your medicine form was not valid')
@@ -104,6 +113,10 @@ def addMedicalRecord(request, apiaryID, pk=None):
             hiveMedicalRecords.hivenumber = hiveinst
             hiveMedicalRecords.hive_name = hiveinst.hive_name
             hiveMedicalRecords.save()
+            messages.success(
+                request, f"You have successfully added a medical record to\
+                    hive: {hiveinst.hive_name}",
+            )
             return redirect('hiveMedicalHistory', apiaryID, pk)
         else:
             messages.error(request, 'Your medical record was not valid')
@@ -131,6 +144,10 @@ def editMedicalRecord(request, apiaryID, hiveinst_id, pk=None):
             editMedicineRecord = form.save(commit=False)
             editMedicineRecord.medicine_updated = timezone.now()
             editMedicineRecord.save()
+            messages.success(
+                request, f"You haver successfully edited a medical record for\
+                    hive: {hiveinst.hive_name}",
+            )
             return redirect('hiveMedicalHistory', apiaryID, hiveinst_id)
         else:
             messages.error(request, 'Your medical record was not valid')
@@ -148,12 +165,16 @@ def editMedicalRecord(request, apiaryID, hiveinst_id, pk=None):
 def deleteMedicalRecord(request, apiaryPK, hiveinst_id, pk):
     """ A view to delete Medicine """
     hiveid = hiveinst_id
+    hiveinst = get_object_or_404(hive_details, pk=hiveid)
     recordDel = get_object_or_404(hiveMedicalRecords, pk=pk)
     if request.method == "POST":
         messages.warning(request, f'You Have Deleted The Medical Record\
-                     Number:{ recordDel.pk }')
+                     Number:{hiveinst.hive_name}')
         recordDel.delete()
         return redirect('hiveMedicalHistory', apiaryPK, hiveinst_id)
+    messages.warning(
+                request, f"You are about to DELETE a medical record for\
+                    hive: {hiveinst.hive_name}")
     context = {
         'recordDel': recordDel,
         'hiveid': hiveid,

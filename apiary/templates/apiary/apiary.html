@@ -10,7 +10,13 @@
     <div id="test"></div>
     <div class="row">
         <div class="col-sm-12">
-            <h1>Welcome to your Apiary's</h1>
+            <h1>Welcome to HoneyCombe Apiary Managent</h1>
+            {% if apiaries %}
+            <h2>{{request.user.username|title}} your Apiarys are listed below:</h2>
+            {% else %}
+            <h2>Welcome {{request.user.username|title}}</h2>
+            {% endif %}
+            {% if apiaries %}
             <a class="btn btn-secondary" href="{% url 'addApiary' %}"><i class="fas fa-sitemap"></i> Add Apiary</a>
             <a class="btn btn-secondary" href="{% url 'beeMedical'%}"><i class="fas fa-notes-medical"></i> Bee Medical</a>
             <div class="row">
@@ -18,6 +24,7 @@
                 <div id='apiarytips'></div>
                 </div>
             </div>
+            {% endif %}
           
             {% if apiaries %}
             <div>

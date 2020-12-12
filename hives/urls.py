@@ -10,6 +10,6 @@ urlpatterns = [
     path('hiveDocs/<apiaryPK>/<pk>/', views.hiveDocs, name='hiveDocs'),
     path('addhiveDoc/<apiaryPK>/<pk>/', views.addhiveDoc, name='addhiveDoc'),
     path('editHiveDoc/<apiaryPK>/<hive_id>/<pk>/', views.editHiveDoc, name='editHiveDoc'),
-    path('deleteHivedoc/<hive_id>/<pk>/', views.deleteHivedoc,
+    path('deleteHivedoc/<apiaryPK>/<hive_id>/<pk>/', views.deleteHivedoc,
          name='deleteHivedoc'),
 ]

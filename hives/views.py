@@ -342,7 +342,7 @@ def editHiveDoc(request, apiaryPK, hive_id, pk):
 
 
 @login_required
-def deleteHivedoc(request, hive_id, pk):
+def deleteHivedoc(request, apiaryPK, hive_id, pk):
     """ A view to delete Hives Sites """
     hiveid = hive_id
     hivedetail = get_object_or_404(hive_details, pk=hive_id)
@@ -361,9 +361,10 @@ def deleteHivedoc(request, hive_id, pk):
                      Hive: {hivedetail.hive_name}",
         )
         hivedocdel.delete()
-        return redirect("hiveDocs", hiveid)
+        return redirect("hiveDocs", apiaryPK, hiveid)
     context = {
         "hivedocdel": hivedocdel,
         "hiveid": hiveid,
+        "apiaryPK": apiaryPK,
     }
     return render(request, "hives/confirm_hive_record_delete.html", context)
