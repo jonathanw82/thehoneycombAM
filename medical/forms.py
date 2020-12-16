@@ -55,16 +55,18 @@ class addHiveMedicalRecordForm(forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        choices = [(med.medicine_name +
+        choices = [(med.medicine_name + ', ' +
                     ' Batch Num: ' +
-                    med.medicine_batch_number +
+                    med.medicine_batch_number + ', ' +
                     ' Exp: ' +
-                    str(med.medicine_exp_date),
-                    med.medicine_name +
+                    str(med.medicine_exp_date) + ', ' +
+                    'ID: ' + str(med.pk),
+                    med.medicine_name + ', ' +
                     ' Batch Num: ' +
-                    med.medicine_batch_number +
+                    med.medicine_batch_number + ', ' +
                     ' Exp: ' +
-                    str(med.medicine_exp_date))
+                    str(med.medicine_exp_date) + ', ' +
+                    'ID: ' + str(med.pk))
                    for med in hiveMedical.objects.filter(user=user)]
 
         for field in self.fields:

@@ -1,42 +1,72 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static '/medical/css/medical.css' %}" />
+{% endblock%}
 
 {% block content %}
 <div class="container">
-  <h1 class="display-4 text-success">Bee Medical Page</h1>
-  <div>
-    {% if medications %}
-    <a class="btn btn-secondary" href="{% url 'addMedicine'%}"><i class="fas fa-prescription-bottle-alt"></i> Add Medicine</a>
-    <a class="btn btn-secondary" href="{% url 'apiary' %}">Back</a>
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="display-4 text-success">Bee Medical Page</h1>
+    </div>
+  </div>
+  {% if medications %}
+  <div class="row">
+    <div class="col-sm-12">
+      <a class="btn btn-secondary" href="{% url 'addMedicine'%}"><i class="fas fa-prescription-bottle-alt"></i> Add
+        Medicine</a>
+      <a class="btn btn-secondary" href="{% url 'apiary' %}">Back</a>
+    </div>
+  </div>
+  <div class="row">
     {% for med in medications reversed %}
-    <div>
-      {{ med.medicine_name }}
-      {{ med.supplier_full_name }}
-      {% if datetoday > med.medicine_exp_date %}
-      Medicine Has EXPIRED!!!!
-      {% else %}
-      {% endif %}
-      <div>
-        {% if med.medicine_updated %}
-        This Medicine Was Updated On The: {{ med.medicine_updated }}
-        {% endif %}
-
+    <div class="col-sm-4">
+      <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          Medication: {{ med.medicine_name|title }}<br>
+          Expiery: {{ med.medicine_exp_date }} {% if datetoday > med.medicine_exp_date %} <span class="text-danger">EXPIRED!!!!</span> {% endif %}
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            Supplier: <br>
+            {{ med.supplier_full_name|title }}
+            <br>
+            {{ med.supplier_street_address1 }}<br>
+            {{ med.supplier_street_address2 }}<br>
+            {{ med.supplier_town_or_city }}<br>
+            {{ med.supplier_county }}<br>
+            {{ med.supplier_postcode }}
+            <hr>
+            Batch Number: {{ med.medicine_batch_number }}
+            <br>
+            Qty Purchased: {{med.medicine_qty}}
+            <br>
+            Date of Purchase: {{ med.medicine_purchase_date }}
+            <br>
+            Updated ? {% if med.medicine_updated %} {{ med.medicine_updated }} {% else %} No {% endif %}
+          </p>
+          <a href="{% url 'medhiveused' med.pk %}">Hives using this medication</a><br>
+          <a href="{% url 'editMedicine' med.pk %}">Edit Medicine</a><br>
+          <a href="{% url 'deleteMedicine' med.pk %}">Delete</a>
+        </div>
       </div>
-      <div>
-        <a href="{% url 'editMedicine' med.pk %}">Edit Medicine</a>
-        <a href="{% url 'deleteMedicine' med.pk %}">Delete</a>
-      </div>
-
     </div>
     {% endfor %}
-    {% else %}
-    <h3>You dont have an medications, to add some please click here: <a class="btn btn-secondary" href="{% url 'addMedicine'%}">Add Medicine</a></h3>
-    {% endif %}
   </div>
+  {% else %}
+  <div class="row">
+    <div class="col-sm-6">
+      <h3>You dont have an medications, to add some please click here: <a class="btn btn-secondary"
+          href="{% url 'addMedicine'%}">Add Medicine</a></h3>
+    </div>
+  </div>
+  {% endif %}
 </div>
 {% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
+<script type="text/javascript" src="{% static 'medical/js/medical.js' %}"></script>
 {% endblock %}

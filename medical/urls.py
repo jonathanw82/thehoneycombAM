@@ -14,4 +14,5 @@ urlpatterns = [
          name='editMedicalRecord'),
     path('deleteMedicalRecord/<apiaryPK>/<hiveinst_id>/<pk>/', views.deleteMedicalRecord,
          name='deleteMedicalRecord'),
+    path('medhiveused/<medID>/', views.medhiveused, name='medhiveused'),
 ]

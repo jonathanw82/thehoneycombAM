@@ -1,7 +1,8 @@
 from django.db import models
 from apiary.models import Apiary_details
 from django.contrib.auth.models import User
-import uuid, os
+import uuid
+import os
 
 
 class hive_details(models.Model):

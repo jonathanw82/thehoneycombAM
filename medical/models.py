@@ -51,6 +51,9 @@ class hiveMedicalRecords(models.Model):
                                    default=-1)
     hive_name = models.CharField(max_length=50, null=False,
                                  blank=False)
+    apiary_name = models.CharField(max_length=20, null=False,
+                                   blank=False)
+    medicine_id = models.CharField(max_length=20, blank=True, null=True)
     medicine_name = models.CharField(max_length=80, blank=True, null=True)
     medicine_admin_time_and_date = models.DateTimeField(blank=True, null=True,
                                                         default=timezone.now)
@@ -61,7 +64,8 @@ class hiveMedicalRecords(models.Model):
                                            blank=True)
     medicine_qty_used = models.CharField(max_length=20, null=False,
                                          blank=False)
-    deployment_method = models.CharField(max_length=50, null=True, blank=True)
+    deployment_method = models.CharField(max_length=50, null=True,
+                                         blank=True)
     medicine_disposal = models.CharField(max_length=150, null=False,
                                          blank=False)
     medicine_disposal_date = models.DateField(null=True, blank=True)

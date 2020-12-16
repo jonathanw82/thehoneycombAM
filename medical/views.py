@@ -3,6 +3,7 @@ from .forms import addHiveMedicineForm, addHiveMedicalRecordForm
 from .models import hiveMedical, hiveMedicalRecords
 from django.contrib.auth.decorators import login_required
 from hives.models import hive_details
+from apiary.models import Apiary_details
 from django.contrib import messages
 from datetime import date
 from django.utils import timezone
@@ -16,9 +17,21 @@ def beeMedical(request):
     medications = hiveMedical.objects.filter(user=user)
     context = {
         'medications': medications,
-        'datetoday': datetoday
+        'datetoday': datetoday,
     }
     return render(request, 'medical/beeMedical.html', context)
+
+
+def medhiveused(request, medID):
+    datetoday = date.today()
+    medications = get_object_or_404(hiveMedical, pk=medID)
+    medhivesusing = hiveMedicalRecords.objects.filter(medicine_id=medID)
+    context = {
+        'medhivesusing': medhivesusing,
+        'medications': medications,
+        'datetoday': datetoday,
+    }
+    return render(request, 'medical/medhiveused.html', context)
 
 
 @login_required
@@ -103,6 +116,7 @@ def hiveMedicalHistory(request, apiaryPK, pk):
 @login_required
 def addMedicalRecord(request, apiaryID, pk=None):
     """ A view to display the add medicine page """
+    apiary = get_object_or_404(Apiary_details, pk=apiaryID)
     user = request.user
     isMedicinePresent = hiveMedical.objects.filter(user=user)
     hiveinst = get_object_or_404(hive_details, pk=pk)
@@ -110,8 +124,14 @@ def addMedicalRecord(request, apiaryID, pk=None):
         form = addHiveMedicalRecordForm(user, request.POST)
         if form.is_valid():
             hiveMedicalRecords = form.save(commit=False)
+            mednamesplit = hiveMedicalRecords.medicine_name.split(',', 4)
+            getidstring = mednamesplit[3]
+            splitidstring = str(getidstring)
+            medid = splitidstring.split()
+            hiveMedicalRecords.medicine_id = medid[1]
             hiveMedicalRecords.hivenumber = hiveinst
             hiveMedicalRecords.hive_name = hiveinst.hive_name
+            hiveMedicalRecords.apiary_name = apiary.full_name
             hiveMedicalRecords.save()
             messages.success(
                 request, f"You have successfully added a medical record to\
@@ -142,6 +162,11 @@ def editMedicalRecord(request, apiaryID, hiveinst_id, pk=None):
                                         instance=editMedicineRecord)
         if form.is_valid():
             editMedicineRecord = form.save(commit=False)
+            mednamesplit = editMedicineRecord.medicine_name.split(',', 4)
+            getidstring = mednamesplit[3]
+            splitidstring = str(getidstring)
+            medid = splitidstring.split()
+            editMedicineRecord.medicine_id = medid[1]
             editMedicineRecord.medicine_updated = timezone.now()
             editMedicineRecord.save()
             messages.success(

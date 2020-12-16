@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <h1 class="display-4 text-success">All Hives Useing {{ medications.medicine_name|title }}</h1>
+  <p>Purchased from: {{ medications.supplier_full_name }},
+    <br>
+    Date: {{ medications.medicine_purchase_date }},
+    <br>
+    {% if datetoday > medications.medicine_exp_date %}
+    Medication Expiery date: {{ medications.medicine_exp_date }} <span class="text-danger">EXPIRED!!!!</span>
+    {% else %}
+    Medication Expiery date: {{ medications.medicine_exp_date }},
+    {% endif %}
+    <br>
+    Batch Number: {{ medications.medicine_batch_number }},
+  </p>
+  <br>
+  <a class="btn btn-secondary" href="{% url 'beeMedical' %}">Back</a>
+  <div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Hive Name</th>
+            <th scope="col">Date Administered</th>
+            <th scope="col">Apiary When Treated</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in medhivesusing %}
+          <tr>
+            <th scope="row">{{ m.hive_name }}</th>
+            <td>{{ m.medicine_admin_time_and_date }}</td>
+            <td>{{ m.apiary_name }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+{% endblock %}
