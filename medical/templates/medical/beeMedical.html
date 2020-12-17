@@ -6,30 +6,35 @@
 {% endblock%}
 
 {% block content %}
+<div class="bg-image">
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1 class="display-4 text-success">Bee Medical Page</h1>
+      <p class="medical_heading">Bee Medical</p>
     </div>
   </div>
   {% if medications %}
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 buttons_col">
       <a class="btn btn-secondary" href="{% url 'addMedicine'%}"><i class="fas fa-prescription-bottle-alt"></i> Add
         Medicine</a>
       <a class="btn btn-secondary" href="{% url 'apiary' %}">Back</a>
     </div>
   </div>
-  <div class="row">
+  <div class="row cards_row mx-auto">
     {% for med in medications reversed %}
-    <div class="col-sm-4">
-      <div class="card" style="width: 18rem;">
+    <div class="col-lg-4 col-md-6 card_col mx-auto">
+      {% if datetoday > med.medicine_exp_date %}  
+      <div id="cardexpire" class="card">
+        {% else %}
+        <div id="card" class="card">
+      {% endif %}
         <div class="card-header">
-          Medication: {{ med.medicine_name|title }}<br>
-          Expiery: {{ med.medicine_exp_date }} {% if datetoday > med.medicine_exp_date %} <span class="text-danger">EXPIRED!!!!</span> {% endif %}
+          Medication: <strong>{{ med.medicine_name|title }}</strong><br>
+          <span>Expiery: <span id="expire">{{ med.medicine_exp_date }}</span> {% if datetoday > med.medicine_exp_date %} <span class="text-danger">EXPIRED!!!!</span> {% endif %}</span>
         </div>
         <div class="card-body">
-          <p class="card-text">
+          <div class="card-text">
             Supplier: <br>
             {{ med.supplier_full_name|title }}
             <br>
@@ -46,7 +51,7 @@
             Date of Purchase: {{ med.medicine_purchase_date }}
             <br>
             Updated ? {% if med.medicine_updated %} {{ med.medicine_updated }} {% else %} No {% endif %}
-          </p>
+          </div>
           <a href="{% url 'medhiveused' med.pk %}">Hives using this medication</a><br>
           <a href="{% url 'editMedicine' med.pk %}">Edit Medicine</a><br>
           <a href="{% url 'deleteMedicine' med.pk %}">Delete</a>
@@ -63,10 +68,12 @@
     </div>
   </div>
   {% endif %}
+  <div class="spacerdiv"></div>
+</div>
 </div>
 {% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
-<script type="text/javascript" src="{% static 'medical/js/medical.js' %}"></script>
+<script src="{% static 'medical/js/medical.js' %}"></script>
 {% endblock %}
