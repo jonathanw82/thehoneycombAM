@@ -1,19 +1,20 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+# from django.contrib.auth.decorators import login_required
 
 
 def index(request):
     """ A view to display the index page """
     if request.user.is_authenticated:
-        return render(request, 'home/loggedInUser.html')
+        # return render(request, 'apiary/apiary.html')
+        return redirect("apiary")
     else:
         return render(request, 'home/index.html')
 
 
-@login_required
-def userLoggedIn(request):
-    """ A view to display the index page """
-    return render(request, 'home/loggedInUser.html')
+# @login_required
+# def userLoggedIn(request):
+#     """ A view to display the index page """
+#     return render(request, 'home/loggedInUser.html')
 
 
 def wiki(request):

@@ -22,7 +22,8 @@ def hive(request, apiary_id):
         apiarypostcode = apiary.postcode
         key = settings.KEYGEO
         responsegeo = requests.get(
-            f"https://api.opencagedata.com/geocode/v1/json?q={apiarypostcode},UK&key={key}"
+            f"https://api.opencagedata.com/geocode/v1/json?q={apiarypostcode}"
+            f",UK&key={key}"
         )
         geo = responsegeo.json()
         geofomat_str = json.dumps(geo, indent=2)
@@ -44,7 +45,8 @@ def hive(request, apiary_id):
         units = "&units=" + "metric"
         keyweatherapi = "&appid=" + settings.KEYWEATHER
         response = requests.get(
-            f"https://api.openweathermap.org/data/2.5/onecall?{queryweather}{exclude}{units}{keyweatherapi}"
+            f"https://api.openweathermap.org/data/2.5/onecall?{queryweather}"
+            f"{exclude}{units}{keyweatherapi}"
         )
         weatherresp = response.json()
         weather_formatted_str = json.dumps(weatherresp, indent=2)
@@ -315,7 +317,8 @@ def editHiveDoc(request, apiaryPK, hive_id, pk):
     docid = pk
     instdoc = get_object_or_404(hiveDocuments, pk=pk)
     if request.method == "POST":
-        form = addHiveDocumentsForm(request.POST, request.FILES, instance=instdoc)
+        form = addHiveDocumentsForm(request.POST, request.FILES,
+                                    instance=instdoc)
         if form.is_valid():
             instdoc.save()
             messages.success(
