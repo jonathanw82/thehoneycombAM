@@ -8,48 +8,49 @@
 {% block content %}
 <div class="background-image">
     <div class="overlay">
-<div class="container">
-    <div id="test"></div>
-    <div class="row">
-        <div class="col-sm-12">
-            <h1>Welcome to Apis Metrics</h1>
-            {% if apiaries %}
-            <h2>{{request.user.username|title}} your Apiarys are listed below:</h2>
-            {% else %}
-            <h2>Welcome {{request.user.username|title}}</h2>
-            {% endif %}
-            {% if apiaries %}
-            <a class="btn btn-secondary" href="{% url 'addApiary' %}"><i class="fas fa-sitemap"></i> Add Apiary</a>
-            <a class="btn btn-secondary" href="{% url 'beeMedical'%}"><i class="fas fa-notes-medical"></i> Bee Medical</a>
+        <div class="container">
             <div class="row">
-                <div class="col-sm-12">
-                <div id='apiarytips'></div>
+                <div class="col-sm-6">
+                    <h1>Welcome to Apis Metrics</h1>
+                    {% if apiaries %}
+                    <h2>{{request.user.username|title}} your Apiarys are listed below:</h2>
+                    {% else %}
+                    <h2>Welcome {{request.user.username|title}}</h2>
+                    {% endif %}
+                    {% if apiaries %}
+                    <a class="btn btn-secondary" href="{% url 'addApiary' %}"><i class="fas fa-sitemap"></i> Add
+                        Apiary</a>
+                    <a class="btn btn-secondary" href="{% url 'beeMedical'%}"><i class="fas fa-notes-medical"></i> Bee
+                        Medical</a>
+                </div>
+                <div class="col-sm-6">
+                    <div id='apiarytips'></div>
+                </div>
+                {% endif %}
+            </div>
+            {% if apiaries %}
+            <hr>
+            <div class="row">
+                {% for apiary in apiaries %}
+                <div class="col-sm-3 apiary_box mx-auto">
+                    <a href="{% url 'hive' apiary.pk %}">
+                        <img class="apiary_image" src="{% static 'images/apiary.png' %}" alt="apiary_image">
+                        <div class="apiary_heading">{{ apiary.full_name|title }}</div>
+                    </a>
+                    <a class="apiary_buttons btn btn-secondary" href="{% url 'editApiary' apiary.pk %}">Edit</a>
+                    <a class="apiary_buttons btn btn-danger" href="{% url 'deleteApiary' apiary.pk %}">Delete</a>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="row">
+                    <h3>You have not added any Apiarys, please click here to add an apiary <a class="btn btn-secondary"
+                            href="{% url 'addApiary' %}">Add Apiary</a></h3>
                 </div>
             </div>
             {% endif %}
-          
-            {% if apiaries %}
-            <div>
-                {% for apiary in apiaries %}
-                <a href="{% url 'hive' apiary.pk %}">
-                    <h5>Site Name: {{ apiary.full_name|title }}</h5>
-                </a>
-                Site User: {{ apiary.user|title }}<br>
-                Loggedin User: {{ request.user|title }}<br>
-                <h4>Apiary id: {{ apiary.id }}</h4>
-                <a href="{% url 'editApiary' apiary.pk %}">Edit</a>
-                <a href="{% url 'deleteApiary' apiary.pk %}">Delete Apiary</a><br>
-                {% endfor %}
-            </div>
-            {% else %}
-            <h3>You have not added any Apiarys, please click here to add an apiary <a class="btn btn-secondary"
-                    href="{% url 'addApiary' %}">Add Apiary</a></h3>
-            {% endif %}
         </div>
+        <div class="emptydiv"></div>
     </div>
-    <div class="emptydiv"></div>
-</div>
-</div>
 </div>
 {% endblock %}
 

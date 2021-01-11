@@ -15,6 +15,28 @@
     height: auto;
 }
 
+.hive_box{
+    border: 2px solid black;
+    text-align: center;
+    min-width: 20%;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.hive_image{
+    height: auto;
+    width: 50%;
+}
+
+.hive_button{
+    border-radius: 0;
+    width: 45%;
+}
+
+.hive_page_instruction{
+    justify-content: center;
+}
+
 /* .btn-file{
     position: relative;
     overflow: hidden;

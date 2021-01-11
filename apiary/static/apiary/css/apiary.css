@@ -2,6 +2,27 @@
     height: 50px;
 }
 
+.apiary_image{
+    height: auto;
+    width: 100%;
+}
+
+.apiary_box{
+    margin-left: 10px;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.apiary_heading{
+    font-size: 1.5rem;
+}
+
+.apiary_buttons{
+    width: 45%;
+    border-radius: 0%;
+    margin-bottom: 10px;
+}
+
 /* .background-image{
     background-image: url("../images/bg2.jpg"); 
     background-position: center;
