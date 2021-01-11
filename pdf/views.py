@@ -25,13 +25,13 @@ def hive_record_pdf_view(request, *args, **kwargs):
     # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type="application/pdf")
     # if download:
-    # response[
-    #     "Content-Disposition"
-    # ] = f'attachment; filename="hiveRecords-{hivename}-{todaysDate}.pdf"'
-    # if diaplay:
     response[
         "Content-Disposition"
-    ] = f'filename="hiveRecords-{hivename}-{todaysDate}.pdf"'
+    ] = f'attachment; filename="hiveRecords-{hivename}-{todaysDate}.pdf"'
+    # if diaplay:
+    # response[
+    #     "Content-Disposition"
+    # ] = f'filename="hiveRecords-{hivename}-{todaysDate}.pdf"'
     # find the template and render it.
     template = get_template(template_path)
     html = template.render(context)
