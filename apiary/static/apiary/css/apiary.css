@@ -2,7 +2,7 @@
     height: 50px;
 }
 
-.background-image{
+/* .background-image{
     background-image: url("../images/bg2.jpg"); 
     background-position: center;
     background-size: cover;
@@ -12,7 +12,7 @@
     z-index: -20;
     width: 100%;
     min-height: 90vh;
-}
+} */
 /* 
 .overlay{
     background-color: rgba(5, 5, 5, 0.5);

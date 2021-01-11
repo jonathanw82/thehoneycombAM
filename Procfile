@@ -1,1 +1,1 @@
-web: gunicorn thehoneycombam.wsgi:application
+web: gunicorn apismetrics.wsgi:application

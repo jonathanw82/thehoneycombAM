@@ -64,10 +64,10 @@ class hiveMedicalRecords(models.Model):
                                            blank=True)
     medicine_qty_used = models.CharField(max_length=20, null=False,
                                          blank=False)
-    deployment_method = models.CharField(max_length=50, null=True,
-                                         blank=True)
-    medicine_disposal = models.CharField(max_length=150, null=False,
+    deployment_method = models.CharField(max_length=50, null=False,
                                          blank=False)
+    medicine_disposal = models.CharField(max_length=150, null=True,
+                                         blank=True)
     medicine_disposal_date = models.DateField(null=True, blank=True)
 
     def __str__(self):

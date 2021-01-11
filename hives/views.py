@@ -315,7 +315,8 @@ def editHiveDoc(request, apiaryPK, hive_id, pk):
     docid = pk
     instdoc = get_object_or_404(hiveDocuments, pk=pk)
     if request.method == "POST":
-        form = addHiveDocumentsForm(request.POST, request.FILES, instance=instdoc)
+        form = addHiveDocumentsForm(request.POST, request.FILES,
+                                    instance=instdoc)
         if form.is_valid():
             instdoc.save()
             messages.success(
