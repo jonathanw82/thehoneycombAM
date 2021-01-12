@@ -14,6 +14,7 @@ class AddHiveForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'add-hive-form'
+            self.fields['hive_name'].label = 'Name or Number'
 
 
 class editHiveForm(forms.ModelForm):

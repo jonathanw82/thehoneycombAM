@@ -32,7 +32,7 @@ class hiveMedical(models.Model):
                                              blank=False)
     medicine_qty = models.CharField(max_length=80, null=False,
                                     blank=False)
-    medicine_exp_date = models.DateField(null=True, blank=True)
+    medicine_exp_date = models.DateField(null=False, blank=False)
     medicine_updated = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):

@@ -14,3 +14,4 @@ class AddApiaryForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'add-apiary-form'
+            self.fields['full_name'].label = 'Site name'
