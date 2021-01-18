@@ -6,8 +6,7 @@
 {% endblock%}
 
 {% block content %}
-<div class="background-image">
-    <div class="overlay">
+
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
@@ -51,11 +50,10 @@
         </div>
         <div class="emptydiv"></div>
     </div>
-</div>
 {% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
-<script type="text/javascript" src="{% static 'apiary/js/apiary.js' %}"></script>
-<script type="text/javascript" src="{% static 'apiary/js/apiaryTips.js' %}"></script>
+<script src="{% static 'apiary/js/apiary.js' %}"></script>
+<script src="{% static 'apiary/js/apiaryTips.js' %}"></script>
 {% endblock %}

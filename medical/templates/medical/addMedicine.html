@@ -13,8 +13,8 @@
                 <form class="addHiveMedicineForm" method="POST" action="{% url 'addMedicine' %}"enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form| crispy }}
-            
                     <button class="btn btn-info buttons-click" type="submit" href="{% url 'beeMedical' %}">Add</button>
+                    <a class="btn btn-info buttons-click" href="{% url 'beeMedical' %}">Cancel</a>
                 </form>
             </div> 
 		</div>

@@ -8,57 +8,81 @@
 {% block content %}
 <div class="container">
     <h1>Hive Records</h1>
-    <a class="btn btn-secondary" href="{% url 'hive' apiaryPK %}"> Back</a>
     <a class="btn btn-secondary" href="{% url 'addhiveDoc' apiaryPK hivename.pk %}">Add Inspection</a>
     <a class="btn btn-secondary" href="{% url 'hiveMedicalHistory' apiaryPK hivename.pk %}"><i
-        class="fas fa-file-medical"></i> Medical History</a><br>
-    {% if docs %}    
+        class="fas fa-file-medical"></i> Medical History</a>
+        {% if docs %}
+    <a class="btn btn-secondary" href="{% url 'hive_record_pdf_view' hivename.pk %}"><i class="fas fa-file-pdf"></i>
+        Download PDF</a>
+        {% endif %}
+    <a class="btn btn-secondary" href="{% url 'hive' apiaryPK %}"> Back</a>
+    {% if docs %}
     <h3>Hive: {{ hivename.hive_name|title }}</h3>
-    Download Hive documents to PDF
-    <a class="btn btn-secondary" href="{% url 'hive_record_pdf_view' hivename.pk %}"><i class="fas fa-file-pdf"></i> Download PDF</a>
-    {% for doc in docs reversed %}
-    <div>
-        Date: {{ doc.date }}
-        Log Number: {{ doc.id }}
-        Hive Number: {{ doc.hivenumber}}
-        Queen: {% if doc.queen %} Yes Queen Colour: {{ doc.queenColour }}{% else %} No {% endif %}
-        QC: {% if doc.qc %} Yes QC Number: {{ doc.qcnum }} {% else %} No {% endif %}
-        Eggs: {% if doc.eggs %} Yes {% else %} No {% endif %}
-        Brood: {{ doc.brood }}
-        Number Of Supers: {{ doc.supersnum }}
-        Weather: {% if doc.weather == None %} None {% else %} {{ doc.weather }} {% endif %}
-        Temperment: {{doc.temperment}}
-        Notes: {{ doc.notes }}
-        Beekeeper: <span class="capitaise">{{ doc.beekeepername }}</span>
-    </div>
     <div class="row">
-        {% if doc.image1 %}
-        <div class="col-sm-6">
-            <a href="{{ doc.image1.url }}" target="_blank">
-                <img class="imageondoc" src="{{ doc.image1.url }}" alt="Oops lost Image! {{ doc.image1.name }}">
-            </a>
+        {% for doc in docs reversed %}
+
+        <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <div class="card-body">
+                    <h5 class="card-title">Date: {{doc.date}}</h5>
+                    <p class="card-text">
+                        Log Num: {{doc.id}}<br>
+                        Queen: {% if doc.queen %} Yes Queen Colour: {{ doc.queenColour }}{% else %} No {% endif %}<br>
+                        Qc: {% if doc.qc %} Yes QC Number: {{ doc.qcnum }} {% else %} No {% endif %}<br>
+                        Eggs: {% if doc.eggs %} Yes {% else %} No {% endif %}<br>
+                        Brood: {% if doc.brood %} Yes {% else %} None {% endif %}<br>
+                        Supers: {{ doc.supersnum }}<br>
+                        Weather: {% if doc.weather == None %} None {% else %} {{ doc.weather }} {% endif %}<br>
+                        Temper: {{ doc.temperment }}<br>
+                        Beekeeper: {{ doc.beekeepername|title }}
+                    </p>
+                    <div class="hide-images" id="image{{doc.pk}}">
+                        {% if doc.image1 %}
+                        <a href="{{ doc.image1.url }}" target="_blank">
+                            <img class="imageondoc" src="{{ doc.image1.url }}"
+                                alt="Oops lost Image1! {{ doc.image1.name }}">
+                        </a>
+                        {% endif %}
+                        {% if doc.image2 %}
+                        <a href="{{ doc.image2.url }}" target="_blank">
+                            <img class="imageondoc" src="{{ doc.image2.url }}"
+                                alt="Oops lost Image2!  {{ doc.image2.name }}">
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="row buttons-row">
+                        {% if doc.image1 or doc.image2 %}
+                        <input class="btn btn-secondary showbutton hive-doc-buttons" type="button" id="button{{doc.pk}}"
+                            onclick="show_images('image{{doc.pk}}', 'button{{doc.pk}}', 'buttonhide{{doc.pk}}')"
+                            value="Images"></input>
+                        <input class="btn btn-secondary hidebutton hive-doc-buttons" type="button"
+                            id="buttonhide{{doc.pk}}"
+                            onclick="hide_images('image{{doc.pk}}', 'button{{doc.pk}}', 'buttonhide{{doc.pk}}')"
+                            value="Hide"></input>
+                        {% endif %}
+                        <a class="btn btn-secondary hive-doc-buttons"
+                            href="{% url 'editHiveDoc' apiaryPK hivename.id doc.pk %}">Edit</a>
+                        <a class="btn btn-danger hive-doc-buttons"
+                            href="{% url 'deleteHivedoc' apiaryPK hivename.id doc.pk %}">Delete</a>
+                    </div>
+                </div>
+
+                <!-- {% if doc.notes %}{{ doc.notes }}{% else %}No notes Recorded {% endif %} -->
+            </div>
         </div>
-        {% endif %}
-        {% if doc.image2 %}
-        <div class="col-sm-6">
-            <a href="{{ doc.image2.url }}" target="_blank">
-                <img class="imageondoc" src="{{ doc.image2.url }}" alt="Oops lost Image!  {{ doc.image2.name }}">
-            </a>
-        </div>
+        {% endfor %}
+        {% else %}
+        <h3>There are no records for this hive to add an inspection record press Add Inspection</h3>
         {% endif %}
     </div>
-    <div>
-        <a href="{% url 'editHiveDoc' apiaryPK hivename.id doc.pk %}">Edit</a>
-        <a href="{% url 'deleteHivedoc' apiaryPK hivename.id doc.pk %}">Delete</a>
-    </div>
-        <hr color=gray>
-    {% endfor %}
-    {% else %}
-    <h3>There are no records for this hive to add an inspection record press Add Inspection</h3>
-    {% endif %}
 </div>
+</div>
+<div class="emptydiv"></div>
+
 {% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
+<script src="{% static 'hives/js/hiveDocs.js' %}"></script>
 {% endblock %}

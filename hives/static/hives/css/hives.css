@@ -10,9 +10,34 @@
     display: none;
 }
 
+.hide-images{
+    display: none;
+}
+
+.show-images{
+    display: inline;
+}
+
+.hidebutton{
+    display: none;
+}
+
+.showbutton{
+    display: inline;
+}
+
 .imageondoc{
-    width: 300px;
-    height: auto;
+    width: 45%;
+    border: 2px solid black;
+}
+
+.hive-doc-buttons{
+    width: 45%;
+    margin: 2px;
+}
+
+.buttons-row{
+    justify-content: center;
 }
 
 .hive_box{
@@ -36,6 +61,7 @@
 .hive_page_instruction{
     justify-content: center;
 }
+
 
 /* .btn-file{
     position: relative;
