@@ -2,6 +2,7 @@ window.onload=(event)=>{
    tips();
 } 
 
+// This finction changes the behaviour of the display tips button.
 function displaytips(){
     document.getElementById("apiarytips").classList.add("desktop-tips-show");
     var but = document.getElementById("mobileButton");
@@ -9,6 +10,7 @@ function displaytips(){
     but.value = "Hide Tips";
 }
 
+// This reverses the behaviour changed but the previouse function.
 function hideTips(){
     let tips = document.getElementById("apiarytips");
     tips.classList.remove("desktop-tips-show");
@@ -18,6 +20,8 @@ function hideTips(){
     but.value = "Show Tips";
 }
 
+/* This finction looks and check to see if the correct window width had been 
+reached by the even listener it then changes the class as required */
 var x = window.matchMedia("(max-width: 425px)");
 x.addEventListener("change", screensize(x));
 
@@ -45,14 +49,17 @@ function screensize(x) {
     }
 }
  
-
+// This function injects a warning that something can not be undone after it is deleted.
 function secondWarning(){
     document.getElementById('firstWarning').style.display = "None";
     document.getElementById('secondary-confirm').innerHTML = `This can not be undone! To Permanently delete this apiary please press Delete
                             <br> <input class="btn btn-danger confirmBut" type="submit" value="Delete"></input>`;
 };
 
-
+/* The tips function uses a switch case and the browser date feature to 
+decide on what month it is then display's the relevent tip pulled for the 
+apiaryTips.js page that then get injected into the dom.
+*/
 function tips(){
     let info = document.getElementById('apiarytips');
     switch(new Date().getMonth()){
