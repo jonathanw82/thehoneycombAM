@@ -1,16 +1,20 @@
-.emptydiv{
-    height: 100px;
+.container{
+    margin-bottom: 100px;
 }
 
 .capitaise{
     text-transform: capitalize;
 }
 
-.hidename{
+.weather_app{
+    margin-top: 10px;
+}
+
+/* .hidename{
     display: none;
 }
 
-.hide-images{
+/* .hide-images{
     display: none;
 }
 
@@ -24,16 +28,18 @@
 
 .showbutton{
     display: inline;
-}
-
-.imageondoc{
-    width: 45%;
-    border: 2px solid black;
-}
+} */
 
 .hive-doc-buttons{
     width: 45%;
     margin: 2px;
+    border-radius: 0%;
+}
+
+.hive-doc-buttons-modal{
+    width: 90%;
+    margin: 2px;
+    border-radius: 0%;
 }
 
 .buttons-row{
@@ -46,6 +52,8 @@
     min-width: 20%;
     margin-left: 10px;
     margin-top: 10px;
+    padding-bottom: 2px;
+    box-shadow: 5px 5px 10px 0px gray;
 }
 
 .hive_image{
@@ -56,12 +64,27 @@
 .hive_button{
     border-radius: 0;
     width: 45%;
+    margin: 2px;
 }
 
 .hive_page_instruction{
     justify-content: center;
 }
 
+.card{
+    min-height: 400px;
+    margin-top: 10px;
+    box-shadow: 5px 5px 10px 0px gray;
+}
+
+.modal-image{
+    width: 100%;
+    margin-top: 4px;
+}
+
+.image-row{
+    justify-content: center;
+}
 
 /* .btn-file{
     position: relative;

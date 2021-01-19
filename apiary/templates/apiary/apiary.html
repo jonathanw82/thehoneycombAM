@@ -31,7 +31,7 @@
             <hr>
             <div class="row">
                 {% for apiary in apiaries %}
-                <div class="col-sm-3 apiary_box mx-auto">
+                <div class="col-sm-4 apiary_box mx-auto">
                     <a href="{% url 'hive' apiary.pk %}">
                         <img class="apiary_image" src="{% static 'images/apiary.png' %}" alt="apiary_image">
                         <div class="apiary_heading">{{ apiary.full_name|title }}</div>

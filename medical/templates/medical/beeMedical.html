@@ -51,9 +51,11 @@
             <br>
             Updated ? {% if med.medicine_updated %} {{ med.medicine_updated }} {% else %} No {% endif %}
           </div>
-          <a href="{% url 'medhiveused' med.pk %}">Hives using this medication</a><br>
-          <a href="{% url 'editMedicine' med.pk %}">Edit Medicine</a><br>
-          <a href="{% url 'deleteMedicine' med.pk %}">Delete</a>
+          <div class="action-button-div">
+          <a class="btn btn-secondary" href="{% url 'medhiveused' med.pk %}">Hives using this medication</a><br>
+          <a class="btn btn-secondary action-button" href="{% url 'editMedicine' med.pk %}">Edit</a>
+          <a class="btn btn-danger action-button" href="{% url 'deleteMedicine' med.pk %}">Delete</a>
+        </div>
         </div>
       </div>
     </div>

@@ -15,10 +15,16 @@
     <div class="row">
         <div class="col-sm-6">
             <h1>Welcome to {{apiary.full_name|title}}</h1>
+            <p>{{ apiary.street_address1 }}<br>
+                {{ apiary.street_address2 }}<br>
+                {{ apiary.town_or_city }}<br>
+                {{ apiary.county }}<br>
+                {{ apiary.postcode }}
+            </p>
             <a class="btn btn-secondary" href="{% url 'addHive' apiaryID %}"> Add Hives</a>
             <a class="btn btn-secondary" href="{% url 'apiary' %}"> Back</a>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6 weather_app">
             <div id="weatherbox" class="col-sm-12 weatherboxcold">
                 {% if area %}
                 <div class="row">
@@ -88,9 +94,11 @@
         </div>
     </div>
     <hr>
+    {% if hives %}
     <div class="row hive_page_instruction">
         <h3>Select the hive by clicking on the image</h3>
     </div>
+    {% endif %}
     <div class="row">
         {% if hives %}
         {% for hive in hives %}
@@ -98,24 +106,47 @@
             <a href="{% url 'hiveDocs' apiaryID hive.id %}">
                 <img class="hive_image" src="{% static 'images/hive2.png' %}" alt="bee hive">
                 <h5>Hive: {{ hive.hive_name|title }}</h5>
-                <!-- <h4>Hive id: {{ hive.id }}</h4>
-                    <h4>Apiary id: {{ apiaryID }}</h4> -->
                 <h4>Hive Type: {{ hive.hive_type }}</h4>
             </a>
+            <button type="button" class="hive_button btn btn-secondary" data-toggle="modal" data-target="#hiveInfoModal{{ hive.id }}">
+                Hive History
+            </button>
             <a class="hive_button btn btn-secondary" href="{% url 'editHive' apiaryID hive.id %}"><i
                     class="fas fa-edit"></i>
                 Edit</a>
             <a class="hive_button btn btn-danger" href="{% url 'deleteHive' apiaryID hive.id %}"><i
                     class="fas fa-trash-alt"></i> Delete</a>
-            <br>
-            Hive Movement History:
-            {% if hive.hive_new_apiary %}
-            <h4>Hive moved to Apiary {{ hive.hive_new_apiary }} <br>
-                on the {{ hive.hive_move_date }} from Apiary {{ hive.hive_old_apiary }}</h4>
-            {% else %}
-            Hive has not been moved from original site {{ hive.hive_old_apiary }}
-            {% endif %}
-
+                    <a class="hive_button btn btn-secondary" href="{% url 'hive_record_pdf_view' hive.id %}"><i class="fas fa-file-pdf"></i>
+                        Save PDF</a>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="hiveInfoModal{{ hive.id }}" tabindex="-1" role="dialog" aria-labelledby="HiveInfo"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="hiveInfo">Hive History for {{ hive.hive_name }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                        {% if hive.hive_new_apiary %}
+                        Hive moved to Apiary {{ hive.hive_new_apiary }} <br>
+                        on the {{ hive.hive_move_date }} from Apiary {{ hive.hive_old_apiary }}
+                        {% else %}
+                        Hive has not been moved from original site {{ hive.hive_old_apiary }}
+                        {% endif %}
+                        </p>
+                        <a class="btn btn-secondary" href="{% url 'hiveMedicalHistory' apiaryID hive.pk %}"><i
+                            class="fas fa-file-medical"></i> Medical History</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
         {% endfor %}
         {% else %}

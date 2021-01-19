@@ -47,6 +47,19 @@
     height: 100px;
 }
 
+.action-button{
+    width: 45%;
+    margin: 2px;
+}
+
+.action-button-div{
+    text-align: center;
+}
+
+.card{
+    min-height: 520px;
+}
+
 
 @media only screen and (max-width: 768px) {
   
