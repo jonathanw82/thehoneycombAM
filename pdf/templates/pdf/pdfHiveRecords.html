@@ -64,7 +64,26 @@
         </p>
     </div>
     <hr>
-
+    <div class="subheading">Hive Medical Records:</div>
+    <table class="content" style="width:100%">
+        <tr>
+            <th>Date</th>
+            <th>Hive Name</th>
+            <th>Med name</th>
+            <th>Deployment</th>
+    
+        </tr>
+        {% for med in medications reversed %}
+        <tr>
+            <td>{{ med.medicine_admin_time_and_date }}</td>
+            <th>{{ med.hive_name }}</th>
+            <td>{{ med.medicine_name }}</td>
+            <td>{{ med.deployment_method}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <hr>
+    <div class="subheading">Hive Documents:</div>
     <table class="content" style="width:100%">
         <tr>
             <th>Date</th>

@@ -9,7 +9,7 @@ import boto3
 import json
 import requests
 import sys
-import os
+# import os
 
 
 @login_required

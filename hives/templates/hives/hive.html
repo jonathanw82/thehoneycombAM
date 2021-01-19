@@ -15,10 +15,10 @@
     <div class="row">
         <div class="col-sm-6">
             <h1>Welcome to {{apiary.full_name|title}}</h1>
-            <p>{{ apiary.street_address1 }}<br>
-                {{ apiary.street_address2 }}<br>
-                {{ apiary.town_or_city }}<br>
-                {{ apiary.county }}<br>
+            <p>{{ apiary.street_address1|title }}<br>
+                {{ apiary.street_address2|title }}<br>
+                {{ apiary.town_or_city|title }}<br>
+                {{ apiary.county|title }}<br>
                 {{ apiary.postcode }}
             </p>
             <a class="btn btn-secondary" href="{% url 'addHive' apiaryID %}"> Add Hives</a>
@@ -108,7 +108,8 @@
                 <h5>Hive: {{ hive.hive_name|title }}</h5>
                 <h4>Hive Type: {{ hive.hive_type }}</h4>
             </a>
-            <button type="button" class="hive_button btn btn-secondary" data-toggle="modal" data-target="#hiveInfoModal{{ hive.id }}">
+            <button type="button" class="hive_button btn btn-secondary" data-toggle="modal"
+                data-target="#hiveInfoModal{{ hive.id }}">
                 Hive History
             </button>
             <a class="hive_button btn btn-secondary" href="{% url 'editHive' apiaryID hive.id %}"><i
@@ -116,10 +117,13 @@
                 Edit</a>
             <a class="hive_button btn btn-danger" href="{% url 'deleteHive' apiaryID hive.id %}"><i
                     class="fas fa-trash-alt"></i> Delete</a>
-                    <a class="hive_button btn btn-secondary" href="{% url 'hive_record_pdf_view' hive.id %}"><i class="fas fa-file-pdf"></i>
-                        Save PDF</a>
+            <a class="hive_button btn btn-secondary" href="{% url 'hive_record_pdf_view' hive.id %}"><i
+                    class="fas fa-file-pdf"></i>
+                Save PDF</a>
         </div>
-        <!-- Modal -->
+
+        <!----------------- Modal ------------------>
+
         <div class="modal fade" id="hiveInfoModal{{ hive.id }}" tabindex="-1" role="dialog" aria-labelledby="HiveInfo"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -132,17 +136,20 @@
                     </div>
                     <div class="modal-body">
                         <p>
-                        {% if hive.hive_new_apiary %}
-                        Hive moved to Apiary {{ hive.hive_new_apiary }} <br>
-                        on the {{ hive.hive_move_date }} from Apiary {{ hive.hive_old_apiary }}
-                        {% else %}
-                        Hive has not been moved from original site {{ hive.hive_old_apiary }}
-                        {% endif %}
+                            {% if hive.hive_new_apiary %}
+                            Hive moved to Apiary {{ hive.hive_new_apiary }} <br>
+                            on the {{ hive.hive_move_date }} from Apiary {{ hive.hive_old_apiary }}
+                            {% else %}
+                            Hive has not been moved from original site {{ hive.hive_old_apiary }}
+                            {% endif %}
                         </p>
-                        <a class="btn btn-secondary" href="{% url 'hiveMedicalHistory' apiaryID hive.pk %}"><i
-                            class="fas fa-file-medical"></i> Medical History</a>
+                        <hr>
+                        <div>For the hive medical history click Medical History</div>
+
                     </div>
                     <div class="modal-footer">
+                        <a class="btn btn-secondary" href="{% url 'hiveMedicalHistory' apiaryID hive.pk %}"><i
+                                class="fas fa-file-medical"></i> Medical History</a>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>

@@ -7,49 +7,67 @@
 
 {% block content %}
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h1>Welcome to Apis Metrics</h1>
-                    {% if apiaries %}
-                    <h2>{{request.user.username|title}} your Apiarys are listed below:</h2>
-                    {% else %}
-                    <h2>Welcome {{request.user.username|title}}</h2>
-                    {% endif %}
-                    {% if apiaries %}
-                    <a class="btn btn-secondary" href="{% url 'addApiary' %}"><i class="fas fa-sitemap"></i> Add
-                        Apiary</a>
-                    <a class="btn btn-secondary" href="{% url 'beeMedical'%}"><i class="fas fa-notes-medical"></i> Bee
-                        Medical</a>
-                </div>
-                <div class="col-sm-6">
-                    <div id='apiarytips'></div>
-                </div>
-                {% endif %}
-            </div>
-            {% if apiaries %}
-            <hr>
-            <div class="row">
-                {% for apiary in apiaries %}
-                <div class="col-sm-4 apiary_box mx-auto">
-                    <a href="{% url 'hive' apiary.pk %}">
-                        <img class="apiary_image" src="{% static 'images/apiary.png' %}" alt="apiary_image">
-                        <div class="apiary_heading">{{ apiary.full_name|title }}</div>
-                    </a>
-                    <a class="apiary_buttons btn btn-secondary" href="{% url 'editApiary' apiary.pk %}">Edit</a>
-                    <a class="apiary_buttons btn btn-danger" href="{% url 'deleteApiary' apiary.pk %}">Delete</a>
-                </div>
-                {% endfor %}
-                {% else %}
-                <div class="row">
-                    <h3>You have not added any Apiarys, please click here to add an apiary <a class="btn btn-secondary"
-                            href="{% url 'addApiary' %}">Add Apiary</a></h3>
-                </div>
-            </div>
-            {% endif %}
+<div class="container">
+    <div class="row">
+        {% if apiaries %}
+        <div class="col-sm-6 heading-info">
+            <div class="page-heading">Welcome to Apis Metrics</div>
+            <div class="sub-heading">{{request.user.username|title}} your Apiarys are listed below:</div>
         </div>
-        <div class="emptydiv"></div>
+        <div class="col-sm-6">
+            <div class="desktop-tips" id="apiarytips"></div>
+            <input style="display:none" id="mobileButton" class="mobileButton btn btn-secondary" type="button" onclick="displaytips()" value="Show Tips"></input>
+        </div>
     </div>
+    {% else %}
+    <div class="row mx-auto">
+        <div class="col-sm-12">
+            <p class="no-apiarys"><em>Welcome {{request.user.username|title}}</em></p>
+            <p class="no-apiarys-sub-heading">You have not added any Apiarys, please click here to add an apiary <a
+                    href="{% url 'addApiary' %}">Add Apiary</a></p>
+        </div>
+    </div>
+    <div class="row logo-row">
+         <div id="logodiv1" class="col-sm-3"><a href="https://www.bbka.org.uk/" target="_blank">
+             <img class="club-logos" src="{% static 'images/bbka-logo.png' %}" alt="bbka logo"></a>
+         </div>
+         <div id="logodiv2" class="col-sm-3"><a href="http://www.northsomersetbeekeepers.org/" target="_blank">
+             <img class="nsbk-logos" src="{% static 'images/nsbk-logo.png' %}" alt="noth somerset logo"></a>
+            
+        </div>
+        <div id="logodiv3" class="col-sm-3">
+            <img class="club-logos defra-logo" src="{% static 'images/defra-logo.png' %}" alt="defra logo">
+        </div>
+    </div>
+   
+    {% endif %}
+    {% if apiaries %}
+    <hr>
+    <div class="row button-row">
+        <div class="col-sm-12">
+            <a class="btn btn-secondary" href="{% url 'addApiary' %}"><i class="fas fa-sitemap"></i> Add
+                Apiary</a>
+            <a class="btn btn-secondary" href="{% url 'beeMedical'%}"><i class="fas fa-notes-medical"></i> Bee
+                Medical</a>
+        </div>
+    </div>
+    <div class="row apiary_row">
+        {% for apiary in apiaries %}
+        <div class="col-sm-3 apiary_box">
+            <a href="{% url 'hive' apiary.pk %}">
+                <img class="apiary_image" src="{% static 'images/apiary.png' %}" alt="apiary_image">
+                <div class="apiary_heading">{{ apiary.full_name|title }}</div>
+            </a>
+            <a class="apiary_buttons btn btn-secondary" href="{% url 'editApiary' apiary.pk %}">Edit</a>
+            <a class="apiary_buttons btn btn-danger" href="{% url 'deleteApiary' apiary.pk %}">Delete</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+</div>
+
+
 {% endblock %}
 
 {% block postloadjs %}
