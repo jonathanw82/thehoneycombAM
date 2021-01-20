@@ -30,8 +30,8 @@ class TestAddHiveDocForm(TestCase):
         form = addHiveDocumentsForm({"Queen": "Test Hive"})
         self.assertFalse(form.is_valid())
 
-    def test_queenColor_is_not_required(self):
-        form = addHiveDocumentsForm({"QueenColor": "Test Hive"})
+    def test_queenColor_is_required(self):
+        form = addHiveDocumentsForm({"QueenColor": ""})
         self.assertFalse(form.is_valid())
 
     def test_qc_is_not_required(self):
@@ -58,12 +58,12 @@ class TestAddHiveDocForm(TestCase):
         form = addHiveDocumentsForm({"supersnum": "Test Hive"})
         self.assertFalse(form.is_valid())
 
-    def test_weather_not_required(self):
-        form = addHiveDocumentsForm({"weather": "Test Hive"})
+    def test_weather_required(self):
+        form = addHiveDocumentsForm({"weather": ""})
         self.assertFalse(form.is_valid())
 
-    def test_temperment_not_required(self):
-        form = addHiveDocumentsForm({"temperment": "Test Hive"})
+    def test_temperment_required(self):
+        form = addHiveDocumentsForm({"temperment": ""})
         self.assertFalse(form.is_valid())
 
     def test_notes_not_required(self):
