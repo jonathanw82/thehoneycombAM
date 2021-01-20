@@ -3,7 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path('setup/', views.setup, name='setup'),
+    # path('setup/', views.setup, name='setup'),
     path('addApiary/', views.addApiary, name='addApiary'),
     path('apiary/', views.apiary, name="apiary"),
     path('editApiary/<pk>', views.editApiary, name="editApiary"),

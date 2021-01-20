@@ -7,10 +7,10 @@ import datetime
 # Create your views here.
 
 
-@login_required
-def setup(request):
-    """ A view to display the Wiki page """
-    return render(request, 'apiary/setup.html')
+# @login_required
+# def setup(request):
+#     """ A view to display the Wiki page """
+#     return render(request, 'apiary/setup.html')
 
 
 @login_required
