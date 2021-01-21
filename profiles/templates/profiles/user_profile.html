@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="col-sm-12">
+    <h1>Profile Infomation</h1>
+    <hr>
+    <div>
+      Logged in user: {{user.username|title}}<br>
+      Loggin in user Email: {{user.email}}<br>
+      Total Apiary Sites: {{apiaries_number}}<br>
+      Total Hives: {{hives_number}}
+
+
+    </div>
+    <hr>
+    <h3>Security options</h3>
+    <p>
+      <a class="btn btn-secondary" href="{% url 'account_set_password' %}">Manage Password</a>
+      <a class="btn btn-secondary" href="{% url 'account_email' %}">Manage Email</a>
+    </p>
+    <hr>
+  </div>
+</div>
+{% endblock %}

@@ -57,9 +57,8 @@
     </button>
     <div class="collapse navbar-collapse navitems" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active link_colour" href="{% url 'apiary' %}"><img
-            class="navbar-image-hive" src="{% static 'images/hive.png' %}" alt="honeycombelogo"> Home<span
-            class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link active link_colour" href="{% url 'apiary' %}"><img class="navbar-image-hive"
+            src="{% static 'images/hive.png' %}" alt="honeycombelogo"> Home<span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link link_colour" href="{% url 'wiki' %}"><img class="navbar-image"
             src="{% static 'images/wiki.png' %}" alt="honeycombelogo"> WiKi</a>
         <div class="dropdown">
@@ -72,6 +71,8 @@
               Apiarys</a>
             <a class="nav-link dropdown-item link_colour" href="{% url 'beeMedical'%}"><i
                 class="fas fa-notes-medical"></i> Bee Medical</a>
+            <a class="nav-link dropdown-item link_colour" href="{% url 'profile'%}"><i
+                class="fas fa-user-circle"></i> Profile</a>
             <a class="nav-link dropdown-item link_colour" href="{% url 'account_logout' %}"><i
                 class="fas fa-power-off"></i> logout</a>
           </div>

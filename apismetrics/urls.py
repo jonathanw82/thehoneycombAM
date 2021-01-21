@@ -27,6 +27,7 @@ urlpatterns = [
     path('hives/', include('hives.urls')),
     path('medical/', include('medical.urls')),
     path('pdf/', include('pdf.urls')),
+    path('profiles', include('profiles.urls')),
 ]
 
 

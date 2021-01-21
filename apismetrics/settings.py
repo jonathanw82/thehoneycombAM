@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'medical',
     'pdf',
     'storages',
+    'profiles',
 ]
 
 MIDDLEWARE = [
