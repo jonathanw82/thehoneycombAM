@@ -9,21 +9,23 @@
 <div class="container">
   <div class="col-sm-12">
     <h1>Profile Infomation</h1>
-    <hr>
     <div>
-      Logged in user: {{user.username|title}}<br>
-      Loggin in user Email: {{user.email}}<br>
-      Total Apiary Sites: {{apiaries_number}}<br>
-      Total Hives: {{hives_number}}
-
-
+      Logged in user: {{ user.username|title }}<br>
+      Loggin in user Email: {{ user.email }}<br>
     </div>
     <hr>
-    <h3>Security options</h3>
-    <p>
-      <a class="btn btn-secondary" href="{% url 'account_set_password' %}">Manage Password</a>
-      <a class="btn btn-secondary" href="{% url 'account_email' %}">Manage Email</a>
-    </p>
+    <div>
+      <h4>User Statistics</h4>
+      Total Apiary Sites: {{ apiaries_number }}<br>
+      Total Hives: {{ hives_number }}<br>
+      Total Insection Documents: {{ docs_number }}<br>
+      Total Purchased Medications: {{ purchased_meds }}<br>
+      Total Medications Dispensed: {{ used_meds }}<br>
+    </div>
+    <hr>
+    <h4>Security</h4>
+    <div>To change or recover password click <a href="{% url 'account_set_password' %}">Password.</a></div>
+    <div>To change or update your email click <a href="{% url 'account_email' %}">Email.</a></div>
     <hr>
   </div>
 </div>

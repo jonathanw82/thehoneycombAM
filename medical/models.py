@@ -46,7 +46,8 @@ class hiveMedicalRecords(models.Model):
     """
     A Model for Hive Medical Medicine
     """
-
+    user = models.CharField(User, max_length=50, null=False,
+                            blank=False)
     hivenumber = models.ForeignKey(hive_details, on_delete=models.CASCADE,
                                    default=-1)
     hive_name = models.CharField(max_length=50, null=False,

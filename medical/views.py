@@ -129,6 +129,7 @@ def addMedicalRecord(request, apiaryID, pk=None):
             splitidstring = str(getidstring)
             medid = splitidstring.split()
             hiveMedicalRecords.medicine_id = medid[1]
+            hiveMedicalRecords.user = user.id
             hiveMedicalRecords.hivenumber = hiveinst
             hiveMedicalRecords.hive_name = hiveinst.hive_name
             hiveMedicalRecords.apiary_name = apiary.full_name
