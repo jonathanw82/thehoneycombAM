@@ -7,7 +7,7 @@
 {% endblock%}
 
 {% block entendedjs %}
-<script src="https://apismetrics.s3.eu-west-2.amazonaws.com/js/helper.js"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -34,7 +34,8 @@
                         {% else %}
                         <div class="weathertext weatherarea">{{ area }}</div>
                         {% endif %}
-                        <div id="current_temp" class="weathertext">{{ current_temp }}&#x2103</div>
+                        <div id="current_temp" class="weathertext">{{ day_of_week1 }}  {{ current_temp }}&#x2103</div>
+                        <!-- This hidden div current_tempdisp passes the temperature to javascript to change the box color -->
                         <div id="current_tempdisp" style="display:None">{{ current_temp }}</div>
                         <div class="weathertext">{{ dec|title }}</div>
                     </div>
@@ -56,30 +57,35 @@
                 <div class="row">
                     <div class="col dayforcastinfo textcol1">
                         <div class="dayforcastinfo rline">
+                            <div class="weathertext day">{{ day_of_week2}}</div>
                             <img src="{{ icon1 }}" alt="weather icon">
                             <div class="forecastprecip"><img class="rainropimage"
                                     src="/static/hives/images/raindrop.png" alt="weather icon"> {{ day1pop }}%</div>
                             <div class="weathertext">{{ day1max }}/{{ day1min }}</div>
                         </div>
                         <div class="dayforcastinfo rline">
+                            <div class="weathertext day">{{ day_of_week3}}</div>
                             <img src="{{ icon2 }}" alt="weather icon">
                             <div class="forecastprecip"><img class="rainropimage"
                                     src="/static/hives/images/raindrop.png" alt="weather icon"> {{ day2pop }}%</div>
                             <div class="weathertext">{{ day2max }}/{{ day2min }}</div>
                         </div>
                         <div class="dayforcastinfo rline">
+                            <div class="weathertext day">{{ day_of_week4}}</div>
                             <img src="{{ icon3 }}" alt="weather icon">
                             <div class="forecastprecip"><img class="rainropimage"
                                     src="/static/hives/images/raindrop.png" alt="weather icon"> {{ day3pop }}%</div>
                             <div class="weathertext">{{ day3max }}/{{ day3min }}</div>
                         </div>
                         <div class="dayforcastinfo rline">
+                            <div class="weathertext day">{{ day_of_week5}}</div>
                             <img src="{{ icon4 }}" alt="weather icon">
                             <div class="forecastprecip"><img class="rainropimage"
                                     src="/static/hives/images/raindrop.png" alt="weather icon"> {{ day4pop }}%</div>
                             <div class="weathertext">{{ day4max }}/{{ day4min }}</div>
                         </div>
                         <div class="dayforcastinfo rline">
+                            <div class="weathertext day">{{ day_of_week6}}</div>
                             <img src="{{ icon5 }}" alt="weather icon">
                             <div class="forecastprecip"><img class="rainropimage"
                                     src="/static/hives/images/raindrop.png" alt="weather icon"> {{ day5pop }}%</div>
