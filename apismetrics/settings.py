@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import dj_database_url
 from pathlib import Path
+import environ
 
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('APM_SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEVELOPMENT' in os.environ
+DEBUG = env.bool('DEVELOPMENT', default=False)
 
 ALLOWED_HOSTS = ['apis-metrics.herokuapp.com', '127.0.0.1']
 
@@ -78,7 +80,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',  # required by allauth
+                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -201,3 +203,6 @@ else:
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
     DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+
+SERVER_EMAIL = 'jonwhewaycode@outlook.com'
+ADMINS = [('Jon Wheway', 'jonwhewaycode@outlook.com'), ]
