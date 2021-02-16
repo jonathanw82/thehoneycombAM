@@ -16,7 +16,8 @@
         </div>
         <div class="col-sm-6">
             <div class="desktop-tips" id="apiarytips"></div>
-            <input style="display:none" id="mobileButton" class="mobileButton btn btn-secondary" type="button" onclick="displaytips()" value="Show Tips"></input>
+            <input style="display:none" id="mobileButton" class="mobileButton btn btn-secondary" type="button"
+                onclick="displaytips()" value="Show Tips"></input>
         </div>
     </div>
     {% else %}
@@ -28,18 +29,18 @@
         </div>
     </div>
     <div class="row logo-row">
-         <div id="logodiv1" class="col-sm-3"><a href="https://www.bbka.org.uk/" target="_blank">
-             <img class="club-logos" src="{% static 'images/bbka-logo.png' %}" alt="bbka logo"></a>
-         </div>
-         <div id="logodiv2" class="col-sm-3"><a href="http://www.northsomersetbeekeepers.org/" target="_blank">
-             <img class="nsbk-logos" src="{% static 'images/nsbk-logo.png' %}" alt="noth somerset logo"></a>
-            
+        <div id="logodiv1" class="col-sm-3"><a href="https://www.bbka.org.uk/" target="_blank">
+                <img class="club-logos" src="{% static 'images/bbka-logo.png' %}" alt="bbka logo"></a>
+        </div>
+        <div id="logodiv2" class="col-sm-3"><a href="http://www.northsomersetbeekeepers.org/" target="_blank">
+                <img class="nsbk-logos" src="{% static 'images/nsbk-logo.png' %}" alt="noth somerset logo"></a>
+
         </div>
         <div id="logodiv3" class="col-sm-3">
             <img class="club-logos defra-logo" src="{% static 'images/defra-logo.png' %}" alt="defra logo">
         </div>
     </div>
-   
+
     {% endif %}
     {% if apiaries %}
     <hr>
@@ -49,6 +50,7 @@
                 Apiary</a>
             <a class="btn btn-secondary" href="{% url 'beeMedical'%}"><i class="fas fa-notes-medical"></i> Bee
                 Medical</a>
+            <a class="btn btn-secondary" href="{% url 'profile'%}"><i class="fas fa-user-circle"></i> Profile</a>
         </div>
     </div>
     <div class="row apiary_row">

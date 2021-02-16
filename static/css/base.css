@@ -25,6 +25,16 @@
     margin-top: 20px;
 }
 
+.confirm-email-address{
+    border: 2px solid black;
+    margin-top: 20px;
+}
+
+.account-button{
+    border-radius: 0px!important;
+    margin-bottom: 10px;
+}
+
 /* ------------- notifications ------------*/
 
 .notifications{

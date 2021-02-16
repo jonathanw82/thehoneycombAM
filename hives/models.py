@@ -47,7 +47,7 @@ class hive_details(models.Model):
                 ]
 
     apiary_id = models.ForeignKey(Apiary_details, on_delete=models.CASCADE,
-                                  default=-1)
+                                  null=True, blank=True)
     user = models.CharField(User, max_length=50, null=False,
                             blank=False)
     hive_name = models.CharField(max_length=50, null=False,
@@ -123,7 +123,7 @@ class hiveDocuments(models.Model):
         return os.path.join('media/images/', filename)
 
     hivenumber = models.ForeignKey(hive_details, on_delete=models.CASCADE,
-                                   default=-1)
+                                   null=True, blank=True)
     date = models.DateField(null=True, blank=True)
     queen = models.BooleanField(default=False)
     queenColour = models.CharField(choices=QUEENCOL, max_length=50,

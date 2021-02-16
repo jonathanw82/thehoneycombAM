@@ -57,6 +57,10 @@
     opacity: 1;
 }
 
+.day{
+    color: #ffff;
+}
+
 .weathertextalert{
     color: black;
     text-align: center;

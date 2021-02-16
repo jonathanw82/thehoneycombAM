@@ -3,7 +3,7 @@ from .forms import AddHiveForm, editHiveForm, addHiveDocumentsForm
 from .models import Apiary_details, hive_details, hiveDocuments
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from datetime import date
+from datetime import date, datetime
 from django.conf import settings
 import boto3
 import json
@@ -108,11 +108,69 @@ def hive(request, apiary_id):
         day5pop = weatherdata["daily"][5]["pop"]
         icon5 = f"http://openweathermap.org/img/wn/{day5icon}.png"
 
+        day_of_week = datetime.now()
+        days_of_week = (day_of_week.strftime("%w"))
+        if days_of_week == '0':
+            day_of_week1 = 'Sun'
+            day_of_week2 = 'Mon'
+            day_of_week3 = 'Tue'
+            day_of_week4 = 'Wed'
+            day_of_week5 = 'Thur'
+            day_of_week6 = 'Fri'
+        elif days_of_week == '1':
+            day_of_week1 = 'Mon'
+            day_of_week2 = 'Tue'
+            day_of_week3 = 'Wed'
+            day_of_week4 = 'Thur'
+            day_of_week5 = 'Fri'
+            day_of_week6 = 'Sat'
+        elif days_of_week == '2':
+            day_of_week1 = 'Tue'
+            day_of_week2 = 'Wed'
+            day_of_week3 = 'Thur'
+            day_of_week4 = 'Fri'
+            day_of_week5 = 'Sat'
+            day_of_week6 = 'Sun'
+        elif days_of_week == '3':
+            day_of_week1 = 'Wed'
+            day_of_week2 = 'Thur'
+            day_of_week3 = 'Fri'
+            day_of_week4 = 'Sat'
+            day_of_week5 = 'Sun'
+            day_of_week6 = 'Mon'
+        elif days_of_week == '4':
+            day_of_week1 = 'Thur'
+            day_of_week2 = 'Fri'
+            day_of_week3 = 'Sat'
+            day_of_week4 = 'Sun'
+            day_of_week5 = 'Mon'
+            day_of_week6 = 'Tue'
+        elif days_of_week == '5':
+            day_of_week1 = 'Fri'
+            day_of_week2 = 'Saty'
+            day_of_week3 = 'Sun'
+            day_of_week4 = 'Mon'
+            day_of_week5 = 'Tue'
+            day_of_week6 = 'Wed'
+        elif days_of_week == '5':
+            day_of_week1 = 'Sat'
+            day_of_week2 = 'Sun'
+            day_of_week3 = 'Mon'
+            day_of_week4 = 'Tue'
+            day_of_week5 = 'Wed'
+            day_of_week6 = 'Thur'
+
         context = {
             "apiary": apiary,
             "apiaryID": apiaryID,
             "hives": hives,
             #  Weather
+            "day_of_week1": day_of_week1,
+            "day_of_week2": day_of_week2,
+            "day_of_week3": day_of_week3,
+            "day_of_week4": day_of_week4,
+            "day_of_week5": day_of_week5,
+            "day_of_week6": day_of_week6,
             "dec": dec,
             "area": area,
             "iconnow": iconnow,
