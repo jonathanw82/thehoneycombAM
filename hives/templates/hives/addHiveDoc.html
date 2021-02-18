@@ -1,46 +1,108 @@
 {% extends "base.html" %}
 
-{% load static %} 
+{% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'hives/css/hives.css' %}">
+<link rel="stylesheet" href="{% static 'hives/css/hives.css' %}">
+<link rel="stylesheet" href="{% static 'hives/css/queen_color.css' %}">
 {% endblock %}
 
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                        <h1>Add Insection Details</h1>
-                        <h3>Please note Date's are added automatically</h3>
-                <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ form.queen |as_crispy_field }}
-                        {{ form.queenColour |as_crispy_field }}
-                        {{ form.qc |as_crispy_field }}
-                        {{ form.qcnum |as_crispy_field }}
-                        {{ form.eggs |as_crispy_field }}
-                        {{ form.brood |as_crispy_field }}
-                        {{ form.supersnum |as_crispy_field }}
-                        {{ form.weather |as_crispy_field }}
-                        {{ form.temperment |as_crispy_field }}
-                        {{ form.notes |as_crispy_field }}
-                        <span>
-                            Images of Supected Virus or for reference:
-                        </span>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                {{ form.image1 |as_crispy_field }}
-                            </div>
-                            <div class="col-sm-6">
-                                {{ form.image2 |as_crispy_field }}
-                            </div>
-                        </div>
-                    <button class="btn btn-info buttons-click" type="submit">Done</button>
-                </form>
-            </div> 
-		</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Add Insection Details</h1>
+            <h3>Please note Date's are added automatically</h3>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.queen |as_crispy_field }}
+                <span id="queen_colour"></span>
+                {{ form.queenColour |as_crispy_field }}
+                {{ form.qc |as_crispy_field }}
+                {{ form.qcnum |as_crispy_field }}
+                {{ form.eggs |as_crispy_field }}
+                {{ form.brood |as_crispy_field }}
+                {{ form.supersnum |as_crispy_field }}
+                {{ form.weather |as_crispy_field }}
+                {{ form.temperment |as_crispy_field }}
+                {{ form.notes |as_crispy_field }}
+                <span>
+                    Images of Supected Virus or for reference:
+                </span>
+                <div class="row">
+                    <div class="col-sm-6">
+                        {{ form.image1 |as_crispy_field }}
+                    </div>
+                    <div class="col-sm-6">
+                        {{ form.image2 |as_crispy_field }}
+                    </div>
+                </div>
+                <button class="btn btn-info buttons-click" type="submit">Done</button>
+            </form>
+        </div>
     </div>
-    <div class="emptydiv"></div>
+</div>
+<div class="emptydiv"></div>
+<!-- Modal -->
+<div class="modal fade" id="queenColorModal" tabindex="-1" role="dialog" aria-labelledby="queenColorModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="queenColorModalLabel">Queen Colours</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Marking your queen bees, in accordance with the internationally understood colour code
+                    relating to the year in which they hatched, Not only does the colour indicate how old the 
+                    queen is, but it also makes it easier to find the queen during a hive inspection.
+                </p>
+                    There are 5 Colours that corespond with year ending<br>
+                </p>
+                <table class="table table-bordered">
+                    <tbody>
+                      <tr>
+                        <td>Year Ending In 1 or 6 is White</td>
+                        <td class="dot_col"><span class="dot d1"></span></td>
+                        <td>Will</td>
+                      </tr>
+                      <tr>
+                        <td>Year Ending In 2 or 7 is Yellow</td>
+                        <td class="dot_col"><span class="dot d2"></span></td>
+                        <td>You</td>
+                      </tr>
+                      <tr>
+                        <td>Year Ending In 3 or 8 is Red</td>
+                        <td class="dot_col"><span class="dot d3"></span></td>
+                        <td>Raise</td>
+                      </tr>
+                      <tr>
+                        <td>Year Ending In 4 or 9 is Green</td>
+                        <td class="dot_col"><span class="dot d4"></span></td>
+                        <td>Good</td>
+                      </tr>
+                      <tr>
+                        <td>Year Ending In 5 or 0 is Blue</td>
+                        <td class="dot_col"><span class="dot d5"></span></td>
+                        <td>Bees</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p>A common mnemonic to remember the colours is<br> "Will You Raise Good Bees".</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+{% endblock %}
+{% block postloadjs %}
+{{ block.super }}
+<script src="{% static 'hives/js/queen_colour.js' %}"></script>
 {% endblock %}
