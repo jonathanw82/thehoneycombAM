@@ -24,11 +24,15 @@
                         {{ form.temperment |as_crispy_field }}
                         {{ form.notes |as_crispy_field }}
                         {{ form.beekeepername |as_crispy_field }}
+                        <div>
+                            <div>You have uploaded <span id="uploaded_images_total">{{ uploadedImages }}</span> out of 
+                                <span id="uploaded_images_quoter">{{ imageQuoter }}</span></div>
+                        </div>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 form-image1" id="image1">
                                 {{ form.image1 |as_crispy_field }}
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 form-image2" id="image2">
                                 {{ form.image2 |as_crispy_field }}
                             </div>
                         </div>
@@ -38,4 +42,8 @@
 		</div>
     </div>
 <div class="emptydiv"></div>
+{% endblock %}
+{% block postloadjs %}
+{{ block.super }}
+    <script src="{% static 'hives/js/editHive.js' %}"></script>
 {% endblock %}

@@ -11,6 +11,30 @@ import requests
 import sys
 # import os
 
+imageQuoter = 50
+
+
+def totalUploadedImages(userID):
+    up_img_1 = hiveDocuments.objects.filter(user=userID).values("image1")
+    up_img_2 = hiveDocuments.objects.filter(user=userID).values("image2")
+    # this gets the uploaded images function from profile views
+    uploadedImages = image_counter(up_img_1, "image1"
+                                   ) + image_counter(
+                                   up_img_2, "image2")
+    return uploadedImages
+
+
+def image_counter(querySet, imgKey):
+    """ This function counts the amount of images in a queryset """
+    imgTotal = 0
+    # We iterate over the queryset and if the imgKey
+    # has a value we increase the imgTotal by 1 each iteration
+    # then return imgTotal
+    for i in querySet:
+        if i[imgKey]:
+            imgTotal += 1
+    return imgTotal
+
 
 @login_required
 def hive(request, apiary_id):
@@ -338,12 +362,15 @@ def hiveDocs(request, apiaryPK, pk):
 @login_required
 def addhiveDoc(request, apiaryPK, pk=None):
     """ A view to display the add Hive Documents """
+    userID = request.user.id
+    uploadedImages = totalUploadedImages(userID)
     instofID = get_object_or_404(hive_details, pk=pk)
     if request.method == "POST":
         form = addHiveDocumentsForm(request.POST, request.FILES)
         if form.is_valid():
             hiveDocuments = form.save(commit=False)
             hiveDocuments.hivenumber = instofID
+            hiveDocuments.user = userID
             hiveDocuments.beekeepername = request.user
             hiveDocuments.date = date.today()
             hiveDocuments.save()
@@ -363,6 +390,8 @@ def addhiveDoc(request, apiaryPK, pk=None):
         form = addHiveDocumentsForm()
         context = {
             "form": form,
+            "uploadedImages": uploadedImages,
+            "imageQuoter":  imageQuoter,
         }
         return render(request, "hives/addHiveDoc.html", context)
 
@@ -370,6 +399,8 @@ def addhiveDoc(request, apiaryPK, pk=None):
 @login_required
 def editHiveDoc(request, apiaryPK, hive_id, pk):
     """ A view to display the Edit Hive Documents """
+    userID = request.user.id
+    uploadedImages = totalUploadedImages(userID)
     hiveid = hive_id
     docid = pk
     instdoc = get_object_or_404(hiveDocuments, pk=pk)
@@ -397,6 +428,8 @@ def editHiveDoc(request, apiaryPK, hive_id, pk):
             "form": form,
             "docid": docid,
             "instdoc": instdoc,
+            "uploadedImages": uploadedImages,
+            "imageQuoter":  imageQuoter,
         }
         return render(request, "hives/editHiveDoc.html", context)
 

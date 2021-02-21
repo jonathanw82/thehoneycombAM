@@ -27,9 +27,14 @@
                 {{ form.weather |as_crispy_field }}
                 {{ form.temperment |as_crispy_field }}
                 {{ form.notes |as_crispy_field }}
-                <span>
-                    Images of Supected Virus or for reference:
-                </span>
+                {% if uploadedImages >= imageQuoter %}
+                <h5>
+                    You have reached your image upload limit of {{ imageQuoter }}
+                </h5>
+                {% else %}
+                <h6>
+                    You have currently uploaded {{ uploadedImages }} images out of {{ imageQuoter }}
+                </h6>
                 <div class="row">
                     <div class="col-sm-6">
                         {{ form.image1 |as_crispy_field }}
@@ -38,6 +43,7 @@
                         {{ form.image2 |as_crispy_field }}
                     </div>
                 </div>
+                {% endif %}
                 <button class="btn btn-info buttons-click" type="submit">Done</button>
             </form>
         </div>

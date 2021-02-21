@@ -9,7 +9,8 @@ urlpatterns = [
     path('editHive/<apiaryID>/<pk>/', views.editHive, name='editHive'),
     path('hiveDocs/<apiaryPK>/<pk>/', views.hiveDocs, name='hiveDocs'),
     path('addhiveDoc/<apiaryPK>/<pk>/', views.addhiveDoc, name='addhiveDoc'),
-    path('editHiveDoc/<apiaryPK>/<hive_id>/<pk>/', views.editHiveDoc, name='editHiveDoc'),
+    path('editHiveDoc/<apiaryPK>/<hive_id>/<pk>/', views.editHiveDoc,
+         name='editHiveDoc'),
     path('deleteHivedoc/<apiaryPK>/<hive_id>/<pk>/', views.deleteHivedoc,
          name='deleteHivedoc'),
 ]

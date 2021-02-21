@@ -121,7 +121,8 @@ class hiveDocuments(models.Model):
         ext = filename.split('.')[-1]
         filename = "%s.%s" % (uuid.uuid4(), ext)
         return os.path.join('media/images/', filename)
-
+    user = models.CharField(User, max_length=50, null=False,
+                            blank=False)
     hivenumber = models.ForeignKey(hive_details, on_delete=models.CASCADE,
                                    null=True, blank=True)
     date = models.DateField(null=True, blank=True)
