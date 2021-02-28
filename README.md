@@ -1,3 +1,12 @@
+<h1 align="center">
+   <a href="https://apis-metrics.herokuapp.com/" target="_blank"><img src="static/images/repoimage.jpg" alt="logo image"/></a>
+ </h1>
+ 
+<div align="center">
+ 
+#### Click on image for live version
+</div>
+
 # Apis Metrics
 Apiary Management for beekeeping 
 
