@@ -19,6 +19,7 @@ class hivedocumentsAdmin(admin.ModelAdmin):
         'qcnum',
         'eggs',
         'brood',
+        'food',
         'supersnum',
         'weather',
         'notes',

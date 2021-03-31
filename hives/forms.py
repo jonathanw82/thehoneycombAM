@@ -52,6 +52,7 @@ class addHiveDocumentsForm(forms.ModelForm):
         model = hiveDocuments
         fields = ['queen', 'queenColour',
                   'qcnum', 'eggs', 'brood',
+                  'food',
                   'supersnum', 'weather',
                   'temperment',
                   'notes', 'beekeepername',
@@ -70,3 +71,4 @@ class addHiveDocumentsForm(forms.ModelForm):
             self.fields['qcnum'].label = 'Queen cells?'
             self.fields['eggs'].label = 'Eggs? on how many frames'
             self.fields['brood'].label = 'Brood Capped? on how many frames'
+            self.fields['food'].label = 'Food? on how many frames'

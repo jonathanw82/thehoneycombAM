@@ -132,6 +132,7 @@ class hiveDocuments(models.Model):
     qcnum = models.IntegerField(blank=True, null=True, default=0)
     eggs = models.IntegerField(blank=True, null=True, default=0)
     brood = models.IntegerField(blank=True, null=True, default=0)
+    food = models.IntegerField(blank=True, null=True, default=0)
     supersnum = models.IntegerField(blank=True, null=True, default=0)
     weather = models.CharField(choices=WEATHER, max_length=20,
                                default=F)
