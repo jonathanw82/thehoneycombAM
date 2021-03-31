@@ -17,8 +17,9 @@ def profile(request):
     used_meds = hiveMedicalRecords.objects.filter(user=user.id).count()
     up_img_1 = hiveDocuments.objects.filter(user=user.id).values("image1")
     up_img_2 = hiveDocuments.objects.filter(user=user.id).values("image2")
-    totalUploadedImages = hiveViews.image_counter(up_img_1, "image1") + hiveViews.image_counter(
-        up_img_2, "image2")
+    totalUploadedImages = hiveViews.image_counter(up_img_1, "image1"
+                                                  ) + hiveViews.image_counter(
+                                                  up_img_2, "image2")
 
     context = {
         "user": user,
@@ -31,5 +32,3 @@ def profile(request):
         "imageQuoter": imageQuoter
     }
     return render(request, "profiles/user_profile.html", context)
-
-

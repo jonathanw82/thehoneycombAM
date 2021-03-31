@@ -23,15 +23,15 @@
                     <h5 class="card-title">{{doc.date}}</h5>
                     <p class="card-text">
                         Hive: {{ doc.hivenumber }}<br>
-                        Log Num: {{doc.id}}<br>
                         {% if doc.queen %} Queen Colour: {{ doc.queenColour }} {% else %}Queen: No {% endif %}<br>
-                        Qc: {% if doc.qc %} {{ doc.qcnum }} {% else %} No {% endif %}<br>
+                        Qc: {% if doc.qcnum > 0 %} {{ doc.qcnum }} {% else %} No {% endif %}<br>
                         Eggs: {% if doc.eggs %} Yes {% else %} No {% endif %}<br>
                         Brood: {% if doc.brood %} Yes {% else %} None {% endif %}<br>
                         Supers: {{ doc.supersnum }}<br>
                         Weather: {% if doc.weather == None %} None {% else %} {{ doc.weather }} {% endif %}<br>
                         Temper: {{ doc.temperment }}<br>
-                        Beekeeper: {{ doc.beekeepername|title }}
+                        Beekeeper: {{ doc.beekeepername|title }}<br>
+                        Log Num: {{doc.id}}
                     </p>
                     <div class="row buttons-row">
                         <button type="button" class="btn btn-secondary hive-doc-buttons-modal" data-toggle="modal" data-target="#exampleModal{{doc.id}}">

@@ -16,7 +16,6 @@ class hivedocumentsAdmin(admin.ModelAdmin):
         'date',
         'queen',
         'queenColour',
-        'qc',
         'qcnum',
         'eggs',
         'brood',

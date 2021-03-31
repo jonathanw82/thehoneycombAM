@@ -97,6 +97,24 @@
     margin-bottom: 5px;;
 }
 /* ------------ Footer --------------*/
+/* body,
+html{
+    height: 100%;
+    position: relative;
+} */
+
+
+
+/* .footer{
+    background-color: #F2A20C;
+    padding: 5px;
+}
+
+footer{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+} */
 
 .footer{
     position: fixed;
@@ -145,7 +163,6 @@
     padding-top: 5px;
 }
 .about-the-apiary-text{
-  
     padding-right: 20px;
     font-size: 1.1rem;
 }

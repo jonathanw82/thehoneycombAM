@@ -3,6 +3,14 @@ from .widgets import CustomClearableFileInput
 from .models import hive_details, Apiary_details, hiveDocuments
 
 
+class DateInput(forms.DateInput):
+    """
+    This function creates a widget to make
+    a Date Input field.
+    """
+    input_type = 'date'
+
+
 class AddHiveForm(forms.ModelForm):
 
     class Meta:
@@ -40,8 +48,9 @@ class editHiveForm(forms.ModelForm):
 class addHiveDocumentsForm(forms.ModelForm):
 
     class Meta:
+        widgets = {'edit_date': DateInput()}
         model = hiveDocuments
-        fields = ['queen', 'queenColour', 'qc',
+        fields = ['queen', 'queenColour',
                   'qcnum', 'eggs', 'brood',
                   'supersnum', 'weather',
                   'temperment',
@@ -58,3 +67,6 @@ class addHiveDocumentsForm(forms.ModelForm):
 
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'add-hive-form'
+            self.fields['qcnum'].label = 'Queen cells?'
+            self.fields['eggs'].label = 'Eggs? on how many frames'
+            self.fields['brood'].label = 'Brood Capped? on how many frames'

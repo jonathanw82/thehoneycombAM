@@ -129,10 +129,9 @@ class hiveDocuments(models.Model):
     queen = models.BooleanField(default=False)
     queenColour = models.CharField(choices=QUEENCOL, max_length=50,
                                    default=NOTYETRECORD)
-    qc = models.BooleanField(default=False)
-    qcnum = models.IntegerField(blank=True, null=True)
-    eggs = models.BooleanField(default=False)
-    brood = models.BooleanField(default=False)
+    qcnum = models.IntegerField(blank=True, null=True, default=0)
+    eggs = models.IntegerField(blank=True, null=True, default=0)
+    brood = models.IntegerField(blank=True, null=True, default=0)
     supersnum = models.IntegerField(blank=True, null=True, default=0)
     weather = models.CharField(choices=WEATHER, max_length=20,
                                default=F)

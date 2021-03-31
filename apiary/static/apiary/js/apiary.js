@@ -70,31 +70,31 @@ function tips(){
             info.innerHTML = feb;
             break;
         case 2:
-            iinfo.innerHTML = mar;
+            info.innerHTML = mar;
             break;
         case 3:
-            iinfo.innerHTML = apr;
+            info.innerHTML = apr;
             break;
         case 4:
-            iinfo.innerHTML = may;
+            info.innerHTML = may;
             break;
         case 5:
-            iinfo.innerHTML = jun;
+            info.innerHTML = jun;
             break;
         case 6:
-            iinfo.innerHTML = jul;
+            info.innerHTML = jul;
             break;
         case 7:
             iinfo.innerHTML = aug;
             break;
         case 8:
-            iinfo.innerHTML = sep;
+            info.innerHTML = sep;
             break;
         case 9:
-            iinfo.innerHTML = oct;
+            info.innerHTML = oct;
             break;
         case 10:
-            iinfo.innerHTML = nov;
+            info.innerHTML = nov;
             break;
         case 11:
             info.innerHTML = dec;
