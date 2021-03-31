@@ -85,7 +85,7 @@ function tips(){
             info.innerHTML = jul;
             break;
         case 7:
-            iinfo.innerHTML = aug;
+            info.innerHTML = aug;
             break;
         case 8:
             info.innerHTML = sep;

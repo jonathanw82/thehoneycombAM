@@ -1,5 +1,16 @@
+<h1 align="center">
+   <a href="https://apis-metrics.herokuapp.com/" target="_blank"><img src="static/images/repoimage.jpg" alt="logo image"/></a>
+ </h1>
+ 
+<div align="center">
+ 
+#### Click on image for live version
+</div>
+
+# Please note this project is a work in progress.
+
 # Apis Metrics
-Apiary Management for beekeeping 
+Apiary Management for beekeeping with live data delivered from the Internet of things with a prototype transmitter-receiver created using Arduino.
 
 ## The users goals of this application are:
 * Have access to apiary, hive and medical notes from any location (as long as the user has internet access).
