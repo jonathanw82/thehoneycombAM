@@ -113,6 +113,15 @@
     .defra-logo{
         padding-top: 20px;
     }
+    .desktop-tips{
+        display: none;
+    }
+    .mobileButton{
+        display: block!important;
+    }
+    .desktop-tips-show{
+        display: block;
+    }
 }     
 
 @media only screen and (max-width: 425px){
@@ -133,15 +142,6 @@
     #logodiv3{
         text-align: left;
     }
-    .desktop-tips{
-        display: none;
-    }
-    .mobileButton{
-        display: block!important;
-    }
-    .desktop-tips-show{
-        display: block;
-    }
 }    
    
 @media only screen and (max-width: 375px){
@@ -158,5 +158,4 @@
     .container{
         margin-bottom: 100px;
     }
-  
 }    
