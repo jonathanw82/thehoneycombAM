@@ -135,7 +135,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="hiveInfo">Hive History for {{ hive.hive_name }}</h5>
+                        <h5 class="modal-title" id="hiveInfo">Hive History for {{ hive.hive_name|title }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -143,10 +143,26 @@
                     <div class="modal-body">
                         <p>
                             {% if hive.hive_new_apiary %}
-                            Hive moved to Apiary {{ hive.hive_new_apiary }} <br>
-                            on the {{ hive.hive_move_date }} from Apiary {{ hive.hive_old_apiary }}
+                            Hive moved to Apiary {{ hive.hive_new_apiary|title }} <br>
+                            on the {{ hive.hive_move_date }} from Apiary {{ hive.hive_old_apiary|title }}
                             {% else %}
-                            Hive has not been moved from original site {{ hive.hive_old_apiary }}
+                            Hive has not been moved from original site: {{ hive.hive_old_apiary|title }}
+                            {% endif %}
+                        </p>
+                        <hr>
+                        <p>
+                            {% if hive.hive_old_name %}
+                            Hive name was: {{ hive.hive_old_name|title }} <br>
+                            {% else %}
+                            Hive has not changed!
+                            {% endif %}
+                        </p>
+                        <hr>
+                        <p>
+                            {% if hive.old_hive_type %}
+                            This hive type changed from: {{ hive.old_hive_type }} <br>
+                            {% else %}
+                            Hive Type has not changed!
                             {% endif %}
                         </p>
                         <hr>

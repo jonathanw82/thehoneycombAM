@@ -62,7 +62,7 @@ def hive(request, apiary_id):
         exactlng = "%.2f" % originallng
         exactlat = "%.2f" % originallat
 
-        # -------------- get the exact weatherwith forcast----------------
+        # -------------- get the exact weather with forcast----------------
 
         queryweather = "lat=" + exactlat + "&lon=" + exactlng
         exclude = "&exclude=" + "minutely," + "alerts"
@@ -176,7 +176,7 @@ def hive(request, apiary_id):
             day_of_week4 = 'Mon'
             day_of_week5 = 'Tue'
             day_of_week6 = 'Wed'
-        elif days_of_week == '5':
+        elif days_of_week == '6':
             day_of_week1 = 'Sat'
             day_of_week2 = 'Sun'
             day_of_week3 = 'Mon'
@@ -280,11 +280,15 @@ def editHive(request, apiaryID, pk=None):
     ap = apiaryID
     currentApiary = get_object_or_404(Apiary_details, pk=apiaryID)
     edithive = get_object_or_404(hive_details, pk=pk) if pk else None
+    oldName = get_object_or_404(hive_details, pk=pk) if pk else None
+    oldtype = get_object_or_404(hive_details, pk=pk) if pk else None
     if request.method == "POST":
         form = editHiveForm(request.user, request.POST, instance=edithive)
         if form.is_valid():
             new = str(edithive.apiary_id)
             current = str(currentApiary.full_name)
+            hiveName = str(edithive.hive_name)
+            hiveType = str(edithive.hive_type)
             edithive = form.save(commit=False)
             # If the new apiary is not the same as the currenty apiary if
             # there is one.
@@ -293,17 +297,17 @@ def editHive(request, apiaryID, pk=None):
                 edithive.hive_new_apiary = new
                 edithive.hive_old_apiary = current
                 edithive.hive_move_date = date.today()
-                messages.success(
-                    request,
-                    f"Hive: {edithive.hive_name.capitalize()} was\
-                     Updated And Moved To Apiary: {edithive.apiary_id}!",
-                )
-            else:
-                messages.success(
-                    request,
-                    f"Hive: {edithive.hive_name.capitalize()} was\
-                             Updated!",
-                )
+
+            if hiveName != oldName.hive_name:
+                edithive.hive_old_name = oldName.hive_name
+
+            if hiveType != oldtype.hive_type:
+                edithive.old_hive_type = oldtype.hive_type
+            messages.success(
+                request,
+                f"Hive: {edithive.hive_name.capitalize()} was\
+                    Updated",
+            )
             edithive.save()
             return redirect("hive", ap)
         else:

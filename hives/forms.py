@@ -28,9 +28,10 @@ class AddHiveForm(forms.ModelForm):
 class editHiveForm(forms.ModelForm):
 
     class Meta:
+        widgets = {'hive_merge_date': DateInput()}
         model = hive_details
         fields = ['hive_name', 'hive_type',
-                  'apiary_id']
+                  'apiary_id', 'hive_merge_date']
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -43,6 +44,7 @@ class editHiveForm(forms.ModelForm):
             # user to the __init__
             self.fields['apiary_id'].queryset = Apiary_details.objects.filter(
                 user=user)
+            self.fields['hive_merge_date'].label = 'Merging hives? date of:'
 
 
 class addHiveDocumentsForm(forms.ModelForm):

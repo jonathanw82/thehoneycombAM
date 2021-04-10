@@ -23,7 +23,8 @@ function hideTips(){
 }
 
 /* This function looks and check to see if the correct window width had been 
-reached by the even listener it then changes the class as required */
+reached by the event listener it then changes the class as required  by iterating 
+over the array and changing the relevent logoDiv */
 
 let x = window.matchMedia("(max-width: 425px)");
 x.addEventListener("change", screensize(x)); // attach the event listerner and run the function.
@@ -32,22 +33,18 @@ function screensize(x) {
     const logoDiv1 = document.getElementById('logodiv1');
     const logoDiv2 = document.getElementById('logodiv2');
     const logoDiv3 = document.getElementById('logodiv3');
-  
+    const dives = [logoDiv1, logoDiv2, logoDiv3]; // add the loggo dives to the array
+
     if (x.matches) { // if x matches the window size do this
-        logoDiv1 && logoDiv1.classList.remove("col-sm-3");
-        logoDiv2 && logoDiv2.classList.remove("col-sm-3");
-        logoDiv3 && logoDiv3.classList.remove("col-sm-3");
-        logoDiv1 && logoDiv1.classList.add("col");
-        logoDiv2 && logoDiv2.classList.add("col");
-        logoDiv3 && logoDiv3.classList.add("col");
-        
+        for(const i of dives){ // on each iteration give access to each varaiable in dives array
+            i && i.classList.remove("col-sm-3"); //if logoDiv1 exists logoDiv1.classlist.remove etc
+            i && i.classList.add("col");
+        }
     } else {
-        logoDiv1 && logoDiv1.classList.remove("col");
-        logoDiv2 && logoDiv2.classList.remove("col");
-        logoDiv3 && logoDiv3.classList.remove("col");
-        logoDiv1 && logoDiv1.classList.add("col-sm-3");
-        logoDiv2 && logoDiv2.classList.add("col-sm-3");
-        logoDiv3 && logoDiv3.classList.add("col-sm-3");
+        for(const i of dives){
+            i && i.classList.remove("col");
+            i && i.classList.add("col-sm-3");
+        }
     }
 }
  

@@ -1,4 +1,4 @@
-"use Strict"
+"use strict"
 
 // img_total_uploaded = document.getElementById("uploaded_images_total").innerHTML;
 // img_total_quoter = document.getElementById("uploaded_images_quoter").innerHTML;

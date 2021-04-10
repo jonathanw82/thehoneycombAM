@@ -6,10 +6,7 @@ window.onload = (event) => {
 
 function get_queen_color(){
     const queenColor = document.getElementById('queen_colour');
-    const d = new Date();
-    const n = d.getFullYear();
-    const year = n.toString();
-    const yearend = year.charAt(year.length-1);
+    const date = new Date(), fullYear = date.getFullYear(), year = fullYear.toString(), yearend = year.charAt(year.length-1);
     let color;
 
     if (yearend == '1' || yearend == '6'){

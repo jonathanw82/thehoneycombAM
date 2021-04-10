@@ -1,18 +1,19 @@
+"use strict";
 // if the current temp is less than 20 makle the weather box blue
 // if greater or equal to 20 then make it red 
-temp = document.getElementById('current_tempdisp').innerHTML;
-boxcolor = document.getElementById('weatherbox');
-separator = document.getElementById('separator');
+const temp = document.getElementById('current_tempdisp')?.innerHTML; // ?. optional chaining if the innerhtml is not accessable it will become nullish not an error
+const boxcolor = document.getElementById('weatherbox');
+const separator = document.getElementById('separator');
+
 if (temp >= 22) {
     boxcolor.classList.add('weatherboxhot');
     separator.classList.add('separatorhot');
 }
 
-
-let weatherAlert = document.getElementById('alert_heading');
+const weatherAlert = document.getElementById('alert_heading');
 let opacity = 0;
 let intervalID = 0;
-// if there is a westher alert
+// if there is a weather alert
 if (weatherAlert) {
     // get the opacity
     opacity = Number(window.getComputedStyle(weatherAlert).getPropertyValue("opacity"));
