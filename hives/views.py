@@ -369,6 +369,7 @@ def addhiveDoc(request, apiaryPK, pk=None):
     userID = request.user.id
     uploadedImages = totalUploadedImages(userID)
     instofID = get_object_or_404(hive_details, pk=pk)
+    yes = 'Yes'
     if request.method == "POST":
         form = addHiveDocumentsForm(userID, request.POST, request.FILES)
         if form.is_valid():
