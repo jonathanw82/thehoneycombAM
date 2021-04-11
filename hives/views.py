@@ -370,13 +370,18 @@ def addhiveDoc(request, apiaryPK, pk=None):
     uploadedImages = totalUploadedImages(userID)
     instofID = get_object_or_404(hive_details, pk=pk)
     if request.method == "POST":
-        form = addHiveDocumentsForm(request.POST, request.FILES)
+        form = addHiveDocumentsForm(userID, request.POST, request.FILES)
         if form.is_valid():
             hiveDocuments = form.save(commit=False)
             hiveDocuments.hivenumber = instofID
             hiveDocuments.user = userID
             hiveDocuments.beekeepername = request.user
             hiveDocuments.date = date.today()
+            if hiveDocuments.merged_with:
+                # bug this will not populate the database with the yes
+                instofID.been_merged = yes
+                if not hiveDocuments.merged_date:
+                    hiveDocuments.merged_date = date.today()
             hiveDocuments.save()
             messages.success(
                 request,
@@ -391,7 +396,7 @@ def addhiveDoc(request, apiaryPK, pk=None):
                            Not Added!",
             )
     else:
-        form = addHiveDocumentsForm()
+        form = addHiveDocumentsForm(userID)
         context = {
             "form": form,
             "uploadedImages": uploadedImages,
@@ -409,9 +414,13 @@ def editHiveDoc(request, apiaryPK, hive_id, pk):
     docid = pk
     instdoc = get_object_or_404(hiveDocuments, pk=pk)
     if request.method == "POST":
-        form = addHiveDocumentsForm(request.POST, request.FILES,
+        form = addHiveDocumentsForm(userID, request.POST, request.FILES,
                                     instance=instdoc)
         if form.is_valid():
+            instdoc = form.save(commit=False)
+            if hiveDocuments.merged_with:
+                if not hiveDocuments.merged_date:
+                    hiveDocuments.merged_date = date.today()
             instdoc.save()
             messages.success(
                 request,
@@ -426,7 +435,7 @@ def editHiveDoc(request, apiaryPK, hive_id, pk):
                            Not Updated!",
             )
     else:
-        form = addHiveDocumentsForm(instance=instdoc)
+        form = addHiveDocumentsForm(userID, instance=instdoc)
         messages.info(request, f"You Are Editing {instdoc.pk}!")
         context = {
             "form": form,

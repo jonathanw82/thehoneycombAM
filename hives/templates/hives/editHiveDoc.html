@@ -36,6 +36,10 @@
                                 {{ form.image2 |as_crispy_field }}
                             </div>
                         </div>
+                        <hr>
+                        <h6>Has this hive been merged with another?</h6>
+                        {{ form.merged_with|as_crispy_field }}
+                        {{ form.merged_date|as_crispy_field }}
                     <button class="btn btn-info buttons-click" type="submit">Done</button>
                 </form>
             </div> 

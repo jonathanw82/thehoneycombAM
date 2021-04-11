@@ -28,10 +28,9 @@ class AddHiveForm(forms.ModelForm):
 class editHiveForm(forms.ModelForm):
 
     class Meta:
-        widgets = {'hive_merge_date': DateInput()}
         model = hive_details
         fields = ['hive_name', 'hive_type',
-                  'apiary_id', 'hive_merge_date']
+                  'apiary_id']
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -44,13 +43,12 @@ class editHiveForm(forms.ModelForm):
             # user to the __init__
             self.fields['apiary_id'].queryset = Apiary_details.objects.filter(
                 user=user)
-            self.fields['hive_merge_date'].label = 'Merging hives? date of:'
 
 
 class addHiveDocumentsForm(forms.ModelForm):
 
     class Meta:
-        widgets = {'edit_date': DateInput()}
+        widgets = {'edit_date': DateInput(), 'merged_date': DateInput()}
         model = hiveDocuments
         fields = ['queen', 'queenColour',
                   'qcnum', 'eggs', 'brood',
@@ -58,6 +56,7 @@ class addHiveDocumentsForm(forms.ModelForm):
                   'supersnum', 'weather',
                   'temperment',
                   'notes', 'beekeepername',
+                  'merged_date', 'merged_with',
                   'image1', 'image2']
 
     image1 = forms.ImageField(label='Image 1', required=False,
@@ -65,8 +64,12 @@ class addHiveDocumentsForm(forms.ModelForm):
     image2 = forms.ImageField(label='Image 2', required=False,
                               widget=CustomClearableFileInput)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, userID, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        initialChoice = [('', 'Select:')]
+        choices = [(hive.hive_name, hive.hive_name.capitalize())
+                   for hive in hive_details.objects.filter(user=userID)]
 
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'add-hive-form'
@@ -74,3 +77,8 @@ class addHiveDocumentsForm(forms.ModelForm):
             self.fields['eggs'].label = 'Eggs? on how many frames'
             self.fields['brood'].label = 'Brood Capped? on how many frames'
             self.fields['food'].label = 'Food? on how many frames'
+            self.fields['merged_date'].label = 'If merged when was it merged'
+            self.fields['merged_with'] = forms.ChoiceField(required=False,
+                                                           label='Merged with what hive?', 
+                                                           widget=forms.Select(),
+                                                           choices=initialChoice + choices)

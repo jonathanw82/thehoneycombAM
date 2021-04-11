@@ -32,7 +32,8 @@
                         Weather: {% if doc.weather == None %} None {% else %} {{ doc.weather }} {% endif %}<br>
                         Temper: {{ doc.temperment }}<br>
                         Beekeeper: {{ doc.beekeepername|title }}<br>
-                        Log Num: {{doc.id}}
+                        Log Num: {{doc.id}}<br>
+                        Special Info: {% if doc.merged_with %} Check Notes! {% else %} No {% endif %}
                     </p>
                     <div class="row buttons-row">
                         <button type="button" class="btn btn-secondary hive-doc-buttons-modal" data-toggle="modal" data-target="#exampleModal{{doc.id}}">
@@ -51,13 +52,17 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Hive: {{ doc.hivenumber }}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Hive: {{ doc.hivenumber|title }} <br> {{ doc.date}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h5>{{ doc.date}}</h5>
+                        {% if doc.merged_with %} 
+                        <h6>Special Info:</h6>
+                        This hive was merged with Hive: {{ doc.merged_with|title }} on the {{ doc.merged_date }}
+                        <hr>
+                        {% endif %}
                         <p>{% if doc.notes %}{{ doc.notes }}{% else %}No notes Recorded {% endif %}</p>
                     <div class="row image-row">
                         {% if doc.image1 %}

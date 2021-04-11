@@ -7,14 +7,19 @@ import os
 
 class hive_details(models.Model):
     UNKNOWN = 'Unknown'
+    APIDEA = 'Apidea'
     NATIONAL = 'National'
+    NATIONALPOLLY = 'National Polly'
     NATLARGE = '14x12 National'
+    NATLARGEPOLLY = '14x12 National Polly'
     COMMERCIAL = 'Commercial'
+    COMMERCIALPOLLY = 'Commercial Polly'
     NUCPOLY = '6 Frame Poly NUC'
     NUCWOOD = '6 Frame Wooden NUC'
     WBC = 'WBC'
     CDB = 'CDB'
     LANGSTROTH = 'Langstroth'
+    LANGSTROTHPOLLY = 'Langstroth Polly'
     SMITH = 'Smith'
     TOPB = 'Top Bar'
     SK = 'Skep'
@@ -27,13 +32,18 @@ class hive_details(models.Model):
     LB = 'Long Box Hive'
 
     HIVETYPE = [(NATIONAL, 'BS National'),
+                (NATIONALPOLLY, 'BS National Polly'),
                 (NATLARGE, '14x12 National'),
+                (NATLARGEPOLLY, '14x12 National Polly'),
                 (COMMERCIAL, 'BS Commercial'),
+                (COMMERCIALPOLLY, 'BS Commercial Polly'),
                 (NUCPOLY, '6 Frame Poly NUC'),
                 (NUCWOOD, '6 Frame Wooden NUC'),
+                (APIDEA, 'Apidea'),
                 (WBC, 'WBC'),
                 (CDB, 'CDB'),
                 (LANGSTROTH, 'Langstroth'),
+                (LANGSTROTHPOLLY, 'Langstroth Polly'),
                 (SMITH, 'Smith'),
                 (TOPB, 'Top Bar'),
                 (SK, 'Skep'),
@@ -63,7 +73,8 @@ class hive_details(models.Model):
     hive_move_date = models.DateField(null=True, blank=True)
     hive_old_name = models.CharField(max_length=50, null=True,
                                      blank=True)
-    hive_merge_date = models.DateField(null=True, blank=True)
+    been_merged = models.CharField(max_length=10, null=True,
+                                   blank=True)                               
 
     def __str__(self):
         return self.hive_name
@@ -122,6 +133,8 @@ class hiveDocuments(models.Model):
               (D, '2'),
               (E, '1 Evil')]
 
+    NOTMERGED = 'Not Merged'
+
     def get_file_path(instance, filename):
         ext = filename.split('.')[-1]
         filename = "%s.%s" % (uuid.uuid4(), ext)
@@ -145,6 +158,8 @@ class hiveDocuments(models.Model):
     temperment = models.CharField(choices=TEMPER, max_length=20,
                                   default=A)
     beekeepername = models.CharField(max_length=30, blank=True, null=True)
+    merged_with = models.CharField(max_length=30, blank=True, null=True)
+    merged_date = models.DateField(null=True, blank=True)
     image1 = models.ImageField(upload_to=get_file_path,
                                blank=True, null=True)
     image2 = models.ImageField(upload_to=get_file_path,
