@@ -106,8 +106,9 @@
     </div>
     {% endif %}
     <div class="row">
-        {% if hives %}
+    {% if hives %}
         {% for hive in hives %}
+        {% if not hive.been_merged %}
         <div class="col-sm-3 mx-auto hive_box">
             <a href="{% url 'hiveDocs' apiaryID hive.id %}">
                 <img class="hive_image" src="{% static 'images/hive2.png' %}" alt="bee hive">
@@ -154,7 +155,7 @@
                             {% if hive.hive_old_name %}
                             Hive name was: {{ hive.hive_old_name|title }} <br>
                             {% else %}
-                            Hive has not changed!
+                            Hive name has not changed!
                             {% endif %}
                         </p>
                         <hr>
@@ -177,12 +178,108 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
-        {% else %}
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <hr class="mt-5" style="border-top: 1px solid black; background: black;">
+            <button id="showHide" class="btn btn-secondary">Show Archive</button>
+        </div>
+    </div>
+    <div id="archiveRow" class="row hide">
+        <div class="col-sm-12">
+            <div class="row hive_page_instruction">
+                <h3>Archive</h3>
+            </div>
+        </div>
+            {% for hive in hives %}
+            {% if hive.been_merged %}
+            <div class="col-sm-3 mx-auto hive_box">
+                <a href="{% url 'hiveDocs' apiaryID hive.id %}">
+                    <img class="hive_image" src="{% static 'images/hive2archive.png' %}" alt="bee hive">
+                    <h5>Hive: {{ hive.hive_name|title }}</h5>
+                    <h4>Hive Type: {{ hive.hive_type }}</h4>
+                </a>
+                <button type="button" class="hive_button btn btn-secondary" data-toggle="modal"
+                    data-target="#hiveInfoModal{{ hive.id }}">
+                    Hive History
+                </button>
+                <a class="hive_button btn btn-secondary" href="{% url 'editHive' apiaryID hive.id %}"><i
+                        class="fas fa-edit"></i>
+                    Edit</a>
+                <a class="hive_button btn btn-danger" href="{% url 'deleteHive' apiaryID hive.id %}"><i
+                        class="fas fa-trash-alt"></i> Delete</a>
+                <a class="hive_button btn btn-secondary" href="{% url 'hive_record_pdf_view' hive.id %}"><i
+                        class="fas fa-file-pdf"></i>
+                    Save PDF</a>
+                <h6>These Hives have been Archived</h5>
+            </div>
+    
+            <!----------------- Modal ------------------>
+    
+            <div class="modal fade" id="hiveInfoModal{{ hive.id }}" tabindex="-1" role="dialog" aria-labelledby="HiveInfo"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="hiveInfo">Hive History for {{ hive.hive_name|title }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                This hive has been Archived Please check notes
+                            </p>
+                            <hr>
+                            <p>
+                                {% if hive.hive_new_apiary %}
+                                Hive moved to Apiary {{ hive.hive_new_apiary|title }} <br>
+                                on the {{ hive.hive_move_date }} from Apiary {{ hive.hive_old_apiary|title }}
+                                {% else %}
+                                Hive has not been moved from original site: {{ hive.hive_old_apiary|title }}
+                                {% endif %}
+                            </p>
+                            <hr>
+                            <p>
+                                {% if hive.hive_old_name %}
+                                Hive name was: {{ hive.hive_old_name|title }} <br>
+                                {% else %}
+                                Hive name has not changed!
+                                {% endif %}
+                            </p>
+                            <hr>
+                            <p>
+                                {% if hive.old_hive_type %}
+                                This hive type changed from: {{ hive.old_hive_type }} <br>
+                                {% else %}
+                                Hive Type has not changed!
+                                {% endif %}
+                            </p>
+                            <hr>
+                            <div>For the hive medical history click Medical History</div>
+    
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-secondary" href="{% url 'hiveMedicalHistory' apiaryID hive.pk %}"><i
+                                    class="fas fa-file-medical"></i> Medical History</a>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="row">
         <div class="col-sm-12">
             <h3> You have not added any hives please click Add Hives to get started</h3>
         </div>
-        {% endif %}
+    </div>
+    {% endif %}
     </div>
     <div class="emptydiv"></div>
 </div>
@@ -192,4 +289,5 @@
 {% block postloadjs %}
 {{ block.super }}
 <script src="{% static 'hives/js/weather.js' %}"></script>
+<script src="{% static  'hives/js/hives.js'%}"></script>
 {% endblock %}

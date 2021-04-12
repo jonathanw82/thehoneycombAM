@@ -78,8 +78,16 @@
 
 /* ------------------- Media Queries -----------------*/
 
-@media only screen and (max-width: 1024px){
-
+@media only screen and (min-width: 1024px){
+    .desktop-tips{
+        display: none;
+    }
+    .mobileButton{
+        display: block!important;
+    }
+    .desktop-tips-show{
+        display: block;
+    }
 }
 
 @media only screen and (min-width: 768px){
@@ -112,15 +120,6 @@
     }
     .defra-logo{
         padding-top: 20px;
-    }
-    .desktop-tips{
-        display: none;
-    }
-    .mobileButton{
-        display: block!important;
-    }
-    .desktop-tips-show{
-        display: block;
     }
 }     
 

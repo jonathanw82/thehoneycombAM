@@ -67,7 +67,7 @@ class addHiveDocumentsForm(forms.ModelForm):
     def __init__(self, userID, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        initialChoice = [('', 'Select:')]
+        initialChoice = [('', 'Select:'), ('', 'Not Merged')]
         choices = [(hive.hive_name, hive.hive_name.capitalize())
                    for hive in hive_details.objects.filter(user=userID)]
 

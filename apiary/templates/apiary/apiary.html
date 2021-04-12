@@ -16,8 +16,6 @@
         </div>
         <div class="col-sm-6">
             <div class="desktop-tips" id="apiarytips"></div>
-            <input style="display:none" id="mobileButton" class="mobileButton btn btn-secondary" type="button"
-                onclick="displaytips()" value="Show Tips"></input>
         </div>
     </div>
     {% else %}
@@ -50,6 +48,8 @@
             <a class="btn btn-secondary" href="{% url 'beeMedical'%}"><i class="fas fa-notes-medical"></i> Bee
                 Medical</a>
             <a class="btn btn-secondary" href="{% url 'profile'%}"><i class="fas fa-user-circle"></i> Profile</a>
+            <input id="mobileButton" class=" btn btn-secondary" type="button"
+            onclick="displaytips()" value="Show Tips"></input>
         </div>
     </div>
     <div class="row apiary_row">

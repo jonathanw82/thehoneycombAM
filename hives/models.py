@@ -133,7 +133,7 @@ class hiveDocuments(models.Model):
               (D, '2'),
               (E, '1 Evil')]
 
-    NOTMERGED = 'Not Merged'
+    # NOTMERGED = 'Not Merged'
 
     def get_file_path(instance, filename):
         ext = filename.split('.')[-1]

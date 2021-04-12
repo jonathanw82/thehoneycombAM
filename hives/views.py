@@ -369,7 +369,6 @@ def addhiveDoc(request, apiaryPK, pk=None):
     userID = request.user.id
     uploadedImages = totalUploadedImages(userID)
     instofID = get_object_or_404(hive_details, pk=pk)
-    yes = 'Yes'
     if request.method == "POST":
         form = addHiveDocumentsForm(userID, request.POST, request.FILES)
         if form.is_valid():
@@ -378,9 +377,12 @@ def addhiveDoc(request, apiaryPK, pk=None):
             hiveDocuments.user = userID
             hiveDocuments.beekeepername = request.user
             hiveDocuments.date = date.today()
+            # if the hivedocument has merged_with add yes to that hive been_merged
             if hiveDocuments.merged_with:
-                # bug this will not populate the database with the yes
-                instofID.been_merged = yes
+                instofID.been_merged = 'YES'
+                instofID.save()
+                # if the date was left blank but a hive was selected as
+                # a merge add todays date
                 if not hiveDocuments.merged_date:
                     hiveDocuments.merged_date = date.today()
             hiveDocuments.save()
@@ -414,14 +416,21 @@ def editHiveDoc(request, apiaryPK, hive_id, pk):
     hiveid = hive_id
     docid = pk
     instdoc = get_object_or_404(hiveDocuments, pk=pk)
+    instofHive = get_object_or_404(hive_details, pk=hive_id)
     if request.method == "POST":
         form = addHiveDocumentsForm(userID, request.POST, request.FILES,
                                     instance=instdoc)
         if form.is_valid():
             instdoc = form.save(commit=False)
-            if hiveDocuments.merged_with:
-                if not hiveDocuments.merged_date:
-                    hiveDocuments.merged_date = date.today()
+            if instdoc.merged_with:
+                print('hear i am ')
+                instofHive.been_merged = 'YES'
+                if not instdoc.merged_date:
+                    instdoc.merged_date = date.today()
+            else:
+                instofHive.been_merged = ''
+                instdoc.merged_date = None
+            instofHive.save()
             instdoc.save()
             messages.success(
                 request,

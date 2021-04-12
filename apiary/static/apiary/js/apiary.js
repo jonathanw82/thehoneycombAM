@@ -22,6 +22,20 @@ function hideTips(){
     but.value = "Show Tips";
 }
 
+/* The tips function gets the browser date feature and the month as a
+number 0 = Jan 11 = Dec that number is then used as the Index on the month array
+displaying the relevent tip pulled for the apiaryTips.js page that then get injected into the dom.
+*/
+
+function tipsMonthData(){
+    const month = [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec];
+    const info = document.getElementById('apiarytips');
+    const monthIndex = new Date().getMonth();
+    if(info){
+        info.innerHTML = month[monthIndex];
+    };   
+}
+
 /* This function looks and check to see if the correct window width had been 
 reached by the event listener it then changes the class as required  by iterating 
 over the array and changing the relevent logoDiv */
@@ -54,17 +68,3 @@ function secondWarning(){
     document.getElementById('secondary-confirm').innerHTML = `This can not be undone! To Permanently delete this apiary please press Delete
                             <br> <input class="btn btn-danger confirmBut" type="submit" value="Delete"></input>`;
 };
-
-/* The tips function gets the browser date feature and the month as a
-number 0 = Jan 11 = Dec that number is then used as the Index on the month array
-displaying the relevent tip pulled for the apiaryTips.js page that then get injected into the dom.
-*/
-
-function tipsMonthData(){
-    const month = [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec];
-    const info = document.getElementById('apiarytips');
-    const monthIndex = new Date().getMonth();
-    if(info){
-        info.innerHTML = month[monthIndex];
-    };   
-}

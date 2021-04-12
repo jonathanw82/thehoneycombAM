@@ -15,8 +15,9 @@
 }
 
 .show{
-    display: block;
+    display: flex;
 }
+
 
 /* .hidename{
     display: none;

@@ -59,7 +59,8 @@
                     </div>
                     <div class="modal-body">
                         {% if doc.merged_with %} 
-                        <h6>Special Info:</h6>
+                        <h6>Special Info: This have has been archived</h6>
+
                         This hive was merged with Hive: {{ doc.merged_with|title }} on the {{ doc.merged_date }}
                         <hr>
                         {% endif %}
